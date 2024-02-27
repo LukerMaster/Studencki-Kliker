@@ -1,14 +1,16 @@
-import CLI.CliClickerGameWindow;
-import CLI.IInformationDisplayingStrategy;
-import CLI.InlineInformationDisplayingStrategy;
-import ClickerGame.ClickerGame;
-import ClickerGame.Inventory;
+import ClickerGame.*;
+import ClickerGame.Actions.ChopTreeAction;
+import ClickerGame.Actions.IUserAction;
+import CLI.*;
+import ClickerGame.Localization.IStringsProvider;
+import ClickerGame.Localization.StringsProvider;
+import ClickerGame.World.IInventory;
+import ClickerGame.World.IWorld;
+import ClickerGame.World.Inventory;
+import ClickerGame.World.World;
 import Core.*;
-import ClickerGame.IStringsProvider;
-import ClickerGame.StringsProvider;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Main {
     /**
@@ -32,13 +34,29 @@ public class Main {
          * is an anti-pattern that creates clutter.
          */
 
-        IStringsProvider stringsProvider = new StringsProvider(ResourceBundle.getBundle("texts", Locale.getDefault()));
+        // Technicals
+        IStringsProvider stringsProvider = new StringsProvider(
+                ResourceBundle.getBundle("texts", Locale.getDefault())
+        );
 
-        ClickerGame gameLoop = new ClickerGame(new Inventory());
+        // Game Core
+        IInventory inventory = new Inventory();
 
-        IInformationDisplayingStrategy displayingStrategy = new InlineInformationDisplayingStrategy(gameLoop, stringsProvider);
+        List<IUserAction> availableActions = new ArrayList<IUserAction>();
+        availableActions.add(new ChopTreeAction(inventory));
 
-        IProgramWindow gameWindow = new CliClickerGameWindow(gameLoop, displayingStrategy);
+        IWorld world = new World(inventory, availableActions);
+
+        GameLoop gameLoop = new GameLoop(world);
+
+        // UI
+        IInformationDisplayingStrategy displayingStrategy = new InlineInformationDisplayingStrategy(world, stringsProvider);
+        IActionTakingStrategy actionTakingStrategy = new CliInputActionTakingStrategy(new Scanner(System.in), world);
+        IProgramWindow gameWindow = new CliClickerGameWindow(
+                gameLoop,
+                displayingStrategy,
+                actionTakingStrategy
+        );
 
         gameWindow.Start();
     }

@@ -1,7 +1,8 @@
-package Actions;
+package ClickerGame.Actions;
 
-import ClickerGame.IInventory;
+import ClickerGame.World.IInventory;
 import ClickerGame.ItemId;
+import ClickerGame.Localization.StringId;
 
 public class ChopTreeAction implements IUserAction {
 
@@ -12,8 +13,8 @@ public class ChopTreeAction implements IUserAction {
     }
 
     @Override
-    public String getInternalName() {
-        return "chop_tree";
+    public StringId getInternalNameStringId() {
+        return StringId.Chop_a_tree;
     }
 
     @Override

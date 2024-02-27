@@ -1,4 +1,6 @@
-package ClickerGame;
+package ClickerGame.Localization;
+
+import ClickerGame.ItemId;
 
 import java.util.ResourceBundle;
 

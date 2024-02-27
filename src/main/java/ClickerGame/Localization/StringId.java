@@ -1,4 +1,4 @@
-package ClickerGame;
+package ClickerGame.Localization;
 
 
 /**

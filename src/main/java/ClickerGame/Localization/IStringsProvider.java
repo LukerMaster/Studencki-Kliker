@@ -1,7 +1,6 @@
-package ClickerGame;
+package ClickerGame.Localization;
 
 import ClickerGame.ItemId;
-import ClickerGame.StringId;
 
 /**
  * Interface used to make localization easier.

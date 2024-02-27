@@ -1,4 +1,6 @@
-package ClickerGame;
+package ClickerGame.World;
+
+import ClickerGame.ItemId;
 
 import java.math.BigInteger;
 import java.util.Dictionary;

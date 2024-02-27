@@ -1,7 +1,5 @@
 package CLI;
 
-import ClickerGame.IClickerGameLoop;
-
 /**
  * An interface used to display stats of currently owned items and other things.
  *
