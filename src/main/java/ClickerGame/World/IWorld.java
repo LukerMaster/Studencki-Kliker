@@ -6,7 +6,7 @@ import ClickerGame.Generators.IGenerator;
 import java.util.List;
 
 /**
- * Game state represents the world of the game itself.
+ * The world of the game itself. This class contains all the states the game has.
  */
 public interface IWorld {
     IInventory GetInventory();

@@ -4,7 +4,7 @@ import ClickerGame.World.IInventory;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.StringId;
 
-/**
+/*
  * This class (alongside others) may be named in a strange way,
  * however I decided that instead of naming them like "ChopTreeAction",
  * they are just in a package named "Actions", which explains their

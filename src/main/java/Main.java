@@ -18,7 +18,7 @@ public class Main {
      * Starts the program.
      */
     public static void main(String[] args) {
-        /**
+        /*
          * Main method is currently used as a factory class to resolve all
          * dependencies / do IoC - In general: Build the program.
          *
@@ -33,7 +33,7 @@ public class Main {
          * but if you're swapping entire program factory class, then
          * it's pretty much just a new program, and code redirection
          * is an anti-pattern that creates clutter.
-         */
+        */
 
         // Technicals
         IStringsProvider stringsProvider = new StringsProvider(
