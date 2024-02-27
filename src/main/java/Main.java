@@ -1,5 +1,6 @@
 import ClickerGame.*;
-import ClickerGame.Actions.ChopTreeAction;
+import ClickerGame.Actions.ChopTree;
+import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.IUserAction;
 import CLI.*;
 import ClickerGame.Localization.IStringsProvider;
@@ -43,7 +44,8 @@ public class Main {
         IInventory inventory = new Inventory();
 
         List<IUserAction> availableActions = new ArrayList<IUserAction>();
-        availableActions.add(new ChopTreeAction(inventory));
+        availableActions.add(new ChopTree(inventory));
+        availableActions.add(new CollectStones(inventory));
 
         IWorld world = new World(inventory, availableActions);
 

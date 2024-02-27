@@ -1,24 +1,25 @@
 package ClickerGame.Actions;
 
-import ClickerGame.World.IInventory;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.StringId;
+import ClickerGame.World.IInventory;
 
-public class ChopTreeAction implements IUserAction {
+public class CollectStones implements IUserAction {
 
     IInventory userInventory;
 
-    public ChopTreeAction(IInventory userInventory) {
+    public CollectStones(IInventory userInventory)
+    {
         this.userInventory = userInventory;
     }
 
     @Override
     public StringId getInternalNameStringId() {
-        return StringId.Chop_a_tree;
+        return StringId.Collect_some_stones;
     }
 
     @Override
     public void execute() {
-        userInventory.addItems(ItemId.Wood, 1);
+        this.userInventory.addItems(ItemId.Stone, 1);
     }
 }
