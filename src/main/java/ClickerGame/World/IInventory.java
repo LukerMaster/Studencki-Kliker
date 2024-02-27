@@ -5,13 +5,13 @@ import ClickerGame.ItemId;
 import java.math.BigInteger;
 
 public interface IInventory {
-    public void takeItems(ItemId id, BigInteger amount);
-    public void takeItems(ItemId id, int amount);
+    void takeItems(ItemId id, BigInteger amount);
+    void takeItems(ItemId id, int amount);
 
-    public boolean hasItems(ItemId id, BigInteger minAmount);
-    public boolean hasItems(ItemId id, int minAmount);
+    boolean hasItems(ItemId id, BigInteger minAmount);
+    boolean hasItems(ItemId id, int minAmount);
 
-    public void addItems(ItemId id, BigInteger amount);
-    public void addItems(ItemId id, int amount);
-    public BigInteger getCount(ItemId id);
+    void addItems(ItemId id, BigInteger amount);
+    void addItems(ItemId id, int amount);
+    BigInteger getCount(ItemId id);
 }

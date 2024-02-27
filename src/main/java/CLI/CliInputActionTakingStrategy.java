@@ -22,7 +22,7 @@ public class CliInputActionTakingStrategy implements IActionTakingStrategy {
 
         String input = scanner.nextLine();
 
-        int actionIdx = 0;
+        int actionIdx;
         try
         {
             actionIdx = Integer.parseInt(input);
