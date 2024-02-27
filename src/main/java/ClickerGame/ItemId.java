@@ -1,4 +1,4 @@
-package Core;
+package ClickerGame;
 
 public enum ItemId {
     Wood,

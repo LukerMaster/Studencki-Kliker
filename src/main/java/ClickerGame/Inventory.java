@@ -1,4 +1,4 @@
-package Core;
+package ClickerGame;
 
 import java.math.BigInteger;
 import java.util.Dictionary;

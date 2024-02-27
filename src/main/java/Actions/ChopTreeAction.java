@@ -1,7 +1,7 @@
 package Actions;
 
-import Core.IInventory;
-import Core.ItemId;
+import ClickerGame.IInventory;
+import ClickerGame.ItemId;
 
 public class ChopTreeAction implements IUserAction {
 
