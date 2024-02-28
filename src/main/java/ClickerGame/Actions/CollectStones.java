@@ -14,7 +14,7 @@ public class CollectStones implements ICustomUserAction {
     }
 
     @Override
-    public StringId getInternalNameStringId() {
+    public StringId GetActionNameId() {
         return StringId.Collect_some_stones;
     }
 

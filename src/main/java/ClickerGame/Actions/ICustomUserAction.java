@@ -7,7 +7,7 @@ import ClickerGame.Localization.StringId;
  */
 public interface ICustomUserAction {
 
-    StringId getInternalNameStringId();
+    StringId GetActionNameId();
 
     void execute();
 }

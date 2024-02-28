@@ -19,7 +19,7 @@ public class ChopTree implements ICustomUserAction {
     }
 
     @Override
-    public StringId getInternalNameStringId() {
+    public StringId GetActionNameId() {
         return StringId.Chop_a_tree;
     }
 
