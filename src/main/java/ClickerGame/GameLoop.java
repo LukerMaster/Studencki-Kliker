@@ -8,7 +8,6 @@ import java.util.List;
 
 public class GameLoop implements IGameLoop {
     IWorld world;
-
     public GameLoop(IWorld world)
     {
         this.world = world;

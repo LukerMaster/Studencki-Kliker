@@ -1,0 +1,23 @@
+L1 Stosowanie konstrukcyjnych wzorców projektowych
+- Singleton - Main.java - inventory, world, stringsProvider
+-
+
+L2 Stosowanie strukturalnych wzorców projektowych
+
+
+L3 Stosowanie czynnościowych wzorców projektowych
+- Strategia - ActionTakingInTerminal, InformationDisplayingInTerminal, PeriodicSpawning
+
+L4 Stosowanie zasad pojedynczej odpowiedzialności i otwarte-zamknięte
+
+L5 Stosowanie zasad podstawiania Liskov, odwracania zależności i segregacji interfejsów
+
+L6 Zastosowanie zasad czystego kodu w programowaniu
+
+L7 Zastosowanie programowania funkcyjnego
+
+L8 Zastosowanie programowania aspektowego
+
+L9 Refactoring kodu programu
+
+L10 Stosowanie testów w wytwarzaniu oprogramowania

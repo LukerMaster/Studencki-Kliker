@@ -1,7 +1,6 @@
 package ClickerGame.Actions;
 
 import ClickerGame.ItemId;
-import ClickerGame.Localization.StringId;
 import ClickerGame.World.IInventory;
 
 public class CollectStones implements ICustomUserAction {
@@ -14,8 +13,8 @@ public class CollectStones implements ICustomUserAction {
     }
 
     @Override
-    public StringId GetActionNameId() {
-        return StringId.Collect_some_stones;
+    public CustomActionId GetActionId() {
+        return CustomActionId.Collect_some_stones;
     }
 
     @Override

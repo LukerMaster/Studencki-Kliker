@@ -1,5 +1,6 @@
 package ClickerGame.Localization;
 
+import ClickerGame.Actions.CustomActionId;
 import ClickerGame.Generators.GeneratorId;
 import ClickerGame.ItemId;
 
@@ -9,9 +10,12 @@ import ClickerGame.ItemId;
  * It being abstracted allows for easier changes if implementation changes
  * in newer versions of Java.
  * (Keep in mind that such wrappers should be SMALL, otherwise it's reinventing the wheel).
+ *
  */
+// This - in fact - Implements a facade design pattern for ResourceBundle.
 public interface IStringsProvider {
     String GetNameForItem(ItemId Id);
+    String GetNameForAction(CustomActionId Id);
     String GetNameForGenerator(GeneratorId Id);
 
     String GetStringFor(StringId Id);

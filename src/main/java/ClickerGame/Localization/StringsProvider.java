@@ -1,5 +1,6 @@
 package ClickerGame.Localization;
 
+import ClickerGame.Actions.CustomActionId;
 import ClickerGame.Generators.GeneratorId;
 import ClickerGame.ItemId;
 
@@ -17,6 +18,11 @@ public class StringsProvider implements IStringsProvider {
     @Override
     public String GetNameForItem(ItemId Id) {
         return this.textsBundle.getString("Item_Name__" + Id.name());
+    }
+
+    @Override
+    public String GetNameForAction(CustomActionId Id) {
+        return this.textsBundle.getString("Action_Name__" + Id.name());
     }
 
     @Override

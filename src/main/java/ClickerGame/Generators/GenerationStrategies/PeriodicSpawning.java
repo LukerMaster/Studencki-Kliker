@@ -28,9 +28,10 @@ public class PeriodicSpawning implements IGeneration
 
     @Override
     public void Update(float deltaTime) {
-        if (currentTime >= secondsBetweenSpawns)
+        while (currentTime >= secondsBetweenSpawns)
         {
             world.GetInventory().addItems(this.spawnedId, this.amount);
+            currentTime -= secondsBetweenSpawns;
         }
     }
 }

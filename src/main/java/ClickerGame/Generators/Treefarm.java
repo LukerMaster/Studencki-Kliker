@@ -9,7 +9,6 @@ import java.math.BigInteger;
 
 public class Treefarm implements IGenerator
 {
-
     IGeneration strategy;
     IWorld world;
     public Treefarm(IWorld world)

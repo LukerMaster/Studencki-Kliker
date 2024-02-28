@@ -2,7 +2,6 @@ package ClickerGame.Actions;
 
 import ClickerGame.World.IInventory;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.StringId;
 
 /*
  * This class (alongside others) may be named in a strange way,
@@ -19,8 +18,8 @@ public class ChopTree implements ICustomUserAction {
     }
 
     @Override
-    public StringId GetActionNameId() {
-        return StringId.Chop_a_tree;
+    public CustomActionId GetActionId() {
+        return CustomActionId.Chop_a_tree;
     }
 
     @Override
