@@ -29,7 +29,7 @@ public class InformationDisplayingInTerminal implements IInformationDisplaying {
 
         ListIterator<ICustomUserAction> uai = world.GetAvailableActions().listIterator();
         while (uai.hasNext())
-            System.out.println((uai.nextIndex()+1) + ". " + stringsProvider.GetStringFor(uai.next().GetActionId()));
+            System.out.println((uai.nextIndex()+1) + ". " + stringsProvider.GetNameForAction(uai.next().GetActionId()));
 
         System.out.println(stringsProvider.GetStringFor(StringId.What_are_we_doing_next));
     }
