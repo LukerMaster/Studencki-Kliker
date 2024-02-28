@@ -1,6 +1,6 @@
 package ClickerGame.World;
 
-import ClickerGame.Actions.IUserAction;
+import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.IGenerator;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
 public interface IWorld {
     IInventory GetInventory();
 
-    List<IUserAction> GetAvailableActions();
+    List<ICustomUserAction> GetAvailableActions();
     List<IGenerator> GetActiveGenerators();
 }

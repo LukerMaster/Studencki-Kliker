@@ -4,7 +4,7 @@ import ClickerGame.ItemId;
 import ClickerGame.Localization.StringId;
 import ClickerGame.World.IInventory;
 
-public class CollectStones implements IUserAction {
+public class CollectStones implements ICustomUserAction {
 
     IInventory userInventory;
 

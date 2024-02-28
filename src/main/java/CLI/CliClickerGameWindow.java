@@ -1,7 +1,7 @@
 package CLI;
 
-import CLI.Strategies.IActionTakingStrategy;
-import CLI.Strategies.IInformationDisplayingStrategy;
+import CLI.Strategies.IActionTaking;
+import CLI.Strategies.IInformationDisplaying;
 import Core.IGameLoop;
 import Core.IProgramWindow;
 
@@ -11,12 +11,12 @@ public class CliClickerGameWindow implements IProgramWindow {
 
     IGameLoop gameLoop;
 
-    IInformationDisplayingStrategy informationDisplayingStrategy;
-    IActionTakingStrategy actionTakingStrategy;
+    IInformationDisplaying informationDisplayingStrategy;
+    IActionTaking actionTakingStrategy;
     StopWatch stopwatch = new StopWatch();
     public CliClickerGameWindow(IGameLoop gameLoop,
-                                IInformationDisplayingStrategy informationDisplayingStrategy,
-                                IActionTakingStrategy actionTakingStrategy) {
+                                IInformationDisplaying informationDisplayingStrategy,
+                                IActionTaking actionTakingStrategy) {
         this.gameLoop = gameLoop;
         this.informationDisplayingStrategy = informationDisplayingStrategy;
         this.actionTakingStrategy = actionTakingStrategy;

@@ -1,17 +1,17 @@
 package CLI.Strategies;
 
-import ClickerGame.Actions.IUserAction;
+import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.World.IWorld;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class CliInputActionTakingStrategy implements IActionTakingStrategy {
+public class ActionTakingInTerminal implements IActionTaking {
 
     Scanner scanner;
     IWorld world;
 
-    public CliInputActionTakingStrategy(Scanner scanner, IWorld world)
+    public ActionTakingInTerminal(Scanner scanner, IWorld world)
     {
         this.scanner = scanner;
         this.world = world;
@@ -33,7 +33,7 @@ public class CliInputActionTakingStrategy implements IActionTakingStrategy {
         }
 
 
-        List<IUserAction> actions = world.GetAvailableActions();
+        List<ICustomUserAction> actions = world.GetAvailableActions();
         if (actionIdx == 0 || actionIdx > actions.size())
             return;
 

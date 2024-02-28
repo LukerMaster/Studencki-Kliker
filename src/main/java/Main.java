@@ -1,11 +1,11 @@
-import CLI.Strategies.CliInputActionTakingStrategy;
-import CLI.Strategies.IActionTakingStrategy;
-import CLI.Strategies.IInformationDisplayingStrategy;
-import CLI.Strategies.InlineInformationDisplayingStrategy;
+import CLI.Strategies.ActionTakingInTerminal;
+import CLI.Strategies.IActionTaking;
+import CLI.Strategies.IInformationDisplaying;
+import CLI.Strategies.InformationDisplayingInTerminal;
 import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
-import ClickerGame.Actions.IUserAction;
+import ClickerGame.Actions.ICustomUserAction;
 import CLI.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
@@ -47,7 +47,7 @@ public class Main {
         // Game Core
         IInventory inventory = new Inventory();
 
-        List<IUserAction> availableActions = new ArrayList<IUserAction>();
+        List<ICustomUserAction> availableActions = new ArrayList<ICustomUserAction>();
 
         /*
         This could have been made with lambdas and would save myself adding a lot of simple classes.
@@ -62,8 +62,8 @@ public class Main {
         GameLoop gameLoop = new GameLoop(world);
 
         // UI
-        IInformationDisplayingStrategy displayingStrategy = new InlineInformationDisplayingStrategy(world, stringsProvider);
-        IActionTakingStrategy actionTakingStrategy = new CliInputActionTakingStrategy(new Scanner(System.in), world);
+        IInformationDisplaying displayingStrategy = new InformationDisplayingInTerminal(world, stringsProvider);
+        IActionTaking actionTakingStrategy = new ActionTakingInTerminal(new Scanner(System.in), world);
         IProgramWindow gameWindow = new CliClickerGameWindow(
                 gameLoop,
                 displayingStrategy,

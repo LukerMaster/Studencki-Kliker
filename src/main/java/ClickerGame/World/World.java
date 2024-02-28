@@ -1,6 +1,6 @@
 package ClickerGame.World;
 
-import ClickerGame.Actions.IUserAction;
+import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.IGenerator;
 
 import java.util.ArrayList;
@@ -8,12 +8,12 @@ import java.util.List;
 
 public class World implements IWorld {
 
-    private final List<IUserAction> userActions;
+    private final List<ICustomUserAction> userActions;
     IInventory inventory;
 
     private final List<IGenerator> activeGenerators = new ArrayList<IGenerator>();
 
-    public World(IInventory inventory, List<IUserAction> userActions)
+    public World(IInventory inventory, List<ICustomUserAction> userActions)
     {
         this.inventory = inventory;
         this.userActions = userActions;
@@ -25,7 +25,7 @@ public class World implements IWorld {
     }
 
     @Override
-    public List<IUserAction> GetAvailableActions() {
+    public List<ICustomUserAction> GetAvailableActions() {
         return userActions;
     }
 

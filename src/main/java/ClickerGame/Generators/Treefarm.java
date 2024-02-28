@@ -1,9 +1,8 @@
 package ClickerGame.Generators;
 
-import ClickerGame.Generators.GenerationStrategies.IGenerationStrategy;
+import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.StringId;
 import ClickerGame.World.IWorld;
 
 import java.math.BigInteger;
@@ -11,7 +10,7 @@ import java.math.BigInteger;
 public class Treefarm implements IGenerator
 {
 
-    IGenerationStrategy strategy;
+    IGeneration strategy;
     IWorld world;
     public Treefarm(IWorld world)
     {

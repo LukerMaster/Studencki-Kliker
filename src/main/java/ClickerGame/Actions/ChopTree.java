@@ -10,7 +10,7 @@ import ClickerGame.Localization.StringId;
  * they are just in a package named "Actions", which explains their
  * purpose rather cleanly.
  */
-public class ChopTree implements IUserAction {
+public class ChopTree implements ICustomUserAction {
 
     IInventory userInventory;
 

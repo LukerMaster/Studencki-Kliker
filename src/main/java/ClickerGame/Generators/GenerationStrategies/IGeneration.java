@@ -1,5 +1,5 @@
 package ClickerGame.Generators.GenerationStrategies;
 
-public interface IGenerationStrategy {
+public interface IGeneration {
     void Update(float deltaTime);
 }

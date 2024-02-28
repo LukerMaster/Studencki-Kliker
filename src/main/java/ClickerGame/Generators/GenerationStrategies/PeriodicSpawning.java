@@ -5,7 +5,7 @@ import ClickerGame.World.IWorld;
 
 import java.math.BigInteger;
 
-public class PeriodicSpawning implements IGenerationStrategy
+public class PeriodicSpawning implements IGeneration
 {
 
     IWorld world;
