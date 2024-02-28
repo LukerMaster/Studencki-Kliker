@@ -1,5 +1,7 @@
 package CLI;
 
+import CLI.Strategies.IActionTakingStrategy;
+import CLI.Strategies.IInformationDisplayingStrategy;
 import Core.IGameLoop;
 import Core.IProgramWindow;
 

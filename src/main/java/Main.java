@@ -1,3 +1,7 @@
+import CLI.Strategies.CliInputActionTakingStrategy;
+import CLI.Strategies.IActionTakingStrategy;
+import CLI.Strategies.IInformationDisplayingStrategy;
+import CLI.Strategies.InlineInformationDisplayingStrategy;
 import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
@@ -44,6 +48,12 @@ public class Main {
         IInventory inventory = new Inventory();
 
         List<IUserAction> availableActions = new ArrayList<IUserAction>();
+
+        /*
+        This could have been made with lambdas and would save myself adding a lot of simple classes.
+        However I decided to keep it that way since this way I can treat those as NAMED functors.
+        Savings done by lambdas would make this code way more cluttered.
+         */
         availableActions.add(new ChopTree(inventory));
         availableActions.add(new CollectStones(inventory));
 

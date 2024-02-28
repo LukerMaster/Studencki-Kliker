@@ -1,5 +1,6 @@
 package ClickerGame.Localization;
 
+import ClickerGame.Generators.GeneratorId;
 import ClickerGame.ItemId;
 
 import java.util.ResourceBundle;
@@ -16,6 +17,11 @@ public class StringsProvider implements IStringsProvider {
     @Override
     public String GetNameForItem(ItemId Id) {
         return this.textsBundle.getString("Item_Name__" + Id.name());
+    }
+
+    @Override
+    public String GetNameForGenerator(GeneratorId Id) {
+        return this.textsBundle.getString("Generator_Name__" + Id.name());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package CLI;
+package CLI.Strategies;
 
 import ClickerGame.Actions.IUserAction;
 import ClickerGame.Localization.IStringsProvider;

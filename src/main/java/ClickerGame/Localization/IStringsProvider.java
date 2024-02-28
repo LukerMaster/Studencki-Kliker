@@ -1,5 +1,6 @@
 package ClickerGame.Localization;
 
+import ClickerGame.Generators.GeneratorId;
 import ClickerGame.ItemId;
 
 /**
@@ -11,6 +12,7 @@ import ClickerGame.ItemId;
  */
 public interface IStringsProvider {
     String GetNameForItem(ItemId Id);
+    String GetNameForGenerator(GeneratorId Id);
 
     String GetStringFor(StringId Id);
 }
