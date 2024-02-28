@@ -1,12 +1,7 @@
-import CLI.Strategies.ActionTakingInTerminal;
-import CLI.Strategies.IActionTaking;
-import CLI.Strategies.IInformationDisplaying;
-import CLI.Strategies.InformationDisplayingInTerminal;
 import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.ICustomUserAction;
-import CLI.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import ClickerGame.World.IInventory;
@@ -14,6 +9,7 @@ import ClickerGame.World.IWorld;
 import ClickerGame.World.Inventory;
 import ClickerGame.World.World;
 import Core.*;
+import Swing.SwingClickerWindow;
 
 import java.util.*;
 
@@ -85,14 +81,8 @@ public class Main {
         GameLoop gameLoop = new GameLoop(world);
 
         // UI
-        IInformationDisplaying displayingStrategy = new InformationDisplayingInTerminal(world, stringsProvider);
-        IActionTaking actionTakingStrategy = new ActionTakingInTerminal(new Scanner(System.in), world);
-        IProgramWindow gameWindow = new CliClickerGameWindow(
-                gameLoop,
-                displayingStrategy,
-                actionTakingStrategy
-        );
 
-        gameWindow.Start();
+        IProgramWindow programWindow = new SwingClickerWindow(stringsProvider);
+        programWindow.Start();
     }
 }

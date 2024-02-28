@@ -10,9 +10,8 @@ package ClickerGame.Localization;
  * in a resources file.
  */
 public enum StringId {
+    Title,
+    Actions,
     Your_Resources,
-    What_are_we_doing_next,
-    Chop_a_tree,
-    Collect_some_stones,
-    Hunt_for_something
+    What_are_we_doing_next
 }
