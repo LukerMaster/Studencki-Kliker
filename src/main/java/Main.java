@@ -82,7 +82,7 @@ public class Main {
 
         // UI
 
-        IProgramWindow programWindow = new SwingClickerWindow(stringsProvider);
+        IProgramWindow programWindow = new SwingClickerWindow(stringsProvider, world);
         programWindow.Start();
     }
 }
