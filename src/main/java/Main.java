@@ -9,6 +9,10 @@ import ClickerGame.World.IWorld;
 import ClickerGame.World.Inventory;
 import ClickerGame.World.World;
 import Core.*;
+import Swing.ClickerWindow;
+import Swing.Dashboards.Factories.AvailableActionsFactory;
+import Swing.Dashboards.Factories.ResourcesDashboardFactory;
+import Swing.Dashboards.IDashboardFactory;
 import Swing.SwingClickerWindow;
 
 import java.util.*;
@@ -70,7 +74,7 @@ public class Main {
 
         /*
         This could have been made with lambdas and would save myself adding a lot of simple classes.
-        However I decided to keep it that way since this way I can treat those as NAMED functors.
+        However, I decided to keep it that way since this way I can treat those as NAMED functors.
         Savings done by lambdas would make this code way more cluttered.
          */
         availableActions.add(new ChopTree(inventory));
@@ -82,7 +86,11 @@ public class Main {
 
         // UI
 
-        IProgramWindow programWindow = new SwingClickerWindow(stringsProvider, world);
+        List<IDashboardFactory> dashboardFactories = new ArrayList<>();
+        dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, world));
+        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, world));
+
+        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider);
         programWindow.Start();
     }
 }
