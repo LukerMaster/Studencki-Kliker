@@ -1,9 +1,12 @@
 package Swing;
 
+import ClickerGame.GameLoop;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
+import Core.IGameLoop;
 import Core.IProgramWindow;
 import Swing.Dashboards.IDashboardFactory;
+import org.apache.commons.lang3.time.StopWatch;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,10 +17,13 @@ public class ClickerWindow implements IProgramWindow {
 
     private List<IDashboardFactory> dashboardFactories;
     private IStringsProvider stringsProvider;
+    private StopWatch stopwatch = new StopWatch();
+    private IGameLoop gameLoop;
 
-    public ClickerWindow(List<IDashboardFactory> dashboardFactories, IStringsProvider stringsProvider) {
+    public ClickerWindow(List<IDashboardFactory> dashboardFactories, IStringsProvider stringsProvider, IGameLoop gameLoop) {
         this.dashboardFactories = dashboardFactories;
         this.stringsProvider = stringsProvider;
+        this.gameLoop = gameLoop;
     }
 
     private JPanel mainPanel = new JPanel();
@@ -34,5 +40,14 @@ public class ClickerWindow implements IProgramWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+
+        stopwatch.start();
+        while (true) {
+            System.nanoTime();
+            gameLoop.Update(stopwatch.getTime() / 1000.0f);
+            stopwatch.reset();
+            stopwatch.start();
+        }
     }
 }

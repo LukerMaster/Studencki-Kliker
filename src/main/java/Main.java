@@ -82,7 +82,7 @@ public class Main {
 
         IWorld world = new World(inventory, availableActions);
 
-        GameLoop gameLoop = new GameLoop(world);
+        IGameLoop gameLoop = new GameLoop(world);
 
         // UI
 
@@ -90,7 +90,7 @@ public class Main {
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, world));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, world));
 
-        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider);
+        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();
     }
 }
