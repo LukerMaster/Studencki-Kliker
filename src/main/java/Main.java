@@ -13,7 +13,6 @@ import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
-import Swing.SwingClickerWindow;
 
 import java.util.*;
 
