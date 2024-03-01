@@ -27,7 +27,7 @@ public class Main {
          * personally I find that redundant.
          *
          * Making a separate factory class just moves the code from Main.
-         * It's even cleaner to create a seperate project
+         * It's even cleaner to create a separate project
          * and reference the classes from Main there.
          *
          * There is argument for better configurability this way,

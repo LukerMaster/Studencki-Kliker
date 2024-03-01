@@ -5,7 +5,7 @@ import ClickerGame.World.IInventory;
 
 public class CollectStones implements ICustomUserAction {
 
-    IInventory userInventory;
+    final IInventory userInventory;
 
     public CollectStones(IInventory userInventory)
     {

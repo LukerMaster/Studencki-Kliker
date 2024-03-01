@@ -17,7 +17,7 @@ public class ResourcesDashboardFactory implements IDashboardFactory {
         this.inventory = inventory;
     }
 
-    IStringsProvider stringsProvider;
+    final IStringsProvider stringsProvider;
     private final IObservableItemsProvider inventory;
 
     @Override

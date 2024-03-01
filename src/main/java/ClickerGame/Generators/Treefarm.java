@@ -9,8 +9,8 @@ import java.math.BigInteger;
 
 public class Treefarm implements IGenerator
 {
-    IGeneration strategy;
-    IWorld world;
+    final IGeneration strategy;
+    final IWorld world;
     public Treefarm(IWorld world)
     {
         this.world = world;

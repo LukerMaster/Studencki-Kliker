@@ -9,9 +9,9 @@ import java.util.List;
 public class World implements IWorld {
 
     private final List<ICustomUserAction> userActions;
-    IInventory inventory;
+    final IInventory inventory;
 
-    private final List<IGenerator> activeGenerators = new ArrayList<IGenerator>();
+    private final List<IGenerator> activeGenerators = new ArrayList<>();
 
     public World(IInventory inventory, List<ICustomUserAction> userActions)
     {

@@ -8,11 +8,11 @@ import java.math.BigInteger;
 public class PeriodicSpawning implements IGeneration
 {
 
-    IWorld world;
+    final IWorld world;
     float currentTime = 0;
-    float secondsBetweenSpawns;
-    ItemId spawnedId;
-    BigInteger amount;
+    final float secondsBetweenSpawns;
+    final ItemId spawnedId;
+    final BigInteger amount;
 
     public PeriodicSpawning(IWorld world,
                             float secondsBetweenSpawns,

@@ -17,7 +17,7 @@ import java.util.function.BiConsumer;
  */
 public class ObservableInventory implements IInventory, IObservableItemsProvider {
 
-    IInventory inventory;
+    final IInventory inventory;
 
     /*
      * This is a good time to appreciate the beauty of C#'s Function and Action classes.
@@ -25,7 +25,7 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
      * (Well - Not to mention there is dedicated event system for Observer pattern)
      * Why is Java like this?
      */
-    List<BiConsumer<ItemId,BigInteger>> listeners = new ArrayList<>();
+    final List<BiConsumer<ItemId,BigInteger>> listeners = new ArrayList<>();
 
     @Override
     public void addListener(BiConsumer<ItemId,BigInteger> function) {

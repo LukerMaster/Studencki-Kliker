@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 public class StringsProvider implements IStringsProvider {
 
-    ResourceBundle textsBundle;
+    final ResourceBundle textsBundle;
 
     public StringsProvider(ResourceBundle textsBundle)
     {

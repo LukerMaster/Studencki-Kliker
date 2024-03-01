@@ -1,6 +1,5 @@
 package Swing;
 
-import ClickerGame.GameLoop;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
 import Core.IGameLoop;
@@ -15,10 +14,10 @@ import java.util.List;
 public class ClickerWindow implements IProgramWindow {
 
 
-    private List<IDashboardFactory> dashboardFactories;
-    private IStringsProvider stringsProvider;
-    private StopWatch stopwatch = new StopWatch();
-    private IGameLoop gameLoop;
+    private final List<IDashboardFactory> dashboardFactories;
+    private final IStringsProvider stringsProvider;
+    private final StopWatch stopwatch = new StopWatch();
+    private final IGameLoop gameLoop;
 
     public ClickerWindow(List<IDashboardFactory> dashboardFactories, IStringsProvider stringsProvider, IGameLoop gameLoop) {
         this.dashboardFactories = dashboardFactories;
@@ -26,7 +25,7 @@ public class ClickerWindow implements IProgramWindow {
         this.gameLoop = gameLoop;
     }
 
-    private JPanel mainPanel = new JPanel();
+    private final JPanel mainPanel = new JPanel();
 
     @Override
     public void Start() {

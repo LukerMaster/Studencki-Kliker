@@ -7,7 +7,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class Inventory implements IInventory {
-    Dictionary<ItemId, BigInteger> items = new Hashtable<>();
+    final Dictionary<ItemId, BigInteger> items = new Hashtable<>();
 
     @Override
     public void takeItems(ItemId id, BigInteger amount) {

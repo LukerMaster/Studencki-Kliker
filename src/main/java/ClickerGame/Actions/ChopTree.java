@@ -11,7 +11,7 @@ import ClickerGame.ItemId;
  */
 public class ChopTree implements ICustomUserAction {
 
-    IInventory userInventory;
+    final IInventory userInventory;
 
     public ChopTree(IInventory userInventory) {
         this.userInventory = userInventory;
