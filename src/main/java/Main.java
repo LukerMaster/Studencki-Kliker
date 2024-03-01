@@ -2,6 +2,8 @@ import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Generators.DemoTestGenerator;
+import ClickerGame.Generators.Schemes.DemoTest;
 import ClickerGame.Generators.Schemes.IGeneratorSchematic;
 import ClickerGame.Generators.Schemes.StandardTreefarm;
 import ClickerGame.Localization.IStringsProvider;
@@ -93,6 +95,7 @@ public class Main {
 
         List<IGeneratorSchematic> schematics = new ArrayList<>();
         schematics.add(new StandardTreefarm());
+        schematics.add(new DemoTest());
 
         // UI
 
