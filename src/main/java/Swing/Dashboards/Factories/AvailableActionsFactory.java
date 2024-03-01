@@ -8,6 +8,7 @@ import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class AvailableActionsFactory implements IDashboardFactory {
@@ -32,6 +33,7 @@ public class AvailableActionsFactory implements IDashboardFactory {
         {
             JButton button = new JButton(stringsProvider.GetNameForAction(action.GetActionId()));
             button.addActionListener(e -> action.execute());
+
 
             resourcePanel.add(button);
         }

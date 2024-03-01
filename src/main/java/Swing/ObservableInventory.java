@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 
@@ -46,7 +47,7 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     }
 
     @Override
-    public void takeItems(Dictionary<ItemId, BigInteger> items) {
+    public void takeItems(Map<ItemId, BigInteger> items) {
         inventory.takeItems(items);
         for (ItemId id: ItemId.values()) {
             notifyAboutChange(id, inventory.getCount(id));
@@ -66,7 +67,7 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     }
 
     @Override
-    public boolean hasItems(Dictionary<ItemId, BigInteger> items) {
+    public boolean hasItems(Map<ItemId, BigInteger> items) {
         return inventory.hasItems(items);
     }
 
@@ -81,7 +82,7 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     }
 
     @Override
-    public void addItems(Dictionary<ItemId, BigInteger> items) {
+    public void addItems(Map<ItemId, BigInteger> items) {
         inventory.addItems(items);
         for (ItemId id: ItemId.values()) {
             notifyAboutChange(id, inventory.getCount(id));

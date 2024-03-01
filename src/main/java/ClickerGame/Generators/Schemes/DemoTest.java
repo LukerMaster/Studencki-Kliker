@@ -9,11 +9,12 @@ import ClickerGame.World.IWorld;
 import java.math.BigInteger;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class DemoTest implements IGeneratorSchematic {
     @Override
-    public Dictionary<ItemId, BigInteger> getCost() {
-        Dictionary<ItemId, BigInteger> cost = new Hashtable<>();
+    public Map<ItemId, BigInteger> getCost() {
+        Map<ItemId, BigInteger> cost = new Hashtable<>();
 
         cost.put(ItemId.Wood, new BigInteger("2"));
 

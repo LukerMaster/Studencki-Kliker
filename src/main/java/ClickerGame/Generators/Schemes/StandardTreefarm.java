@@ -10,11 +10,12 @@ import com.sun.source.tree.Tree;
 import java.math.BigInteger;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class StandardTreefarm implements IGeneratorSchematic {
     @Override
-    public Dictionary<ItemId, BigInteger> getCost() {
-        Dictionary<ItemId, BigInteger> cost = new Hashtable<>();
+    public Map<ItemId, BigInteger> getCost() {
+        Map<ItemId, BigInteger> cost = new Hashtable<>();
         cost.put(ItemId.Wood, new BigInteger("40"));
         cost.put(ItemId.Stone, new BigInteger("20"));
         return cost;

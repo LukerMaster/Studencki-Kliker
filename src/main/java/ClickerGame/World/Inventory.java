@@ -5,12 +5,14 @@ import ClickerGame.ItemId;
 import java.math.BigInteger;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Inventory implements IInventory {
-    final Dictionary<ItemId, BigInteger> items = new Hashtable<>();
+    final Map<ItemId, BigInteger> items = new ConcurrentHashMap<>();
 
     @Override
-    public void takeItems(Dictionary<ItemId, BigInteger> items) {
+    public void takeItems(Map<ItemId, BigInteger> items) {
         for (ItemId key : ItemId.values())
         {
             if (items.get(key) != null)
@@ -38,7 +40,7 @@ public class Inventory implements IInventory {
     }
 
     @Override
-    public boolean hasItems(Dictionary<ItemId, BigInteger> items) {
+    public boolean hasItems(Map<ItemId, BigInteger> items) {
         for (ItemId key : ItemId.values())
         {
             if (items.get(key) != null && !hasItems(key, items.get(key)))
@@ -60,7 +62,7 @@ public class Inventory implements IInventory {
     }
 
     @Override
-    public void addItems(Dictionary<ItemId, BigInteger> items) {
+    public void addItems(Map<ItemId, BigInteger> items) {
         for (ItemId key : ItemId.values())
         {
             if (items.get(key) != null)

@@ -7,12 +7,13 @@ import ClickerGame.World.IWorld;
 
 import java.math.BigInteger;
 import java.util.Dictionary;
+import java.util.Map;
 
 /**
  * Interface for defining building costs for different kind of generators
  */
 public interface IGeneratorSchematic {
-    Dictionary<ItemId, BigInteger> getCost();
+    Map<ItemId, BigInteger> getCost();
 
     GeneratorId getGeneratorId();
     IGenerator buyGenerator(IWorld world);
