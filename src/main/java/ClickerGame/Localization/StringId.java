@@ -13,5 +13,5 @@ public enum StringId {
     Title,
     Actions,
     Your_Resources,
-    What_are_we_doing_next
+    Build
 }

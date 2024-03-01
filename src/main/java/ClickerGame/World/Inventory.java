@@ -22,11 +22,13 @@ public class Inventory implements IInventory {
     public void takeItems(ItemId id, BigInteger amount) {
         if (items.get(id) != null)
         {
-            if (items.get(id).compareTo(amount) > 0)
+            if (hasItems(id, amount))
             {
                 items.put(id, items.get(id).subtract(amount));
+                return;
             }
         }
+
         throw new RuntimeException("Not enough items.");
     }
 
@@ -49,7 +51,7 @@ public class Inventory implements IInventory {
     public boolean hasItems(ItemId id, BigInteger minAmount) {
         if (items.get(id) == null)
             return false;
-        return items.get(id).compareTo(minAmount) > 0;
+        return items.get(id).compareTo(minAmount) >= 0;
     }
 
     @Override

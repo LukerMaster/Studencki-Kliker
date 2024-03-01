@@ -2,12 +2,15 @@ import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Generators.Schemes.IGeneratorSchematic;
+import ClickerGame.Generators.Schemes.StandardTreefarm;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import ClickerGame.World.*;
 import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
+import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
 import Swing.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
@@ -88,11 +91,15 @@ public class Main {
 
         IGameLoop gameLoop = new GameLoop(world);
 
+        List<IGeneratorSchematic> schematics = new ArrayList<>();
+        schematics.add(new StandardTreefarm());
+
         // UI
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
+        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
 
         IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();

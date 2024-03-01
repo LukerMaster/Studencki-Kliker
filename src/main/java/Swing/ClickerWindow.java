@@ -44,9 +44,13 @@ public class ClickerWindow implements IProgramWindow {
         stopwatch.start();
         while (true) {
             System.nanoTime();
-            gameLoop.Update(stopwatch.getTime() / 1000.0f);
-            stopwatch.reset();
-            stopwatch.start();
+            if (stopwatch.getTime() > 0.1f)
+            {
+                gameLoop.Update(stopwatch.getTime() / 1000.0f);
+                stopwatch.reset();
+                stopwatch.start();
+            }
+
         }
     }
 }
