@@ -1,4 +1,4 @@
-package Swing.Dashboards.Factories;
+package Swing;
 
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
@@ -6,6 +6,7 @@ import ClickerGame.World.IObservableItemsProvider;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -45,6 +46,14 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     }
 
     @Override
+    public void takeItems(Dictionary<ItemId, BigInteger> items) {
+        inventory.takeItems(items);
+        for (ItemId id: ItemId.values()) {
+            notifyAboutChange(id, inventory.getCount(id));
+        }
+    }
+
+    @Override
     public void takeItems(ItemId id, BigInteger amount) {
         inventory.takeItems(id, amount);
         notifyAboutChange(id, inventory.getCount(id));
@@ -57,6 +66,11 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     }
 
     @Override
+    public boolean hasItems(Dictionary<ItemId, BigInteger> items) {
+        return inventory.hasItems(items);
+    }
+
+    @Override
     public boolean hasItems(ItemId id, BigInteger minAmount) {
         return inventory.hasItems(id, minAmount);
     }
@@ -64,6 +78,14 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     @Override
     public boolean hasItems(ItemId id, int minAmount) {
         return inventory.hasItems(id, minAmount);
+    }
+
+    @Override
+    public void addItems(Dictionary<ItemId, BigInteger> items) {
+        inventory.addItems(items);
+        for (ItemId id: ItemId.values()) {
+            notifyAboutChange(id, inventory.getCount(id));
+        }
     }
 
     @Override

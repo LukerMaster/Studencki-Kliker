@@ -10,6 +10,15 @@ public class Inventory implements IInventory {
     final Dictionary<ItemId, BigInteger> items = new Hashtable<>();
 
     @Override
+    public void takeItems(Dictionary<ItemId, BigInteger> items) {
+        for (ItemId key : ItemId.values())
+        {
+            if (items.get(key) != null)
+                takeItems(key, items.get(key));
+        }
+    }
+
+    @Override
     public void takeItems(ItemId id, BigInteger amount) {
         if (items.get(id) != null)
         {
@@ -27,6 +36,16 @@ public class Inventory implements IInventory {
     }
 
     @Override
+    public boolean hasItems(Dictionary<ItemId, BigInteger> items) {
+        for (ItemId key : ItemId.values())
+        {
+            if (items.get(key) != null && !hasItems(key, items.get(key)))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean hasItems(ItemId id, BigInteger minAmount) {
         if (items.get(id) == null)
             return false;
@@ -36,6 +55,15 @@ public class Inventory implements IInventory {
     @Override
     public boolean hasItems(ItemId id, int minAmount) {
         return hasItems(id, new BigInteger(String.valueOf(minAmount)));
+    }
+
+    @Override
+    public void addItems(Dictionary<ItemId, BigInteger> items) {
+        for (ItemId key : ItemId.values())
+        {
+            if (items.get(key) != null)
+                addItems(key, items.get(key));
+        }
     }
 
     @Override

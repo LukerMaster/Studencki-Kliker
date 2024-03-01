@@ -8,7 +8,7 @@ import ClickerGame.World.*;
 import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
-import Swing.Dashboards.Factories.ObservableInventory;
+import Swing.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
 
