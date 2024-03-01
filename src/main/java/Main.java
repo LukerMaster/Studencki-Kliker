@@ -1,6 +1,7 @@
 import ClickerGame.*;
 import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
+import ClickerGame.Actions.HuntForSomething;
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.DemoTestGenerator;
 import ClickerGame.Generators.Schemes.DemoTest;
@@ -88,6 +89,7 @@ public class Main {
          */
         availableActions.add(new ChopTree(inventory));
         availableActions.add(new CollectStones(inventory));
+        availableActions.add(new HuntForSomething(inventory));
 
         IWorld world = new World(inventory, availableActions);
 

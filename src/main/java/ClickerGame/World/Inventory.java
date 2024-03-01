@@ -13,7 +13,7 @@ public class Inventory implements IInventory {
 
     @Override
     public void takeItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : ItemId.values())
+        for (ItemId key : items.keySet())
         {
             if (items.get(key) != null)
                 takeItems(key, items.get(key));
@@ -41,7 +41,7 @@ public class Inventory implements IInventory {
 
     @Override
     public boolean hasItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : ItemId.values())
+        for (ItemId key : items.keySet())
         {
             if (items.get(key) != null && !hasItems(key, items.get(key)))
                 return false;
@@ -63,7 +63,7 @@ public class Inventory implements IInventory {
 
     @Override
     public void addItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : ItemId.values())
+        for (ItemId key : items.keySet())
         {
             if (items.get(key) != null)
                 addItems(key, items.get(key));
@@ -72,10 +72,7 @@ public class Inventory implements IInventory {
 
     @Override
     public void addItems(ItemId id, BigInteger amount) {
-        if (items.get(id) == null)
-            items.put(id, amount);
-        else
-            items.put(id, items.get(id).add(amount));
+        items.merge(id, amount, BigInteger::add);
     }
 
     @Override

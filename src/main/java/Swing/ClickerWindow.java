@@ -35,6 +35,7 @@ public class ClickerWindow implements IProgramWindow {
             mainPanel.add(factory.CreateDashboard());
 
         JFrame frame = new JFrame(stringsProvider.GetStringFor(StringId.Title));
+        frame.setLocationRelativeTo(null);
         frame.setContentPane(this.mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -50,7 +51,6 @@ public class ClickerWindow implements IProgramWindow {
                 stopwatch.reset();
                 stopwatch.start();
             }
-
         }
     }
 }
