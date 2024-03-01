@@ -1,4 +1,4 @@
-package ClickerGame.Generators;
+package ClickerGame.Localization;
 
 public enum GeneratorId {
     Treefarm,

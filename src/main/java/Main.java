@@ -3,10 +3,9 @@ import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.HuntForSomething;
 import ClickerGame.Actions.ICustomUserAction;
-import ClickerGame.Generators.DemoTestGenerator;
-import ClickerGame.Generators.Schemes.DemoTest;
-import ClickerGame.Generators.Schemes.IGeneratorSchematic;
-import ClickerGame.Generators.Schemes.StandardTreefarm;
+import ClickerGame.Generators.Templates.Factories.DemoGeneratorFactory;
+import ClickerGame.Generators.Templates.Factories.TreefarmFactory;
+import ClickerGame.Generators.Templates.IGeneratorTemplate;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import ClickerGame.World.*;
@@ -95,9 +94,9 @@ public class Main {
 
         IGameLoop gameLoop = new GameLoop(world);
 
-        List<IGeneratorSchematic> schematics = new ArrayList<>();
-        schematics.add(new StandardTreefarm());
-        schematics.add(new DemoTest());
+        List<IGeneratorTemplate> schematics = new ArrayList<>();
+        schematics.add(new DemoGeneratorFactory().CreateTemplate());
+        schematics.add(new TreefarmFactory().CreateTemplate());
 
         // UI
 

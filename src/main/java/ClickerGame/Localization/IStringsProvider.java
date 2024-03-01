@@ -1,7 +1,6 @@
 package ClickerGame.Localization;
 
 import ClickerGame.Actions.CustomActionId;
-import ClickerGame.Generators.GeneratorId;
 import ClickerGame.ItemId;
 
 /**

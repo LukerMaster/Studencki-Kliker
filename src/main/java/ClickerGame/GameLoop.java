@@ -18,6 +18,6 @@ public class GameLoop implements IGameLoop {
         List<IGenerator> activeGenerators = world.GetActiveGenerators();
 
         for (IGenerator gen : activeGenerators)
-            gen.Update(deltaTime);
+            gen.Update(deltaTime, world.GetInventory());
     }
 }

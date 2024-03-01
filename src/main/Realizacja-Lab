@@ -4,6 +4,7 @@ L1 Stosowanie konstrukcyjnych wzorców projektowych
 
 L2 Stosowanie strukturalnych wzorców projektowych
 - Facade - StringsProvider.java
+- Decorator - ObservableInventory.java
 
 L3 Stosowanie czynnościowych wzorców projektowych
 - Strategy - PeriodicSpawning.java
