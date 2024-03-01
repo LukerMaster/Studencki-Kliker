@@ -7,6 +7,8 @@ L2 Stosowanie strukturalnych wzorców projektowych
 
 L3 Stosowanie czynnościowych wzorców projektowych
 - Strategy - PeriodicSpawning.java
+- Command - ICustomUserAction.java
+- Observer - ObservableInventory.java
 
 L4 Stosowanie zasad pojedynczej odpowiedzialności i otwarte-zamknięte
 

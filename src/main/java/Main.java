@@ -4,13 +4,11 @@ import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
-import ClickerGame.World.IInventory;
-import ClickerGame.World.IWorld;
-import ClickerGame.World.Inventory;
-import ClickerGame.World.World;
+import ClickerGame.World.*;
 import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
+import Swing.Dashboards.Factories.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
 
@@ -67,9 +65,16 @@ public class Main {
         );
 
         // Game Core
-        IInventory inventory = new Inventory();
+        ObservableInventory observableInventory = new ObservableInventory(new Inventory());
 
-        List<ICustomUserAction> availableActions = new ArrayList<ICustomUserAction>();
+        /*
+         * These two may be temporary solution. I like to separate classes into their interfaces.
+         * This ensures that if I even need to split this class, I won't have to change any uses of the class.
+         */
+        IInventory inventory = observableInventory;
+        IObservableItemsProvider observableItemsProvider = observableInventory;
+
+        List<ICustomUserAction> availableActions = new ArrayList<>();
 
         /*
         This could have been made with lambdas and would save myself adding a lot of simple classes.
@@ -86,8 +91,8 @@ public class Main {
         // UI
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
-        dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, world));
-        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, world));
+        dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
+        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
 
         IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();

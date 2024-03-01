@@ -3,7 +3,7 @@ package Swing.Dashboards.Factories;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
-import ClickerGame.World.IWorld;
+import ClickerGame.World.IObservableItemsProvider;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
@@ -12,13 +12,13 @@ import java.awt.*;
 public class ResourcesDashboardFactory implements IDashboardFactory {
 
 
-    public ResourcesDashboardFactory(IStringsProvider stringsProvider, IWorld world) {
+    public ResourcesDashboardFactory(IStringsProvider stringsProvider, IObservableItemsProvider inventory) {
         this.stringsProvider = stringsProvider;
-        this.world = world;
+        this.inventory = inventory;
     }
 
     IStringsProvider stringsProvider;
-    private final IWorld world;
+    private final IObservableItemsProvider inventory;
 
     @Override
     public JComponent CreateDashboard() {
@@ -31,7 +31,15 @@ public class ResourcesDashboardFactory implements IDashboardFactory {
         for (ItemId id : ItemId.values())
         {
             resourcePanel.add(new JLabel(stringsProvider.GetNameForItem(id)));
-            resourcePanel.add(new JLabel("0"));
+
+            JLabel amountLabel = new JLabel();
+            amountLabel.setText("0");
+            inventory.addListener((itemId, amount) ->
+            {
+                if (itemId == id)
+                    amountLabel.setText(amount.toString());
+            });
+            resourcePanel.add(amountLabel);
         }
 
         JPanel dashboard = new JPanel();

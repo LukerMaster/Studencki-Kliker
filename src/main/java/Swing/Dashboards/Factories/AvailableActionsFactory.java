@@ -4,23 +4,21 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
-import ClickerGame.World.IWorld;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
 
 public class AvailableActionsFactory implements IDashboardFactory {
-    private IStringsProvider stringsProvider;
+    private final IStringsProvider stringsProvider;
 
-    public AvailableActionsFactory(IStringsProvider stringsProvider, IWorld world) {
+    public AvailableActionsFactory(IStringsProvider stringsProvider, List<ICustomUserAction> actionList) {
         this.stringsProvider = stringsProvider;
-        this.world = world;
+        this.actionList = actionList;
     }
 
-    private IWorld world;
+    private final List<ICustomUserAction> actionList;
 
     @Override
     public JComponent CreateDashboard() {
@@ -30,15 +28,10 @@ public class AvailableActionsFactory implements IDashboardFactory {
         JPanel resourcePanel = new JPanel();
 
         resourcePanel.setLayout(new GridLayout(ItemId.values().length, 1));
-        for (ICustomUserAction action : world.GetAvailableActions())
+        for (ICustomUserAction action : actionList)
         {
             JButton button = new JButton(stringsProvider.GetNameForAction(action.GetActionId()));
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    action.execute();
-                }
-            });
+            button.addActionListener(e -> action.execute());
 
             resourcePanel.add(button);
         }
