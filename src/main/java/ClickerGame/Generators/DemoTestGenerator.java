@@ -1,7 +1,7 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
+import ClickerGame.Generators.GenerationStrategies.PeriodicSpawningOneItem;
 import ClickerGame.ItemId;
 import ClickerGame.World.IWorld;
 
@@ -14,7 +14,7 @@ public class DemoTestGenerator implements IGenerator {
     {
 
         this.world = world;
-        this.spawning = new PeriodicSpawning(world,
+        this.spawning = new PeriodicSpawningOneItem(world,
                 0.25f,
                 ItemId.Gold,
                 new BigInteger("750"));

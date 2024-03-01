@@ -5,7 +5,7 @@ import ClickerGame.World.IWorld;
 
 import java.math.BigInteger;
 
-public class PeriodicSpawning implements IGeneration
+public class PeriodicSpawningOneItem implements IGeneration
 {
 
     final IWorld world;
@@ -14,10 +14,10 @@ public class PeriodicSpawning implements IGeneration
     final ItemId spawnedId;
     final BigInteger amount;
 
-    public PeriodicSpawning(IWorld world,
-                            float secondsBetweenSpawns,
-                            ItemId spawnedId,
-                            BigInteger amount)
+    public PeriodicSpawningOneItem(IWorld world,
+                                   float secondsBetweenSpawns,
+                                   ItemId spawnedId,
+                                   BigInteger amount)
     {
         this.world = world;
         this.secondsBetweenSpawns = secondsBetweenSpawns;

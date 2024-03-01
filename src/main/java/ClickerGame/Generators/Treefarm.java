@@ -1,7 +1,7 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
+import ClickerGame.Generators.GenerationStrategies.PeriodicSpawningOneItem;
 import ClickerGame.ItemId;
 import ClickerGame.World.IWorld;
 
@@ -14,7 +14,7 @@ public class Treefarm implements IGenerator
     public Treefarm(IWorld world)
     {
         this.world = world;
-        this.strategy = new PeriodicSpawning(world,
+        this.strategy = new PeriodicSpawningOneItem(world,
                 10,
                 ItemId.Wood,
                 new BigInteger("10"));
