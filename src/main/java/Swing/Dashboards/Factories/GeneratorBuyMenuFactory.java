@@ -1,6 +1,5 @@
 package Swing.Dashboards.Factories;
 
-import ClickerGame.Generators.IGenerator;
 import ClickerGame.Generators.Schemes.IGeneratorSchematic;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.IStringsProvider;
@@ -32,13 +31,12 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
     }
     @Override
     public JComponent CreateDashboard() {
-        JPanel dashboard = new JPanel();
 
-        dashboard.setLayout(new GridLayout(schematics.size(), 1));
+        JPanel allSchematicsPanel = new JPanel(new GridLayout(schematics.size(), 1));
         for (IGeneratorSchematic schematic : schematics)
         {
-            JPanel schematicPanel = new JPanel();
-            schematicPanel.setLayout(new GridLayout(1, 2));
+            JPanel singleSchematicPanel = new JPanel();
+            singleSchematicPanel.setLayout(new GridLayout(1, 2));
             JLabel label = new JLabel();
             label.setText(stringsProvider.GetStringFor(StringId.Build) + ": " + stringsProvider.GetNameForGenerator(schematic.getGeneratorId()));
 
@@ -52,10 +50,18 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
             }
             buyButton.addActionListener(e -> world.GetActiveGenerators().add(schematic.buyGenerator(world)));
 
-            schematicPanel.add(label);
-            schematicPanel.add(buyButton);
-            dashboard.add(schematicPanel);
+            singleSchematicPanel.add(label);
+            singleSchematicPanel.add(buyButton);
+            allSchematicsPanel.add(singleSchematicPanel);
         }
+        JLabel title = new JLabel();
+        title.setText(stringsProvider.GetStringFor(StringId.Resource_generation));
+
+        JPanel dashboard = new JPanel();
+        dashboard.setLayout(new GridLayout(2, 1));
+
+        dashboard.add(title);
+        dashboard.add(allSchematicsPanel);
         return dashboard;
     }
 }

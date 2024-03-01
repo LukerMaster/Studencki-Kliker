@@ -13,5 +13,6 @@ public enum StringId {
     Title,
     Actions,
     Your_Resources,
-    Build
+    Build,
+    Resource_generation
 }
