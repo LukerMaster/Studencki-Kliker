@@ -22,7 +22,8 @@ public class TreefarmFactory implements ITemplateFactory {
         );
 
         IGeneration generation = new PeriodicSpawning( 5, Map.of(
-            ItemId.Wood, new BigInteger("10")
+            ItemId.Wood, new BigInteger("40"),
+            ItemId.Stone, new BigInteger("20")
         ));
 
         return new GeneratorTemplate(() -> new Generator(Treefarm, generation), buildCost, Treefarm);
