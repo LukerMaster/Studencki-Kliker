@@ -10,7 +10,7 @@ import ClickerGame.ItemId;
 import java.math.BigInteger;
 import java.util.Map;
 
-import static ClickerGame.Localization.GeneratorId.Treefarm;
+import static ClickerGame.Localization.GeneratorId.Tree_farm;
 
 public class TreefarmFactory implements ITemplateFactory {
 
@@ -26,6 +26,6 @@ public class TreefarmFactory implements ITemplateFactory {
             ItemId.Stone, new BigInteger("20")
         ));
 
-        return new GeneratorTemplate(() -> new Generator(Treefarm, generation), buildCost, Treefarm);
+        return new GeneratorTemplate(() -> new Generator(Tree_farm, generation), buildCost, Tree_farm);
     }
 }

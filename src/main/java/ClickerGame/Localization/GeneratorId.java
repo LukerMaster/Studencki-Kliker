@@ -1,6 +1,6 @@
 package ClickerGame.Localization;
 
 public enum GeneratorId {
-    Treefarm,
+    Tree_farm,
     DemoTestGenerator
 }

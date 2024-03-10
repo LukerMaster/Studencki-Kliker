@@ -11,7 +11,6 @@ import java.math.BigInteger;
 import java.util.Map;
 
 import static ClickerGame.Localization.GeneratorId.DemoTestGenerator;
-import static ClickerGame.Localization.GeneratorId.Treefarm;
 
 public class DemoGeneratorFactory implements ITemplateFactory{
     @Override
