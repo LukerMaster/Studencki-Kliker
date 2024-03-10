@@ -8,5 +8,6 @@ public enum ItemId {
     Hops,
     Beer,
     Vodka,
-    Gold
+    Gold,
+    Student
 }

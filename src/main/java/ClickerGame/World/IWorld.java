@@ -12,4 +12,6 @@ public interface IWorld {
     IInventory GetInventory();
     List<ICustomUserAction> GetAvailableActions();
     List<IGenerator> GetActiveGenerators();
+    void AddNewGenerator(IGenerator generator);
+    void RemoveGenerator(IGenerator generator);
 }

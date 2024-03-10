@@ -6,6 +6,7 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.BuildRecipes.DemoGenerator;
 import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
 import ClickerGame.Generators.BuildRecipes.TreeFarm;
+import Swing.Dashboards.Factories.CurrentGeneratorsFactory;
 import Swing.Localization.*;
 import ClickerGame.World.*;
 import Core.*;
@@ -103,11 +104,14 @@ public class Main {
                 localeMapper,
                 generationPresentingStrategy);
 
+        IWorldEventHandler eventHandler = (IWorldEventHandler) world;
+
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
         dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
+        dashboardFactories.add(new CurrentGeneratorsFactory(world, eventHandler, stringsProvider));
 
         IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();

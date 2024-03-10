@@ -69,7 +69,7 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
             buyButton.addActionListener(e ->
                     {
                         world.GetInventory().takeItems(recipe.GetBuildCost());
-                        world.GetActiveGenerators().add(recipe.CreateGenerator());
+                        world.AddNewGenerator(recipe.CreateGenerator());
                     });
             singleSchematicPanel.add(buyButton);
 
