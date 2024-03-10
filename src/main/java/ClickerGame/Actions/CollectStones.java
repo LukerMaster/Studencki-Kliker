@@ -13,11 +13,6 @@ public class CollectStones implements ICustomUserAction {
     }
 
     @Override
-    public CustomActionId GetActionId() {
-        return CustomActionId.Collect_some_stones;
-    }
-
-    @Override
     public void execute() {
         this.userInventory.addItems(ItemId.Stone, 1);
     }

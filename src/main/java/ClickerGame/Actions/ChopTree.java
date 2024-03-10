@@ -16,12 +16,6 @@ public class ChopTree implements ICustomUserAction {
     public ChopTree(IInventory userInventory) {
         this.userInventory = userInventory;
     }
-
-    @Override
-    public CustomActionId GetActionId() {
-        return CustomActionId.Chop_a_tree;
-    }
-
     @Override
     public void execute() {
         userInventory.addItems(ItemId.Wood, 1);

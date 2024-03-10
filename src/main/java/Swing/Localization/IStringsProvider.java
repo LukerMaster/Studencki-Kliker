@@ -1,7 +1,12 @@
-package ClickerGame.Localization;
+package Swing.Localization;
 
-import ClickerGame.Actions.CustomActionId;
+import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Generators.GenerationStrategies.IGeneration;
+import ClickerGame.Generators.IGenerator;
 import ClickerGame.ItemId;
+
+import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * Interface used to make localization easier.
@@ -14,8 +19,9 @@ import ClickerGame.ItemId;
 // This - in fact - Implements a facade design pattern for ResourceBundle.
 public interface IStringsProvider {
     String GetNameForItem(ItemId Id);
-    String GetNameForAction(CustomActionId Id);
-    String GetNameForGenerator(GeneratorId Id);
-    String GetGenerationDescription(GenerationDescriptionId Id);
+    String GetNameForAction(ICustomUserAction Action);
+    String GetNameForGenerator(IGenerator Generator);
+    String GetGenerationDescription(IGeneration Id);
+    String FormatItemsAsString(Map<ItemId, BigInteger> cost);
     String GetStringFor(StringId Id);
 }

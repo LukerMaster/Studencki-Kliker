@@ -1,6 +1,6 @@
 package ClickerGame.Generators;
 
-import ClickerGame.Localization.GeneratorId;
+import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.World.IInventory;
 
 /**
@@ -8,7 +8,8 @@ import ClickerGame.World.IInventory;
  */
 public interface IGenerator {
 
-    GeneratorId GetGeneratorId();
     void Update(float deltaTime, IInventory targetInventory);
+
+    IGeneration GetGenerationStrategy();
 
 }

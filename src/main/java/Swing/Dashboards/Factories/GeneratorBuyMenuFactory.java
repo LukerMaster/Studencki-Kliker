@@ -1,10 +1,10 @@
 package Swing.Dashboards.Factories;
 
-import ClickerGame.Generators.Templates.IGeneratorTemplate;
+import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
+import ClickerGame.Generators.IGenerator;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.IBuildCostPresenter;
-import ClickerGame.Localization.IStringsProvider;
-import ClickerGame.Localization.StringId;
+import Swing.Localization.IStringsProvider;
+import Swing.Localization.StringId;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.World.IWorld;
 import Swing.Dashboards.IDashboardFactory;
@@ -15,57 +15,61 @@ import java.util.List;
 
 public class GeneratorBuyMenuFactory implements IDashboardFactory {
 
-    private final List<IGeneratorTemplate> templates;
+    private final List<IBuildRecipe> recipes;
     private final IWorld world;
     private final IObservableItemsProvider observableItems;
     private final IStringsProvider stringsProvider;
 
-    private final IBuildCostPresenter buildCostPresenter;
 
-    public GeneratorBuyMenuFactory(List<IGeneratorTemplate> templates,
+    public GeneratorBuyMenuFactory(List<IBuildRecipe> recipes,
                                    IWorld world,
                                    IObservableItemsProvider observableItems,
-                                   IStringsProvider stringsProvider, IBuildCostPresenter buildCostPresenter)
+                                   IStringsProvider stringsProvider)
     {
-        this.templates = templates;
+        this.recipes = recipes;
         this.world = world;
         this.observableItems = observableItems;
         this.stringsProvider = stringsProvider;
-        this.buildCostPresenter = buildCostPresenter;
     }
     @Override
     public JComponent CreateDashboard() {
 
-        JPanel allSchematicsPanel = new JPanel(new GridLayout(templates.size(), 1));
-        for (IGeneratorTemplate template : templates)
+        JPanel allSchematicsPanel = new JPanel(new GridLayout(recipes.size(), 1));
+        for (IBuildRecipe recipe : recipes)
         {
+            IGenerator generatorToDescribe = recipe.CreateGenerator();
+
             JPanel singleSchematicPanel = new JPanel();
             singleSchematicPanel.setLayout(new GridLayout(1, 2));
 
             JPanel descriptionPanel = new JPanel(new GridLayout(3, 1));
 
             JLabel nameLabel = new JLabel();
-            nameLabel.setText(stringsProvider.GetStringFor(StringId.Build) + ": " + stringsProvider.GetNameForGenerator(template.GetGeneratorId()));
+            nameLabel.setText(stringsProvider.GetStringFor(StringId.Build) + ": " + stringsProvider.GetNameForGenerator(generatorToDescribe));
             descriptionPanel.add(nameLabel);
 
             JLabel buildCostLabel = new JLabel();
-            buildCostLabel.setText("<html>" + stringsProvider.GetStringFor(StringId.Build_cost) + ":<br/>" + buildCostPresenter.PresentCostAsString(template.GetCost()) + "</html>");
+            buildCostLabel.setText("<html><br/>" + stringsProvider.GetStringFor(StringId.Build_cost) + ":<br/>" + stringsProvider.FormatItemsAsString(recipe.GetBuildCost()) + "</html>");
             descriptionPanel.add(buildCostLabel);
+
+            JLabel generationLabel = new JLabel();
+            generationLabel.setText("<html><br/>" + stringsProvider.GetGenerationDescription(generatorToDescribe.GetGenerationStrategy()) + "</html>");
+            descriptionPanel.add(generationLabel);
 
             singleSchematicPanel.add(descriptionPanel);
 
             JButton buyButton = new JButton();
             buyButton.setText(stringsProvider.GetStringFor(StringId.Build));
-            buyButton.setEnabled(world.GetInventory().hasItems(template.GetCost()));
+            buyButton.setEnabled(world.GetInventory().hasItems(recipe.GetBuildCost()));
             for (ItemId itemId : ItemId.values())
             {
-                if (template.GetCost().get(itemId) != null)
-                    observableItems.addListener((id, amount) -> buyButton.setEnabled(world.GetInventory().hasItems(template.GetCost())));
+                if (recipe.GetBuildCost().get(itemId) != null)
+                    observableItems.addListener((id, amount) -> buyButton.setEnabled(world.GetInventory().hasItems(recipe.GetBuildCost())));
             }
             buyButton.addActionListener(e ->
                     {
-                        world.GetInventory().takeItems(template.GetCost());
-                        world.GetActiveGenerators().add(template.GetGeneratorSupplier().get());
+                        world.GetInventory().takeItems(recipe.GetBuildCost());
+                        world.GetActiveGenerators().add(recipe.CreateGenerator());
                     });
             singleSchematicPanel.add(buyButton);
 

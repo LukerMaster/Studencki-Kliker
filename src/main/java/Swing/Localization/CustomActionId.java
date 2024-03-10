@@ -1,4 +1,4 @@
-package ClickerGame.Actions;
+package Swing.Localization;
 
 public enum CustomActionId {
     Chop_a_tree,

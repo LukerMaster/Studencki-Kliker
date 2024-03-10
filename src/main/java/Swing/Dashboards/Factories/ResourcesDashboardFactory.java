@@ -1,8 +1,8 @@
 package Swing.Dashboards.Factories;
 
 import ClickerGame.ItemId;
-import ClickerGame.Localization.IStringsProvider;
-import ClickerGame.Localization.StringId;
+import Swing.Localization.IStringsProvider;
+import Swing.Localization.StringId;
 import ClickerGame.World.IObservableItemsProvider;
 import Swing.Dashboards.IDashboardFactory;
 

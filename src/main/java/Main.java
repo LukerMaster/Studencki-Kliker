@@ -3,18 +3,17 @@ import ClickerGame.Actions.ChopTree;
 import ClickerGame.Actions.CollectStones;
 import ClickerGame.Actions.HuntForSomething;
 import ClickerGame.Actions.ICustomUserAction;
-import ClickerGame.Generators.Templates.Factories.DemoGeneratorFactory;
-import ClickerGame.Generators.Templates.Factories.TreefarmFactory;
-import ClickerGame.Generators.Templates.IGeneratorTemplate;
-import ClickerGame.Localization.BuildCostPresenter;
-import ClickerGame.Localization.IBuildCostPresenter;
-import ClickerGame.Localization.IStringsProvider;
-import ClickerGame.Localization.StringsProvider;
+import ClickerGame.Generators.BuildRecipes.DemoGenerator;
+import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
+import ClickerGame.Generators.BuildRecipes.TreeFarm;
+import Swing.Localization.*;
 import ClickerGame.World.*;
 import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
+import Swing.Localization.GenerationPresenters.GenerationPresentingStrategy;
+import Swing.Localization.GenerationPresenters.IGenerationPresentingStrategy;
 import Swing.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
@@ -67,10 +66,6 @@ public class Main {
          * IoC frameworks often allow for registering things "as singletons" which does
          * exactly that without utilizing actual Singleton-pattern.
         */
-        IStringsProvider stringsProvider = new StringsProvider(
-                ResourceBundle.getBundle("texts", Locale.getDefault())
-        );
-
         // Game Core
         ObservableInventory observableInventory = new ObservableInventory(new Inventory());
 
@@ -96,18 +91,23 @@ public class Main {
 
         IGameLoop gameLoop = new GameLoop(world);
 
-        List<IGeneratorTemplate> schematics = new ArrayList<>();
-        schematics.add(new DemoGeneratorFactory().CreateTemplate());
-        schematics.add(new TreefarmFactory().CreateTemplate());
+        List<IBuildRecipe> schematics = new ArrayList<>();
+        schematics.add(new DemoGenerator());
+        schematics.add(new TreeFarm());
 
         // UI
+        IClassToLocaleIdMapper localeMapper = new ClassToLocaleIdMapper();
+        IGenerationPresentingStrategy generationPresentingStrategy = new GenerationPresentingStrategy();
+        IStringsProvider stringsProvider = new StringsProvider(
+                ResourceBundle.getBundle("texts", Locale.getDefault()),
+                localeMapper,
+                generationPresentingStrategy);
 
-        IBuildCostPresenter buildCostPresenter = new BuildCostPresenter(stringsProvider);
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
-        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider, buildCostPresenter));
+        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
 
         IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();

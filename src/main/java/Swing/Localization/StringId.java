@@ -1,4 +1,4 @@
-package ClickerGame.Localization;
+package Swing.Localization;
 
 
 /**
@@ -14,5 +14,6 @@ public enum StringId {
     Actions,
     Your_Resources,
     Build,
-    Build_cost, Resource_generation
+    Build_cost, Resource_generation,
+    Nothing
 }

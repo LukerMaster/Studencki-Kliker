@@ -2,13 +2,12 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.IStringsProvider;
-import ClickerGame.Localization.StringId;
+import Swing.Localization.IStringsProvider;
+import Swing.Localization.StringId;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 public class AvailableActionsFactory implements IDashboardFactory {
@@ -31,7 +30,7 @@ public class AvailableActionsFactory implements IDashboardFactory {
         resourcePanel.setLayout(new GridLayout(ItemId.values().length, 1));
         for (ICustomUserAction action : actionList)
         {
-            JButton button = new JButton(stringsProvider.GetNameForAction(action.GetActionId()));
+            JButton button = new JButton(stringsProvider.GetNameForAction(action));
             button.addActionListener(e -> action.execute());
 
 

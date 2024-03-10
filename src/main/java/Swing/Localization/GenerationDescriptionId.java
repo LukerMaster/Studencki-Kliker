@@ -1,4 +1,4 @@
-package ClickerGame.Localization;
+package Swing.Localization;
 
 public enum GenerationDescriptionId {
     Periodic_Spawning
