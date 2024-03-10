@@ -6,6 +6,8 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.Templates.Factories.DemoGeneratorFactory;
 import ClickerGame.Generators.Templates.Factories.TreefarmFactory;
 import ClickerGame.Generators.Templates.IGeneratorTemplate;
+import ClickerGame.Localization.BuildCostPresenter;
+import ClickerGame.Localization.IBuildCostPresenter;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import ClickerGame.World.*;
@@ -100,10 +102,12 @@ public class Main {
 
         // UI
 
+        IBuildCostPresenter buildCostPresenter = new BuildCostPresenter(stringsProvider);
+
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
-        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
+        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider, buildCostPresenter));
 
         IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
         programWindow.Start();

@@ -2,6 +2,7 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Generators.Templates.IGeneratorTemplate;
 import ClickerGame.ItemId;
+import ClickerGame.Localization.IBuildCostPresenter;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
 import ClickerGame.World.IObservableItemsProvider;
@@ -19,15 +20,18 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
     private final IObservableItemsProvider observableItems;
     private final IStringsProvider stringsProvider;
 
+    private final IBuildCostPresenter buildCostPresenter;
+
     public GeneratorBuyMenuFactory(List<IGeneratorTemplate> templates,
                                    IWorld world,
                                    IObservableItemsProvider observableItems,
-                                   IStringsProvider stringsProvider)
+                                   IStringsProvider stringsProvider, IBuildCostPresenter buildCostPresenter)
     {
         this.templates = templates;
         this.world = world;
         this.observableItems = observableItems;
         this.stringsProvider = stringsProvider;
+        this.buildCostPresenter = buildCostPresenter;
     }
     @Override
     public JComponent CreateDashboard() {
@@ -37,8 +41,18 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
         {
             JPanel singleSchematicPanel = new JPanel();
             singleSchematicPanel.setLayout(new GridLayout(1, 2));
-            JLabel label = new JLabel();
-            label.setText(stringsProvider.GetStringFor(StringId.Build) + ": " + stringsProvider.GetNameForGenerator(template.GetGeneratorId()));
+
+            JPanel descriptionPanel = new JPanel(new GridLayout(3, 1));
+
+            JLabel nameLabel = new JLabel();
+            nameLabel.setText(stringsProvider.GetStringFor(StringId.Build) + ": " + stringsProvider.GetNameForGenerator(template.GetGeneratorId()));
+            descriptionPanel.add(nameLabel);
+
+            JLabel buildCostLabel = new JLabel();
+            buildCostLabel.setText("<html>" + stringsProvider.GetStringFor(StringId.Build_cost) + ":<br/>" + buildCostPresenter.PresentCostAsString(template.GetCost()) + "</html>");
+            descriptionPanel.add(buildCostLabel);
+
+            singleSchematicPanel.add(descriptionPanel);
 
             JButton buyButton = new JButton();
             buyButton.setText(stringsProvider.GetStringFor(StringId.Build));
@@ -53,9 +67,10 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
                         world.GetInventory().takeItems(template.GetCost());
                         world.GetActiveGenerators().add(template.GetGeneratorSupplier().get());
                     });
-
-            singleSchematicPanel.add(label);
             singleSchematicPanel.add(buyButton);
+
+
+
             allSchematicsPanel.add(singleSchematicPanel);
         }
         JLabel title = new JLabel();

@@ -14,5 +14,5 @@ public enum StringId {
     Actions,
     Your_Resources,
     Build,
-    Resource_generation
+    Build_cost, Resource_generation
 }
