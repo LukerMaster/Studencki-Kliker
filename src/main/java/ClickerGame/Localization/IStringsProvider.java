@@ -16,6 +16,6 @@ public interface IStringsProvider {
     String GetNameForItem(ItemId Id);
     String GetNameForAction(CustomActionId Id);
     String GetNameForGenerator(GeneratorId Id);
-
+    String GetGenerationDescription(GenerationDescriptionId Id);
     String GetStringFor(StringId Id);
 }
