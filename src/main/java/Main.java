@@ -81,6 +81,7 @@ public class Main {
         buildRecipes.add(new TreeFarm());
         buildRecipes.add(new Quarry());
         buildRecipes.add(new StudentTrap(world.GetRng()));
+        buildRecipes.add(new HopsBush());
         buildRecipes.add(new HopsFarm());
         buildRecipes.add(new Brewery());
         buildRecipes.add(new HuntingHut());
