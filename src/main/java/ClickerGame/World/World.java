@@ -3,6 +3,7 @@ package ClickerGame.World;
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.IGenerator;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
@@ -17,6 +18,7 @@ public class World implements IWorld, IWorldEventHandler {
 
     private final ConcurrentLinkedQueue<IGenerator> activeGenerators = new ConcurrentLinkedQueue<>();
     private final Random rng;
+    private Instant LastGameTime;
 
     public World(IInventory inventory, List<ICustomUserAction> userActions, Random rng)
     {
@@ -60,6 +62,17 @@ public class World implements IWorld, IWorldEventHandler {
         }
         activeGenerators.remove(generator);
     }
+
+    @Override
+    public void SetLastGameTime(Instant time) {
+        LastGameTime = time;
+    }
+
+    @Override
+    public Instant GetLastGameTime() {
+        return LastGameTime;
+    }
+
 
     @Override
     public Random GetRng() {

@@ -42,6 +42,8 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
 
     private void notifyAboutChange(ItemId id, BigInteger newAmount)
     {
+        if (listeners == null)
+            listeners = new ArrayList<>();
         for (BiConsumer<ItemId, BigInteger> listener : listeners)
             listener.accept(id, newAmount);
     }

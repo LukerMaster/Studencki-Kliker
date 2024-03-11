@@ -4,6 +4,7 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.IGenerator;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -18,6 +19,8 @@ public interface IWorld extends Serializable {
     ConcurrentLinkedQueue<IGenerator> GetActiveGenerators();
     void AddNewGenerator(IGenerator generator);
     void RemoveGenerator(IGenerator generator);
+    void SetLastGameTime(Instant time);
+    Instant GetLastGameTime();
 
     Random GetRng();
 }

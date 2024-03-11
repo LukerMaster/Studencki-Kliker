@@ -5,6 +5,8 @@ import ClickerGame.World.*;
 import Swing.ObservableInventory;
 
 import java.io.*;
+import java.sql.Time;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,6 +58,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
         try {
             FileOutputStream fout = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fout);
+            world.SetLastGameTime(Instant.now());
             oos.writeObject(world);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -76,6 +79,11 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             IWorld world = (IWorld) in.readObject();
             world.SetAvailableActions(GetUserActions(world.GetInventory(), world.GetRng()));
+            world.GetActiveGenerators().forEach(g ->
+            {
+                float TimeDelta = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
+                g.Update(TimeDelta, world.GetInventory());
+            });
             return world;
         }
         catch (IOException | ClassNotFoundException e) {
