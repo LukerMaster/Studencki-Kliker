@@ -59,7 +59,7 @@ public class StringsProvider implements IStringsProvider {
             itemRepresentations.add(entry.getValue() + " " + GetNameForItem(entry.getKey()));
         }
 
-        return String.join("<br/>", itemRepresentations);
+        return String.join("\n", itemRepresentations);
     }
 }
 

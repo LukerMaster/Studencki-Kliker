@@ -30,7 +30,11 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         JLabel generatorName = new JLabel(stringsProvider.GetNameForGenerator(generator));
         generatorName.setFont(generatorName.getFont().deriveFont(14f));
 
-        JLabel generatorDescription = new JLabel("<html>" + stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()) + "</html>");
+        JTextArea generatorDescription = new JTextArea(stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()));
+        generatorDescription.setEditable(false);
+        generatorDescription.setOpaque(true);
+        generatorDescription.setFont(new JLabel().getFont());
+
 
         JPanel generatorPanel = new JPanel();
         generatorPanel.setLayout(new BoxLayout(generatorPanel, BoxLayout.Y_AXIS));

@@ -50,16 +50,19 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
 
             JLabel nameLabel = new JLabel();
             nameLabel.setText(stringsProvider.GetNameForGenerator(generatorToDescribe));
-            nameLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, nameLabel.getPreferredSize().height));
             nameLabel.setFont(nameLabel.getFont().deriveFont(14f));
 
-            JLabel buildCostLabel = new JLabel();
-            buildCostLabel.setText("<html><br/>" + stringsProvider.GetStringFor(StringId.Build_cost) + ":<br/>" + stringsProvider.FormatItemsAsString(recipe.GetBuildCost()) + "</html>");
-            buildCostLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, buildCostLabel.getPreferredSize().height));
+            JTextArea buildCostLabel = new JTextArea();
+            buildCostLabel.setText("\n" + stringsProvider.GetStringFor(StringId.Build_cost) + ":\n" + stringsProvider.FormatItemsAsString(recipe.GetBuildCost()));
+            buildCostLabel.setEditable(false);
+            buildCostLabel.setOpaque(true);
+            buildCostLabel.setFont(new JLabel().getFont());
 
-            JLabel generationLabel = new JLabel();
-            generationLabel.setText("<html><br/>" + stringsProvider.GetGenerationDescription(generatorToDescribe.GetGenerationStrategy()) + "</html>");
-            generationLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, generationLabel.getPreferredSize().height));
+            JTextArea generationLabel = new JTextArea();
+            generationLabel.setText("\n" + stringsProvider.GetGenerationDescription(generatorToDescribe.GetGenerationStrategy()));
+            generationLabel.setEditable(false);
+            generationLabel.setOpaque(true);
+            generationLabel.setFont(new JLabel().getFont());
 
             JButton buyButton = new JButton();
             buyButton.setText(stringsProvider.GetStringFor(StringId.Build));
