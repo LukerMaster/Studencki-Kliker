@@ -21,6 +21,7 @@ public class ClassToLocaleIdMapper implements IClassToLocaleIdMapper {
         if (action.getClass().equals(CollectStones.class)) return CustomActionId.Collect_some_stones;
         if (action.getClass().equals(HuntForSomething.class)) return CustomActionId.Hunt_for_something;
         if (action.getClass().equals(SearchForPlants.class)) return CustomActionId.Search_for_plants;
+        if (action.getClass().equals(BrewBeer.class)) return CustomActionId.Brew_beer;
         throw new IllegalArgumentException("Unknown action class");
     }
 

@@ -2,6 +2,8 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.ItemId;
+import ClickerGame.World.IInventory;
+import ClickerGame.World.IObservableItemsProvider;
 import Swing.Localization.IStringsProvider;
 import Swing.Localization.StringId;
 import Swing.Dashboards.IDashboardFactory;
@@ -13,12 +15,14 @@ import java.util.List;
 public class AvailableActionsFactory implements IDashboardFactory {
     private final IStringsProvider stringsProvider;
 
-    public AvailableActionsFactory(IStringsProvider stringsProvider, List<ICustomUserAction> actionList) {
+    public AvailableActionsFactory(IStringsProvider stringsProvider, List<ICustomUserAction> actionList, IObservableItemsProvider inventory) {
         this.stringsProvider = stringsProvider;
         this.actionList = actionList;
+        this.inventory = inventory;
     }
 
     private final List<ICustomUserAction> actionList;
+    final IObservableItemsProvider inventory;
 
     @Override
     public JComponent CreateDashboard() {
@@ -32,6 +36,9 @@ public class AvailableActionsFactory implements IDashboardFactory {
         {
             JButton button = new JButton(stringsProvider.GetNameForAction(action));
             button.addActionListener(e -> action.execute());
+            button.setEnabled(action.canExecute());
+
+            inventory.addListener((id, count) -> {button.setEnabled(action.canExecute());});
 
 
             resourcePanel.add(button);

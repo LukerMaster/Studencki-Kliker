@@ -87,6 +87,7 @@ public class Main {
         availableActions.add(new CollectStones(inventory));
         availableActions.add(new HuntForSomething(inventory));
         availableActions.add(new SearchForPlants(inventory, rng));
+        availableActions.add(new BrewBeer(inventory));
 
         IWorld world = new World(inventory, availableActions);
 
@@ -109,7 +110,7 @@ public class Main {
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
-        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions));
+        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableInventory));
         dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
         dashboardFactories.add(new CurrentGeneratorsFactory(world, eventHandler, stringsProvider));
 
