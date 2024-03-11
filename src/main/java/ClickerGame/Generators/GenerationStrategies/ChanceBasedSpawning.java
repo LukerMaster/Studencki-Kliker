@@ -4,8 +4,11 @@ import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Consumer;
 
 public class ChanceBasedSpawning implements IGeneration, IChanceBasedSpawning {
 
@@ -16,6 +19,8 @@ public class ChanceBasedSpawning implements IGeneration, IChanceBasedSpawning {
     final float chanceOfSpawning;
     final Map<ItemId, BigInteger> itemsSpawned;
     final Map<ItemId, BigInteger> itemsTaken;
+    private List<Consumer<Float>> onProgressListeners = new ArrayList<>();
+
     public ChanceBasedSpawning(
             float secondsBetweenSpawns,
             float chanceOfSpawning,
@@ -32,6 +37,7 @@ public class ChanceBasedSpawning implements IGeneration, IChanceBasedSpawning {
     @Override
     public void Update(float deltaTime, IInventory targetInventory) {
         currentTime += deltaTime;
+        NotifyListeners();
         while (currentTime >= secondsBetweenSpawns)
         {
             if (rng.nextFloat() > chanceOfSpawning)
@@ -44,6 +50,25 @@ public class ChanceBasedSpawning implements IGeneration, IChanceBasedSpawning {
             }
             currentTime -= secondsBetweenSpawns;
         }
+    }
+
+    private void NotifyListeners()
+    {
+        for (Consumer<Float> onProgressListener : onProgressListeners) {
+            onProgressListener.accept(GetProgressToNextSpawn());
+        }
+    }
+    @Override
+    public void AddOnProgressChangeListener(Consumer<Float> function) {
+        if (onProgressListeners == null)
+            onProgressListeners = new ArrayList<>();
+
+        onProgressListeners.add(function);
+    }
+
+    @Override
+    public float GetProgressToNextSpawn() {
+        return currentTime / secondsBetweenSpawns;
     }
 
     @Override

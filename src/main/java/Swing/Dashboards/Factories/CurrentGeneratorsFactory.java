@@ -1,5 +1,7 @@
 package Swing.Dashboards.Factories;
 
+import ClickerGame.Generators.GenerationStrategies.IPeriodicSpawning;
+import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
@@ -8,6 +10,7 @@ import ClickerGame.Localization.IStringsProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 import static ClickerGame.Localization.StringId.ActiveGenerators;
 
@@ -29,6 +32,7 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
 
         JLabel generatorName = new JLabel(stringsProvider.GetNameForGenerator(generator));
         generatorName.setFont(generatorName.getFont().deriveFont(14f));
+        generatorName.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JTextArea generatorDescription = new JTextArea(stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()));
         generatorDescription.setEditable(false);
@@ -42,10 +46,21 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         generatorPanel.add(generatorName);
         generatorPanel.add(generatorDescription);
 
+        if (Arrays.asList(generator.GetGenerationStrategy().getClass().getInterfaces()).contains(IPeriodicSpawning.class))
+        {
+            JProgressBar progressBar = new JProgressBar();
+            IPeriodicSpawning strategy = (IPeriodicSpawning) generator.GetGenerationStrategy();
+            strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
+
+            generatorPanel.add(progressBar);
+        }
+
         panel.add(generatorPanel);
 
         // Spacer
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
+        panel.revalidate();
+        panel.repaint();
     }
 
     @Override
