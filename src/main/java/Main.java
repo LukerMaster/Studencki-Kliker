@@ -3,6 +3,9 @@ import ClickerGame.Actions.*;
 import ClickerGame.Generators.BuildRecipes.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
+import SaveSystem.IGameSaver;
+import SaveSystem.IWorldProvider;
+import SaveSystem.WorldSaver;
 import Swing.Dashboards.Factories.CurrentGeneratorsFactory;
 import ClickerGame.World.*;
 import Core.*;
@@ -64,41 +67,25 @@ public class Main {
          * exactly that without utilizing actual Singleton-pattern.
         */
         // Game Core
-        Random rng = new Random();
+        IWorldProvider worldProvider = new WorldSaver("save.kekw");
+        IGameSaver gameSaver = (IGameSaver)worldProvider;
 
-        ObservableInventory observableInventory = new ObservableInventory(new Inventory());
+        IWorld world = worldProvider.GetWorld();
 
-        /*
-         * These two may be temporary solution. I like to separate classes into their interfaces.
-         * This ensures that if I even need to split this class, I won't have to change any uses of the class.
-         */
-        IInventory inventory = observableInventory;
-        IObservableItemsProvider observableItemsProvider = observableInventory;
+        IInventory inventory = world.GetInventory();
+        IObservableItemsProvider observableItemsProvider = (IObservableItemsProvider)inventory;
+        List<ICustomUserAction> availableActions = world.GetAvailableActions();
 
-        List<ICustomUserAction> availableActions = new ArrayList<>();
-
-        /*
-        This could have been made with lambdas and would save myself adding a lot of simple classes.
-        However, I decided to keep it that way since this way I can treat those as NAMED functors.
-        Savings done by lambdas would make this code way more cluttered.
-         */
-        availableActions.add(new ChopTree(inventory));
-        availableActions.add(new CollectStones(inventory));
-        availableActions.add(new HuntForSomething(inventory));
-        availableActions.add(new SearchForPlants(inventory, rng));
-        availableActions.add(new BrewBeer(inventory));
-
-        IWorld world = new World(inventory, availableActions);
+        List<IBuildRecipe> buildRecipes = new ArrayList<>();
+        //buildRecipes.add(new DemoGenerator());
+        buildRecipes.add(new TreeFarm());
+        buildRecipes.add(new Quarry());
+        buildRecipes.add(new StudentTrap(world.GetRng()));
+        buildRecipes.add(new HopsFarm());
+        buildRecipes.add(new Brewery());
+        buildRecipes.add(new HuntingHut());
 
         IGameLoop gameLoop = new GameLoop(world);
-
-        List<IBuildRecipe> schematics = new ArrayList<>();
-        //schematics.add(new DemoGenerator());
-        schematics.add(new TreeFarm());
-        schematics.add(new StudentTrap(rng));
-        schematics.add(new HopsFarm());
-        schematics.add(new MeatFarm());
-
         //
         IGenerationPresentingStrategy generationPresentingStrategy = new GenerationPresentingStrategy();
         IStringsProvider stringsProvider = new StringsProvider(
@@ -110,11 +97,11 @@ public class Main {
 
         List<IDashboardFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
-        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableInventory));
-        dashboardFactories.add(new GeneratorBuyMenuFactory(schematics, world, observableItemsProvider, stringsProvider));
+        dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableItemsProvider));
+        dashboardFactories.add(new GeneratorBuyMenuFactory(buildRecipes, world, observableItemsProvider, stringsProvider));
         dashboardFactories.add(new CurrentGeneratorsFactory(world, eventHandler, stringsProvider));
 
-        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop);
+        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop, gameSaver);
         programWindow.Start();
     }
 }

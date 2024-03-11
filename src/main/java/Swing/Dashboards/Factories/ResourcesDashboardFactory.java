@@ -33,7 +33,7 @@ public class ResourcesDashboardFactory implements IDashboardFactory {
             resourcePanel.add(new JLabel(stringsProvider.GetNameForItem(id)));
 
             JLabel amountLabel = new JLabel();
-            amountLabel.setText("0");
+            amountLabel.setText(inventory.getCount(id).toString());
             inventory.addListener((itemId, amount) ->
             {
                 if (itemId == id)

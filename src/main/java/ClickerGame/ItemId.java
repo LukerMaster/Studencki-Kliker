@@ -1,6 +1,8 @@
 package ClickerGame;
 
-public enum ItemId {
+import java.io.Serializable;
+
+public enum ItemId implements Serializable {
     Wood,
     Stone,
     Meat,

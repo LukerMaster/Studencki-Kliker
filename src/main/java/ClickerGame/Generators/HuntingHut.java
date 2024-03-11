@@ -11,8 +11,8 @@ public class HuntingHut implements IGenerator{
     final IGeneration strategy;
 
     public HuntingHut() {
-        this.strategy = new PeriodicSpawning(20,
-                Map.of(ItemId.Meat, new BigInteger("5")),
+        this.strategy = new PeriodicSpawning(10,
+                Map.of(ItemId.Meat, new BigInteger("8")),
                 Map.of(ItemId.Beer, new BigInteger("1")));
     }
 

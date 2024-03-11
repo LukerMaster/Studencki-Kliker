@@ -2,6 +2,8 @@ package ClickerGame.Generators.GenerationStrategies;
 
 import ClickerGame.World.IInventory;
 
-public interface IGeneration {
+import java.io.Serializable;
+
+public interface IGeneration extends Serializable {
     void Update(float deltaTime, IInventory targetInventory);
 }

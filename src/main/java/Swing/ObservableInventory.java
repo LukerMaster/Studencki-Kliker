@@ -4,6 +4,8 @@ import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 import ClickerGame.World.IObservableItemsProvider;
 
+import java.beans.Transient;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -27,10 +29,14 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
      * (Well - Not to mention there is dedicated event system for Observer pattern)
      * Why is Java like this?
      */
-    final List<BiConsumer<ItemId,BigInteger>> listeners = new ArrayList<>();
+
+    transient List<BiConsumer<ItemId,BigInteger>> listeners;
 
     @Override
     public void addListener(BiConsumer<ItemId,BigInteger> function) {
+        if (listeners == null)
+            listeners = new ArrayList<>();
+
         listeners.add(function);
     }
 

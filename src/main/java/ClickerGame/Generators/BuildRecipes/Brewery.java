@@ -1,23 +1,22 @@
 package ClickerGame.Generators.BuildRecipes;
 
-import ClickerGame.Generators.HuntingHut;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.ItemId;
 
 import java.math.BigInteger;
 import java.util.Map;
 
-public class MeatFarm implements IBuildRecipe{
+public class Brewery implements IBuildRecipe {
     @Override
     public IGenerator CreateGenerator() {
-        return new HuntingHut();
+        return new ClickerGame.Generators.Brewery();
     }
 
     @Override
     public Map<ItemId, BigInteger> GetBuildCost() {
         return Map.of(
-                ItemId.Wood, new BigInteger("380"),
-                ItemId.Stone, new BigInteger("220"),
+                ItemId.Wood, new BigInteger("750"),
+                ItemId.Stone, new BigInteger("450"),
                 ItemId.Student, new BigInteger("3")
         );
     }

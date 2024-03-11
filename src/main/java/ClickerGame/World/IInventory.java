@@ -2,10 +2,11 @@ package ClickerGame.World;
 
 import ClickerGame.ItemId;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Map;
 
-public interface IInventory {
+public interface IInventory extends Serializable {
     void takeItems(Map<ItemId, BigInteger> items);
     void takeItems(ItemId id, BigInteger amount);
     void takeItems(ItemId id, int amount);
