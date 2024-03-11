@@ -29,6 +29,6 @@ public class SearchForPlants implements ICustomUserAction{
 
     @Override
     public boolean canExecute() {
-        return false;
+        return true;
     }
 }
