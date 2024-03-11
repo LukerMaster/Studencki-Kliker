@@ -11,9 +11,9 @@ public class Brewery implements IGenerator {
     private final IGeneration strategy;
 
     public Brewery() {
-        strategy = new PeriodicSpawning(24,
-                Map.of(ItemId.Beer, new BigInteger("1")),
-                Map.of(ItemId.Hops, new BigInteger("3"),
+        strategy = new PeriodicSpawning(18,
+                Map.of(ItemId.Beer, new BigInteger("10")),
+                Map.of(ItemId.Hops, new BigInteger("25"),
                         ItemId.Meat, new BigInteger("12")));
     }
 

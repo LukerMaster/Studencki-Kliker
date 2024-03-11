@@ -5,7 +5,6 @@ import ClickerGame.Localization.StringId;
 import Core.IGameLoop;
 import Core.IProgramWindow;
 import SaveSystem.IGameSaver;
-import SaveSystem.WorldSaver;
 import Swing.Dashboards.IDashboardFactory;
 import org.apache.commons.lang3.time.StopWatch;
 
@@ -69,7 +68,7 @@ public class ClickerWindow implements IProgramWindow {
             }
             if (timeSinceLastSave > 20)
             {
-                saver.SaveGame();
+                saver.SaveGame("save.kekw.autobackup");
                 timeSinceLastSave = 0;
             }
         }

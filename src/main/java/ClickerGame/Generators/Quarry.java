@@ -13,7 +13,7 @@ public class Quarry implements IGenerator{
     public Quarry()
     {
         strategy = new PeriodicSpawning(10,
-                Map.of(ItemId.Stone, new BigInteger("12")),
+                Map.of(ItemId.Stone, new BigInteger("32")),
                 Map.of(ItemId.Beer, new BigInteger("1"),
                         ItemId.Meat, new BigInteger("8")));
     }

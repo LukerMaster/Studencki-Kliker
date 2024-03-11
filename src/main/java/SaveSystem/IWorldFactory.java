@@ -2,6 +2,6 @@ package SaveSystem;
 
 import ClickerGame.World.IWorld;
 
-public interface IWorldProvider {
+public interface IWorldFactory {
     IWorld GetWorld();
 }

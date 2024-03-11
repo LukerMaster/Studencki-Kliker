@@ -15,8 +15,8 @@ public class Quarry implements IBuildRecipe {
     @Override
     public Map<ItemId, BigInteger> GetBuildCost() {
         return Map.of(
-                ItemId.Wood, new BigInteger("100"),
-                ItemId.Stone, new BigInteger("20"),
+                ItemId.Wood, new BigInteger("180"),
+                ItemId.Stone, new BigInteger("30"),
                 ItemId.Student, new BigInteger("1")
         );
     }

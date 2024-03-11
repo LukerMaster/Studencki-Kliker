@@ -11,7 +11,7 @@ public class HopsBush implements IGenerator {
     private final IGeneration strategy;
 
     public HopsBush() {
-        strategy = new PeriodicSpawning(30,
+        strategy = new PeriodicSpawning(35,
                 Map.of(ItemId.Hops, new BigInteger("2")),
                 Map.of());
     }

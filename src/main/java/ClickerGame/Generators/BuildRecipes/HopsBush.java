@@ -15,6 +15,6 @@ public class HopsBush implements IBuildRecipe {
     @Override
     public Map<ItemId, BigInteger> GetBuildCost() {
         return Map.of(ItemId.Hops, new BigInteger("2"),
-                ItemId.Wood, new BigInteger("85"));
+                ItemId.Wood, new BigInteger("125"));
     }
 }

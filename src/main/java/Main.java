@@ -4,8 +4,8 @@ import ClickerGame.Generators.BuildRecipes.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import SaveSystem.IGameSaver;
-import SaveSystem.IWorldProvider;
-import SaveSystem.WorldSaver;
+import SaveSystem.IWorldFactory;
+import SaveSystem.SaveBasedWorldFactory;
 import Swing.Dashboards.Factories.CurrentGeneratorsFactory;
 import ClickerGame.World.*;
 import Core.*;
@@ -14,7 +14,6 @@ import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
 import ClickerGame.Localization.GenerationPresenters.GenerationPresentingStrategy;
 import ClickerGame.Localization.GenerationPresenters.IGenerationPresentingStrategy;
-import Swing.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
 
@@ -67,7 +66,7 @@ public class Main {
          * exactly that without utilizing actual Singleton-pattern.
         */
         // Game Core
-        IWorldProvider worldProvider = new WorldSaver("save.kekw");
+        IWorldFactory worldProvider = new SaveBasedWorldFactory("save.kekw");
         IGameSaver gameSaver = (IGameSaver)worldProvider;
 
         IWorld world = worldProvider.GetWorld();
@@ -79,9 +78,9 @@ public class Main {
         List<IBuildRecipe> buildRecipes = new ArrayList<>();
         //buildRecipes.add(new DemoGenerator());
         buildRecipes.add(new TreeFarm());
-        buildRecipes.add(new Quarry());
-        buildRecipes.add(new StudentTrap(world.GetRng()));
         buildRecipes.add(new HopsBush());
+        buildRecipes.add(new StudentTrap(world.GetRng()));
+        buildRecipes.add(new Quarry());
         buildRecipes.add(new HopsFarm());
         buildRecipes.add(new Brewery());
         buildRecipes.add(new HuntingHut());

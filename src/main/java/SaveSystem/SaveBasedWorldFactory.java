@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WorldSaver implements IWorldProvider, IGameSaver {
+public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
 
 
     private IWorld world;
 
     private final String filePath;
 
-    public WorldSaver(String filePath)
+    public SaveBasedWorldFactory(String filePath)
     {
         this.filePath = filePath;
         if (SaveExists())
@@ -50,16 +50,22 @@ public class WorldSaver implements IWorldProvider, IGameSaver {
         this.world = new World(observableInventory, availableActions, rng);
     }
 
-    public void SaveGame()
+    @Override
+    public void SaveGame(String filePath)
     {
         try {
-            FileOutputStream fout = new FileOutputStream("save.kekw");
+            FileOutputStream fout = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(world);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Override
+    public void SaveGame() {
+        SaveGame("save.kekw");
     }
 
     private IWorld LoadGame()

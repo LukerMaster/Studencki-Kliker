@@ -12,7 +12,7 @@ public class HuntingHut implements IGenerator{
 
     public HuntingHut() {
         this.strategy = new PeriodicSpawning(10,
-                Map.of(ItemId.Meat, new BigInteger("8")),
+                Map.of(ItemId.Meat, new BigInteger("12")),
                 Map.of(ItemId.Beer, new BigInteger("1")));
     }
 
