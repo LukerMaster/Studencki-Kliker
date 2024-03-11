@@ -5,4 +5,5 @@ package ClickerGame.Actions;
  */
 public interface ICustomUserAction {
     void execute();
+    boolean canExecute();
 }

@@ -16,4 +16,9 @@ public class CollectStones implements ICustomUserAction {
     public void execute() {
         this.userInventory.addItems(ItemId.Stone, 1);
     }
+
+    @Override
+    public boolean canExecute() {
+        return true;
+    }
 }

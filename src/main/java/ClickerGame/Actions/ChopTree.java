@@ -20,4 +20,9 @@ public class ChopTree implements ICustomUserAction {
     public void execute() {
         userInventory.addItems(ItemId.Wood, 1);
     }
+
+    @Override
+    public boolean canExecute() {
+        return true;
+    }
 }

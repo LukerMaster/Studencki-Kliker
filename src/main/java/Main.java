@@ -1,8 +1,5 @@
 import ClickerGame.*;
-import ClickerGame.Actions.ChopTree;
-import ClickerGame.Actions.CollectStones;
-import ClickerGame.Actions.HuntForSomething;
-import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Actions.*;
 import ClickerGame.Generators.BuildRecipes.DemoGenerator;
 import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
 import ClickerGame.Generators.BuildRecipes.TreeFarm;
@@ -68,6 +65,8 @@ public class Main {
          * exactly that without utilizing actual Singleton-pattern.
         */
         // Game Core
+        Random rng = new Random();
+
         ObservableInventory observableInventory = new ObservableInventory(new Inventory());
 
         /*
@@ -87,6 +86,7 @@ public class Main {
         availableActions.add(new ChopTree(inventory));
         availableActions.add(new CollectStones(inventory));
         availableActions.add(new HuntForSomething(inventory));
+        availableActions.add(new SearchForPlants(inventory, rng));
 
         IWorld world = new World(inventory, availableActions);
 

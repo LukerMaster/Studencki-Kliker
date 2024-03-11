@@ -13,6 +13,5 @@ import java.nio.file.FileStore;
 public interface IClassToLocaleIdMapper {
     GeneratorId GetIdOfGenerator(IGenerator generator);
     CustomActionId GetIdOfAction(ICustomUserAction action);
-
     GenerationDescriptionId GetIdOfGeneration(IGeneration generation);
 }

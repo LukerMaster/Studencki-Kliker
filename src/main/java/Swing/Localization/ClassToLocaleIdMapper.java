@@ -1,9 +1,6 @@
 package Swing.Localization;
 
-import ClickerGame.Actions.ChopTree;
-import ClickerGame.Actions.CollectStones;
-import ClickerGame.Actions.HuntForSomething;
-import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Actions.*;
 import ClickerGame.Core.Generators.TreeFarm;
 import ClickerGame.Generators.DemoGenerator;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
@@ -23,6 +20,7 @@ public class ClassToLocaleIdMapper implements IClassToLocaleIdMapper {
         if (action.getClass().equals(ChopTree.class)) return CustomActionId.Chop_a_tree;
         if (action.getClass().equals(CollectStones.class)) return CustomActionId.Collect_some_stones;
         if (action.getClass().equals(HuntForSomething.class)) return CustomActionId.Hunt_for_something;
+        if (action.getClass().equals(SearchForPlants.class)) return CustomActionId.Search_for_plants;
         throw new IllegalArgumentException("Unknown action class");
     }
 

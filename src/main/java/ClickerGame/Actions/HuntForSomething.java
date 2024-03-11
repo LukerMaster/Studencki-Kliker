@@ -15,4 +15,9 @@ public class HuntForSomething implements ICustomUserAction {
     public void execute() {
         inventory.addItems(ItemId.Meat, 1);
     }
+
+    @Override
+    public boolean canExecute() {
+        return true;
+    }
 }
