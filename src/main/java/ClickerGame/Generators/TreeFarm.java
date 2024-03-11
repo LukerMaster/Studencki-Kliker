@@ -19,11 +19,6 @@ public class TreeFarm implements IGenerator {
                 Map.of(ItemId.Wood, new BigInteger("10")), Map.of());
     }
     @Override
-    public void Update(float deltaTime, IInventory targetInventory) {
-        strategy.Update(deltaTime, targetInventory);
-    }
-
-    @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;
     }

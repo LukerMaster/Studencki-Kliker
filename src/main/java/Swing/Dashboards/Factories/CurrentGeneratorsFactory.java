@@ -4,12 +4,12 @@ import ClickerGame.Generators.IGenerator;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;
-import Swing.Localization.IStringsProvider;
+import ClickerGame.Localization.IStringsProvider;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static Swing.Localization.StringId.Generators;
+import static ClickerGame.Localization.StringId.Generators;
 
 public class CurrentGeneratorsFactory implements IDashboardFactory {
 

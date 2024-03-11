@@ -2,10 +2,9 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.ItemId;
-import ClickerGame.World.IInventory;
 import ClickerGame.World.IObservableItemsProvider;
-import Swing.Localization.IStringsProvider;
-import Swing.Localization.StringId;
+import ClickerGame.Localization.IStringsProvider;
+import ClickerGame.Localization.StringId;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;

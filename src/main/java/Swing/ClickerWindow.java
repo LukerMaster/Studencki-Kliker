@@ -1,7 +1,7 @@
 package Swing;
 
-import Swing.Localization.IStringsProvider;
-import Swing.Localization.StringId;
+import ClickerGame.Localization.IStringsProvider;
+import ClickerGame.Localization.StringId;
 import Core.IGameLoop;
 import Core.IProgramWindow;
 import Swing.Dashboards.IDashboardFactory;

@@ -1,4 +1,4 @@
-package Swing.Localization;
+package ClickerGame.Localization;
 
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;

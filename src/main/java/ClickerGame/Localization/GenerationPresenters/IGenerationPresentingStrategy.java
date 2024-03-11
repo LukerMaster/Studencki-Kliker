@@ -1,7 +1,7 @@
-package Swing.Localization.GenerationPresenters;
+package ClickerGame.Localization.GenerationPresenters;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import Swing.Localization.IStringsProvider;
+import ClickerGame.Localization.IStringsProvider;
 
 public interface IGenerationPresentingStrategy {
     String GetFormattedRepresentation(String template, IGeneration generation, IStringsProvider provider);

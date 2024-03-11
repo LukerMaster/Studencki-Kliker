@@ -1,17 +1,16 @@
 import ClickerGame.*;
 import ClickerGame.Actions.*;
-import ClickerGame.Generators.BuildRecipes.DemoGenerator;
-import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
-import ClickerGame.Generators.BuildRecipes.TreeFarm;
+import ClickerGame.Generators.BuildRecipes.*;
+import ClickerGame.Localization.IStringsProvider;
+import ClickerGame.Localization.StringsProvider;
 import Swing.Dashboards.Factories.CurrentGeneratorsFactory;
-import Swing.Localization.*;
 import ClickerGame.World.*;
 import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
-import Swing.Localization.GenerationPresenters.GenerationPresentingStrategy;
-import Swing.Localization.GenerationPresenters.IGenerationPresentingStrategy;
+import ClickerGame.Localization.GenerationPresenters.GenerationPresentingStrategy;
+import ClickerGame.Localization.GenerationPresenters.IGenerationPresentingStrategy;
 import Swing.ObservableInventory;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
@@ -94,15 +93,16 @@ public class Main {
         IGameLoop gameLoop = new GameLoop(world);
 
         List<IBuildRecipe> schematics = new ArrayList<>();
-        schematics.add(new DemoGenerator());
+        //schematics.add(new DemoGenerator());
         schematics.add(new TreeFarm());
+        schematics.add(new StudentTrap(rng));
+        schematics.add(new HopsFarm());
+        schematics.add(new MeatFarm());
 
-        // UI
-        IClassToLocaleIdMapper localeMapper = new ClassToLocaleIdMapper();
+        //
         IGenerationPresentingStrategy generationPresentingStrategy = new GenerationPresentingStrategy();
         IStringsProvider stringsProvider = new StringsProvider(
                 ResourceBundle.getBundle("texts", Locale.getDefault()),
-                localeMapper,
                 generationPresentingStrategy);
 
         IWorldEventHandler eventHandler = (IWorldEventHandler) world;

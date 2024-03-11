@@ -8,8 +8,10 @@ import ClickerGame.World.IInventory;
  */
 public interface IGenerator {
 
-    void Update(float deltaTime, IInventory targetInventory);
-
+    default void Update(float deltaTime, IInventory targetInventory)
+    {
+        GetGenerationStrategy().Update(deltaTime, targetInventory);
+    }
     IGeneration GetGenerationStrategy();
 
 }

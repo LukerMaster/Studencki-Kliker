@@ -29,8 +29,8 @@ public class PeriodicSpawning implements IGeneration, IPeriodicSpawning
             {
                 targetInventory.takeItems(itemsTaken);
                 targetInventory.addItems(itemsSpawned);
-                currentTime -= secondsBetweenSpawns;
             }
+            currentTime -= secondsBetweenSpawns;
         }
     }
 

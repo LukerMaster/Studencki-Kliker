@@ -19,10 +19,10 @@ public class SearchForPlants implements ICustomUserAction{
     @Override
     public void execute() {
         int rolled = rng.nextInt(0, 21);
-        int potatoes = rolled / 20;
+        int potatoes = rolled / 10;
         userInventory.addItems(ItemId.Potato, potatoes);
 
-        boolean foundHops = rng.nextInt(0, 51) == 50;
+        boolean foundHops = rng.nextInt(0, 41) == 40;
         if (foundHops)
             userInventory.addItems(ItemId.Hops, 1);
     }
