@@ -14,8 +14,8 @@ public class DemoGenerator implements IGenerator
 
     public DemoGenerator()
     {
-        strategy = new PeriodicSpawning(0.5f,
-                Map.of(ItemId.Gold, new BigInteger("750")), Map.of());
+        strategy = new PeriodicSpawning(0.1f,
+                Map.of(ItemId.Wood, new BigInteger("50")), Map.of());
     }
     @Override
     public IGeneration GetGenerationStrategy() {

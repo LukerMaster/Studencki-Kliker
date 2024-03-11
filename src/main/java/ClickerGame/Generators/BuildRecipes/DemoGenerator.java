@@ -14,6 +14,6 @@ public class DemoGenerator implements IBuildRecipe {
 
     @Override
     public Map<ItemId, BigInteger> GetBuildCost() {
-        return Map.of(ItemId.Wood, new BigInteger("2"));
+        return Map.of(ItemId.Wood, new BigInteger("1"));
     }
 }
