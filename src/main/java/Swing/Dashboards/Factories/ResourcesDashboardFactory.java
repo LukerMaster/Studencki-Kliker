@@ -22,15 +22,14 @@ public class ResourcesDashboardFactory implements IDashboardFactory {
 
     @Override
     public JComponent CreateDashboard() {
-        JLabel label = new JLabel();
-        label.setText(stringsProvider.GetStringFor(StringId.Your_Resources));
 
         JPanel resourcePanel = new JPanel();
 
         resourcePanel.setLayout(new GridLayout(ItemId.values().length, 2));
         for (ItemId id : ItemId.values())
         {
-            resourcePanel.add(new JLabel(stringsProvider.GetNameForItem(id)));
+            JLabel nameLabel = new JLabel(stringsProvider.GetNameForItem(id));
+            nameLabel.setFont(nameLabel.getFont().deriveFont(16f));
 
             JLabel amountLabel = new JLabel();
             amountLabel.setText(inventory.getCount(id).toString());
@@ -39,13 +38,22 @@ public class ResourcesDashboardFactory implements IDashboardFactory {
                 if (itemId == id)
                     amountLabel.setText(amount.toString());
             });
+
+            resourcePanel.add(nameLabel);
             resourcePanel.add(amountLabel);
         }
 
+        JScrollPane scrollPane = new JScrollPane(resourcePanel);
+
         JPanel dashboard = new JPanel();
-        dashboard.setLayout(new GridLayout(2, 1));
-        dashboard.add(label);
-        dashboard.add(resourcePanel);
+        dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
+
+        JLabel titleLabel = new JLabel();
+        titleLabel.setText(stringsProvider.GetStringFor(StringId.Your_Resources));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        dashboard.add(titleLabel);
+        dashboard.add(scrollPane);
         return dashboard;
     }
 }

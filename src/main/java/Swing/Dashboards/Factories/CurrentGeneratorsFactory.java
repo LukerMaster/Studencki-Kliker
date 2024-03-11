@@ -9,10 +9,11 @@ import ClickerGame.Localization.IStringsProvider;
 import javax.swing.*;
 import java.awt.*;
 
-import static ClickerGame.Localization.StringId.Generators;
+import static ClickerGame.Localization.StringId.ActiveGenerators;
 
 public class CurrentGeneratorsFactory implements IDashboardFactory {
 
+    private static final int SCROLL_SPEED = 32;
     final IWorld world;
     final IWorldEventHandler eventHandler;
     final IStringsProvider stringsProvider;
@@ -23,37 +24,52 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         this.stringsProvider = stringsProvider;
     }
 
-    private void PresentGeneratorOnPanel(IGenerator generator, JPanel panel, GridLayout layout)
+    private void PresentGeneratorOnPanel(IGenerator generator, JPanel panel)
     {
-        JPanel generatorPanel = new JPanel(new GridLayout(1, 2));
+
         JLabel generatorName = new JLabel(stringsProvider.GetNameForGenerator(generator));
+        generatorName.setFont(generatorName.getFont().deriveFont(14f));
+
         JLabel generatorDescription = new JLabel("<html>" + stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()) + "</html>");
+
+        JPanel generatorPanel = new JPanel();
+        generatorPanel.setLayout(new BoxLayout(generatorPanel, BoxLayout.Y_AXIS));
 
         generatorPanel.add(generatorName);
         generatorPanel.add(generatorDescription);
 
-        layout.setRows(layout.getRows() + 1);
         panel.add(generatorPanel);
+
+        // Spacer
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
     }
 
     @Override
     public JComponent CreateDashboard() {
-        JPanel mainPanel = new JPanel(new GridLayout(2, 1));
 
-        JLabel titleLabel = new JLabel();
-        titleLabel.setText(stringsProvider.GetStringFor(Generators));
-        mainPanel.add(titleLabel);
 
         JPanel generatorsPanel = new JPanel();
-        GridLayout layout = new GridLayout(1, 1);
-        generatorsPanel.setLayout(layout);
-        eventHandler.AddListener_OnBeforeAddGenerator(gen -> PresentGeneratorOnPanel(gen, generatorsPanel, layout));
+        generatorsPanel.setLayout(new BoxLayout(generatorsPanel, BoxLayout.Y_AXIS));
+        eventHandler.AddListener_OnBeforeAddGenerator(gen -> PresentGeneratorOnPanel(gen, generatorsPanel));
 
         for (IGenerator generator : world.GetActiveGenerators()) {
-            PresentGeneratorOnPanel(generator, generatorsPanel, layout);
+            PresentGeneratorOnPanel(generator, generatorsPanel);
         }
 
-        mainPanel.add(generatorsPanel);
-        return mainPanel;
+        JScrollPane scrollPane = new JScrollPane(generatorsPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);
+        scrollPane.getVerticalScrollBar().setBlockIncrement((int)(SCROLL_SPEED * 1.5f));
+
+
+        JPanel dashboard = new JPanel();
+        dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
+
+        JLabel titleLabel = new JLabel();
+        titleLabel.setText(stringsProvider.GetStringFor(ActiveGenerators));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        dashboard.add(titleLabel);
+        dashboard.add(scrollPane);
+        return dashboard;
     }
 }

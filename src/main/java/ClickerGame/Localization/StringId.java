@@ -17,5 +17,5 @@ public enum StringId {
     Build_cost,
     Resource_generation,
     Nothing,
-    Generators
+    ActiveGenerators
 }

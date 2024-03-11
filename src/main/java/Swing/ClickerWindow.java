@@ -43,6 +43,7 @@ public class ClickerWindow implements IProgramWindow {
         JFrame frame = new JFrame(stringsProvider.GetStringFor(StringId.Title));
         frame.setLocationRelativeTo(null);
         frame.setContentPane(this.mainPanel);
+        frame.setPreferredSize(new Dimension(500, 400));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.addWindowListener(new WindowAdapter() {

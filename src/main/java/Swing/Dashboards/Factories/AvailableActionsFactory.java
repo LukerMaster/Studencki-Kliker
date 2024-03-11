@@ -8,6 +8,7 @@ import ClickerGame.Localization.StringId;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
+import javax.swing.text.BoxView;
 import java.awt.*;
 import java.util.List;
 
@@ -25,28 +26,33 @@ public class AvailableActionsFactory implements IDashboardFactory {
 
     @Override
     public JComponent CreateDashboard() {
-        JLabel label = new JLabel();
-        label.setText(stringsProvider.GetStringFor(StringId.Actions));
+
 
         JPanel resourcePanel = new JPanel();
 
-        resourcePanel.setLayout(new GridLayout(ItemId.values().length, 1));
+        resourcePanel.setLayout(new BoxLayout(resourcePanel, BoxLayout.Y_AXIS));
         for (ICustomUserAction action : actionList)
         {
             JButton button = new JButton(stringsProvider.GetNameForAction(action));
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getPreferredSize().height));
             button.addActionListener(e -> action.execute());
             button.setEnabled(action.canExecute());
 
             inventory.addListener((id, count) -> {button.setEnabled(action.canExecute());});
-
-
             resourcePanel.add(button);
         }
+        JScrollPane scrollPane = new JScrollPane(resourcePanel);
 
         JPanel dashboard = new JPanel();
-        dashboard.setLayout(new GridLayout(2, 1));
-        dashboard.add(label);
-        dashboard.add(resourcePanel);
+        dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
+
+        JLabel titleLabel = new JLabel();
+        titleLabel.setText(stringsProvider.GetStringFor(StringId.Actions));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        dashboard.add(titleLabel);
+        dashboard.add(scrollPane);
         return dashboard;
     }
 }
