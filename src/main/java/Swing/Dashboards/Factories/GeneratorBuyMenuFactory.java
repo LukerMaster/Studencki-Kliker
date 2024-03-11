@@ -51,6 +51,7 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
             JLabel nameLabel = new JLabel();
             nameLabel.setText(stringsProvider.GetNameForGenerator(generatorToDescribe));
             nameLabel.setFont(nameLabel.getFont().deriveFont(14f));
+            nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JTextArea buildCostLabel = new JTextArea();
             buildCostLabel.setText("\n" + stringsProvider.GetStringFor(StringId.Build_cost) + ":\n" + stringsProvider.FormatItemsAsString(recipe.GetBuildCost()));
