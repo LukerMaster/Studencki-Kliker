@@ -9,7 +9,7 @@ import java.util.Map;
 public class TreeFarm implements IBuildRecipe {
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Core.Generators.TreeFarm();
+        return new ClickerGame.Generators.TreeFarm();
     }
     @Override
     public Map<ItemId, BigInteger> GetBuildCost() {
