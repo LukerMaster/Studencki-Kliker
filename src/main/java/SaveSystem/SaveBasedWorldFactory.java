@@ -63,7 +63,6 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
@@ -79,21 +78,23 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             IWorld world = (IWorld) in.readObject();
             world.SetAvailableActions(GetUserActions(world.GetInventory(), world.GetRng()));
-
-            float TimeDelta = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
-            for (float i = TimeDelta; i < 0; i-=1)
-            {
-                float finalI = i;
-                world.GetActiveGenerators().forEach(g ->
-                {
-                    g.Update(finalI, world.GetInventory());
-                });
-            }
-
+            EmulateTimeOffline(world);
             return world;
         }
         catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void EmulateTimeOffline(IWorld world) {
+        float TotalTimeOffline = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
+        float stepDeltaTime = TotalTimeOffline / 100;
+        for (float i = TotalTimeOffline; i > 0; i-=stepDeltaTime)
+        {
+            world.GetActiveGenerators().forEach(g ->
+            {
+                g.Update(stepDeltaTime, world.GetInventory());
+            });
         }
     }
 
