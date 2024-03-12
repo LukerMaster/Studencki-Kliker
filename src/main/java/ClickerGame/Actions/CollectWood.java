@@ -9,11 +9,11 @@ import ClickerGame.ItemId;
  * they are just in a package named "Actions", which explains their
  * purpose rather cleanly.
  */
-public class ChopTree implements ICustomUserAction {
+public class CollectWood implements ICustomUserAction {
 
     final IInventory userInventory;
 
-    public ChopTree(IInventory userInventory) {
+    public CollectWood(IInventory userInventory) {
         this.userInventory = userInventory;
     }
     @Override

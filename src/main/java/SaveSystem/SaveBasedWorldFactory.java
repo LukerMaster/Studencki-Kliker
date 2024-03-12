@@ -5,7 +5,6 @@ import ClickerGame.World.*;
 import Swing.ObservableInventory;
 
 import java.io.*;
-import java.sql.Time;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +32,9 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
     {
         List<ICustomUserAction> availableActions = new ArrayList<>();
 
-        availableActions.add(new ChopTree(inv));
+        availableActions.add(new CollectWood(inv));
         availableActions.add(new CollectStones(inv));
-        availableActions.add(new HuntForSomething(inv));
+        availableActions.add(new HuntForSomething(inv, rng));
         availableActions.add(new SearchForPlants(inv, rng));
         availableActions.add(new BrewBeer(inv));
 
@@ -88,14 +87,11 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
 
     private static void EmulateTimeOffline(IWorld world) {
         float TotalTimeOffline = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
-        float stepDeltaTime = TotalTimeOffline / 100;
-        for (float i = TotalTimeOffline; i > 0; i-=stepDeltaTime)
+        world.GetActiveGenerators().forEach(g ->
         {
-            world.GetActiveGenerators().forEach(g ->
-            {
-                g.Update(stepDeltaTime, world.GetInventory());
-            });
-        }
+            g.Update(TotalTimeOffline, world.GetInventory());
+        });
+
     }
 
     public boolean SaveExists()
