@@ -1,7 +1,6 @@
 package Swing.Dashboards.Factories;
 
-import ClickerGame.Generators.GenerationStrategies.IPeriodicSpawning;
-import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
+import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
@@ -46,10 +45,10 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         generatorPanel.add(generatorName);
         generatorPanel.add(generatorDescription);
 
-        if (Arrays.asList(generator.GetGenerationStrategy().getClass().getInterfaces()).contains(IPeriodicSpawning.class))
+        if (Arrays.asList(generator.GetGenerationStrategy().getClass().getInterfaces()).contains(IPeriodicProgressingAction.class))
         {
             JProgressBar progressBar = new JProgressBar();
-            IPeriodicSpawning strategy = (IPeriodicSpawning) generator.GetGenerationStrategy();
+            IPeriodicProgressingAction strategy = (IPeriodicProgressingAction) generator.GetGenerationStrategy();
             strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
 
             generatorPanel.add(progressBar);

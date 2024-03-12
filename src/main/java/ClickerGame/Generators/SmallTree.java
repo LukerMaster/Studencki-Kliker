@@ -11,16 +11,20 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class HopsBush implements IGenerator {
+public class SmallTree implements IGenerator {
+
     private final IGeneration strategy;
 
-    public HopsBush(IInventory inventory) {
-        strategy = new PeriodicAction(35,
+    public SmallTree(IInventory inventory)
+    {
+        strategy = new PeriodicAction(15,
                 new NoRequirements(),
                 new NoAction(),
-                new SimpleItemSpawning(Map.of(ItemId.Hops, new BigInteger("2")), inventory));
+                new SimpleItemSpawning(
+                        Map.of(ItemId.Wood, new BigInteger("10")),
+                        inventory
+                ));
     }
-
     @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;

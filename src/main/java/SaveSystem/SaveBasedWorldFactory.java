@@ -79,11 +79,17 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             IWorld world = (IWorld) in.readObject();
             world.SetAvailableActions(GetUserActions(world.GetInventory(), world.GetRng()));
-            world.GetActiveGenerators().forEach(g ->
+
+            float TimeDelta = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
+            for (float i = TimeDelta; i < 0; i-=1)
             {
-                float TimeDelta = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
-                g.Update(TimeDelta, world.GetInventory());
-            });
+                float finalI = i;
+                world.GetActiveGenerators().forEach(g ->
+                {
+                    g.Update(finalI, world.GetInventory());
+                });
+            }
+
             return world;
         }
         catch (IOException | ClassNotFoundException e) {

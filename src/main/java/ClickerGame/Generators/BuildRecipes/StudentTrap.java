@@ -2,22 +2,25 @@ package ClickerGame.Generators.BuildRecipes;
 
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.ItemId;
+import ClickerGame.World.IInventory;
 
 import java.math.BigInteger;
 import java.util.Map;
 import java.util.Random;
 
-public class StudentTrap implements IBuildRecipe{
+public class StudentTrap implements IBuildRecipe {
 
+    final IInventory targetInventory;
     final Random rng;
 
-    public StudentTrap(Random rng) {
+    public StudentTrap(IInventory targetInventory, Random rng) {
+        this.targetInventory = targetInventory;
         this.rng = rng;
     }
 
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.StudentTrap(rng);
+        return new ClickerGame.Generators.StudentTrap(rng, targetInventory);
     }
 
     @Override

@@ -12,8 +12,6 @@ import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
-import ClickerGame.Localization.GenerationPresenters.GenerationPresentingStrategy;
-import ClickerGame.Localization.GenerationPresenters.IGenerationPresentingStrategy;
 import Swing.Dashboards.Factories.ResourcesDashboardFactory;
 import Swing.Dashboards.IDashboardFactory;
 
@@ -77,20 +75,18 @@ public class Main {
 
         List<IBuildRecipe> buildRecipes = new ArrayList<>();
         //buildRecipes.add(new DemoGenerator());
-        buildRecipes.add(new TreeFarm());
-        buildRecipes.add(new HopsBush());
-        buildRecipes.add(new StudentTrap(world.GetRng()));
-        buildRecipes.add(new Quarry());
-        buildRecipes.add(new HopsFarm());
-        buildRecipes.add(new Brewery());
-        buildRecipes.add(new HuntingHut());
+        buildRecipes.add(new SmallTree(world.GetInventory()));
+        buildRecipes.add(new HopsBush(world.GetInventory()));
+        buildRecipes.add(new StudentTrap(world.GetInventory(), world.GetRng()));
+        buildRecipes.add(new Quarry(world.GetInventory()));
+        buildRecipes.add(new HopsFarm(world.GetInventory()));
+        buildRecipes.add(new Brewery(world.GetInventory()));
+        buildRecipes.add(new HuntingHut(world.GetInventory()));
 
         IGameLoop gameLoop = new GameLoop(world);
         //
-        IGenerationPresentingStrategy generationPresentingStrategy = new GenerationPresentingStrategy();
         IStringsProvider stringsProvider = new StringsProvider(
-                ResourceBundle.getBundle("texts", Locale.getDefault()),
-                generationPresentingStrategy);
+                ResourceBundle.getBundle("texts", Locale.getDefault()));
 
         IWorldEventHandler eventHandler = (IWorldEventHandler) world;
 

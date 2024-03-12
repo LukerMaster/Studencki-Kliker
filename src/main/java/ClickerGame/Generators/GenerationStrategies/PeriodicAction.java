@@ -1,44 +1,71 @@
 package ClickerGame.Generators.GenerationStrategies;
 
-import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class PeriodicSpawning implements IGeneration, IPeriodicSpawning
+public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 {
     float currentTime = 0;
     final float secondsBetweenSpawns;
-    final Map<ItemId, BigInteger> itemsSpawned;
-    final Map<ItemId, BigInteger> itemsTaken;
+
+    boolean isProducing = false;
+
+    final Runnable OnFinish;
+    final Runnable OnStart;
+    final Supplier<Boolean> Requirement;
 
     transient List<Consumer<Float>> onProgressListeners = new ArrayList<>();
 
-    public PeriodicSpawning(
+    public PeriodicAction(
             float secondsBetweenSpawns,
-            Map<ItemId, BigInteger> itemsSpawned, Map<ItemId, BigInteger> itemsTaken)
+            Supplier<Boolean> requirement,
+            Runnable onStart,
+            Runnable onFinish)
     {
         this.secondsBetweenSpawns = secondsBetweenSpawns;
-        this.itemsSpawned = itemsSpawned;
-        this.itemsTaken = itemsTaken;
+        OnStart = onStart;
+        OnFinish = onFinish;
+        Requirement = requirement;
     }
     @Override
     public void Update(float deltaTime, IInventory targetInventory) {
-        currentTime += deltaTime;
-        NotifyListeners();
-        while (currentTime >= secondsBetweenSpawns)
+
+        if (Requirement.get() && !isProducing)
         {
-            if (targetInventory.hasItems(itemsTaken))
-            {
-                targetInventory.takeItems(itemsTaken);
-                targetInventory.addItems(itemsSpawned);
-            }
-            currentTime -= secondsBetweenSpawns;
+            OnStart.run();
+            isProducing = true;
         }
+
+        if (isProducing)
+        {
+            currentTime += deltaTime;
+            NotifyListeners();
+            if (currentTime >= secondsBetweenSpawns)
+            {
+                OnFinish.run();
+                currentTime -= secondsBetweenSpawns;
+                isProducing = false;
+            }
+        }
+    }
+
+    @Override
+    public Runnable GetOnStart() {
+        return OnStart;
+    }
+
+    @Override
+    public Runnable GetOnFinish() {
+        return OnFinish;
+    }
+
+    @Override
+    public Supplier<Boolean> GetRequirement() {
+        return Requirement;
     }
 
     private void NotifyListeners()
@@ -63,17 +90,7 @@ public class PeriodicSpawning implements IGeneration, IPeriodicSpawning
     }
 
     @Override
-    public float GetSecondsBetweenSpawns() {
+    public float GetWorkTime() {
         return secondsBetweenSpawns;
-    }
-
-    @Override
-    public Map<ItemId, BigInteger> GetItemsSpawned() {
-        return itemsSpawned;
-    }
-
-    @Override
-    public Map<ItemId, BigInteger> GetItemsTaken() {
-        return itemsTaken;
     }
 }

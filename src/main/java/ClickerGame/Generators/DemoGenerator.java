@@ -1,7 +1,10 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.Generators.GenerationStrategies.PeriodicSpawning;
+import ClickerGame.Generators.GenerationStrategies.OnFinishActions.SimpleItemSpawning;
+import ClickerGame.Generators.GenerationStrategies.OnStartActions.NoAction;
+import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
+import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
@@ -12,10 +15,12 @@ public class DemoGenerator implements IGenerator
 {
     private final IGeneration strategy;
 
-    public DemoGenerator()
+    public DemoGenerator(IInventory inventory)
     {
-        strategy = new PeriodicSpawning(0.1f,
-                Map.of(ItemId.Wood, new BigInteger("50")), Map.of());
+        strategy = new PeriodicAction(0.5f,
+                new NoRequirements(),
+                new NoAction(),
+                new SimpleItemSpawning(Map.of(ItemId.Wood, new BigInteger("50")), inventory));
     }
     @Override
     public IGeneration GetGenerationStrategy() {

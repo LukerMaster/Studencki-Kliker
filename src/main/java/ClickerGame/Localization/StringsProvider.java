@@ -2,26 +2,31 @@ package ClickerGame.Localization;
 
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
+import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
+import ClickerGame.Generators.GenerationStrategies.OnFinishActions.IChanceBased;
+import ClickerGame.Generators.GenerationStrategies.OnFinishActions.IItemSpawning;
+import ClickerGame.Generators.GenerationStrategies.OnStartActions.IItemTaking;
+import ClickerGame.Generators.GenerationStrategies.OnStartActions.NoAction;
+import ClickerGame.Generators.GenerationStrategies.StartConditions.IItemRequirement;
+import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.GenerationPresenters.IGenerationPresentingStrategy;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.function.Supplier;
 
 public class StringsProvider implements IStringsProvider {
 
     final ResourceBundle textsBundle;
-    final IGenerationPresentingStrategy presenter;
 
 
-    public StringsProvider(ResourceBundle textsBundle, IGenerationPresentingStrategy presenter)
+    public StringsProvider(ResourceBundle textsBundle)
     {
         this.textsBundle = textsBundle;
-        this.presenter = presenter;
     }
 
     @Override
@@ -41,8 +46,52 @@ public class StringsProvider implements IStringsProvider {
 
     @Override
     public String GetGenerationDescription(IGeneration Generation) {
-        String template = textsBundle.getString("Generation_Description." + Generation.getClass().getSimpleName());
-        return presenter.GetFormattedRepresentation(template, Generation, this);
+        String template = textsBundle.getString("Generation.Type." + Generation.getClass().getSimpleName());
+
+        if (Generation instanceof IPeriodicProgressingAction)
+        {
+            template = String.format(template, ((IPeriodicProgressingAction) Generation).GetWorkTime());
+        }
+
+        String requirement = "";
+        if (Generation.GetRequirement().getClass() != NoRequirements.class)
+        {
+            requirement = textsBundle.getString("Generation.Requirement");
+            requirement += ":\n" + textsBundle.getString("Generation.Requirement." + Generation.GetRequirement().getClass().getSimpleName());
+
+            if (Generation.GetRequirement() instanceof IItemRequirement)
+            {
+                requirement += ":\n" + FormatItemsAsString(((IItemRequirement) Generation.GetRequirement()).GetItemsNeeded());
+            }
+        }
+
+        String onStart = "";
+        if (Generation.GetOnStart().getClass() != NoAction.class)
+        {
+            onStart = textsBundle.getString("Generation.OnStart");
+            onStart += ":\n" + textsBundle.getString("Generation.OnStart." + Generation.GetOnStart().getClass().getSimpleName());
+
+            if (Generation.GetOnStart() instanceof IItemTaking)
+            {
+                onStart += ":\n" + FormatItemsAsString(((IItemTaking) Generation.GetOnStart()).GetItemsTaken());
+            }
+        }
+
+        String onFinish = textsBundle.getString("Generation.OnFinish");
+        onFinish += ":\n" + textsBundle.getString("Generation.OnFinish." + Generation.GetOnFinish().getClass().getSimpleName());
+
+        if (Generation.GetOnFinish() instanceof IChanceBased)
+        {
+            onFinish = String.format(onFinish, ((IChanceBased) Generation.GetOnFinish()).GetChance() * 100);
+        }
+        if (Generation.GetOnFinish() instanceof IItemSpawning)
+        {
+            onFinish += ":\n" + FormatItemsAsString(((IItemSpawning) Generation.GetOnFinish()).GetItemsSpawned());
+        }
+
+        String finalString = template + "\n" + requirement + "\n" + onStart + "\n" + onFinish;
+
+        return finalString;
     }
 
     @Override
