@@ -1,6 +1,6 @@
 import ClickerGame.*;
 import ClickerGame.Actions.*;
-import ClickerGame.Generators.BuildRecipes.*;
+import ClickerGame.Generators.Factories.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
 import SaveSystem.IGameSaver;
@@ -73,7 +73,7 @@ public class Main {
         IObservableItemsProvider observableItemsProvider = (IObservableItemsProvider)inventory;
         List<ICustomUserAction> availableActions = world.GetAvailableActions();
 
-        List<IBuildRecipe> buildRecipes = new ArrayList<>();
+        List<IGeneratorFactory> buildRecipes = new ArrayList<>();
         buildRecipes.add(new DemoGenerator(world.GetInventory()));
         buildRecipes.add(new SmallTree(world.GetInventory()));
         buildRecipes.add(new HopsBush(world.GetInventory()));

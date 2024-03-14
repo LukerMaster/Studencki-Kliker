@@ -4,11 +4,8 @@ import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 import ClickerGame.World.IObservableItemsProvider;
 
-import java.beans.Transient;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;

@@ -4,8 +4,6 @@ import ClickerGame.ItemId;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

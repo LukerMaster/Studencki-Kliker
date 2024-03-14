@@ -50,6 +50,7 @@ public class World implements IWorld, IWorldEventHandler {
     @Override
     public void AddNewGenerator(IGenerator generator) {
         activeGenerators.add(generator);
+        if (onGeneratorAddEvents == null) onGeneratorAddEvents = new ArrayList<>();
         for (Consumer<IGenerator> onGeneratorAddEvent : onGeneratorAddEvents) {
             onGeneratorAddEvent.accept(generator);
         }
@@ -57,8 +58,9 @@ public class World implements IWorld, IWorldEventHandler {
 
     @Override
     public void RemoveGenerator(IGenerator generator) {
-        for (Consumer<IGenerator> onGeneratorAddEvent : onGeneratorAddEvents) {
-            onGeneratorAddEvent.accept(generator);
+        if (onGeneratorRemoveEvents == null) onGeneratorRemoveEvents = new ArrayList<>();
+        for (Consumer<IGenerator> onGeneratorRemoveEvent : onGeneratorRemoveEvents) {
+            onGeneratorRemoveEvent.accept(generator);
         }
         activeGenerators.remove(generator);
     }

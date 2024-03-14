@@ -1,7 +1,8 @@
 package Swing.Dashboards.Factories;
 
-import ClickerGame.Generators.BuildRecipes.IBuildRecipe;
+import ClickerGame.Generators.Factories.IGeneratorFactory;
 import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.IMadeOutOf;
 import ClickerGame.ItemId;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
@@ -11,24 +12,23 @@ import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.BitSet;
 import java.util.List;
 
 public class GeneratorBuyMenuFactory implements IDashboardFactory {
 
     private static final int SCROLL_SPEED = 32;
-    private final List<IBuildRecipe> recipes;
+    private final List<IGeneratorFactory> factories;
     private final IWorld world;
     private final IObservableItemsProvider observableItems;
     private final IStringsProvider stringsProvider;
 
 
-    public GeneratorBuyMenuFactory(List<IBuildRecipe> recipes,
+    public GeneratorBuyMenuFactory(List<IGeneratorFactory> recipes,
                                    IWorld world,
                                    IObservableItemsProvider observableItems,
                                    IStringsProvider stringsProvider)
     {
-        this.recipes = recipes;
+        this.factories = recipes;
         this.world = world;
         this.observableItems = observableItems;
         this.stringsProvider = stringsProvider;
@@ -38,9 +38,10 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
 
         JPanel allSchematicsPanel = new JPanel();
         allSchematicsPanel.setLayout(new BoxLayout(allSchematicsPanel, BoxLayout.Y_AXIS));
-        for (IBuildRecipe recipe : recipes)
+        for (IGeneratorFactory factory : factories)
         {
-            IGenerator generatorToDescribe = recipe.CreateGenerator();
+            IGenerator generatorToDescribe = factory.CreateGenerator();
+            IMadeOutOf generatorMaterials = (IMadeOutOf) generatorToDescribe;
 
             JPanel singleSchematicPanel = new JPanel();
             singleSchematicPanel.setLayout(new GridLayout(1, 2));
@@ -54,7 +55,7 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
             nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             JTextArea buildCostLabel = new JTextArea();
-            buildCostLabel.setText("\n" + stringsProvider.GetStringFor(StringId.Build_cost) + ":\n" + stringsProvider.FormatItemsAsString(recipe.GetBuildCost()));
+            buildCostLabel.setText("\n" + stringsProvider.GetStringFor(StringId.Build_cost) + ":\n" + stringsProvider.FormatItemsAsString(generatorMaterials.GetWhatItsMadeOutOf()));
             buildCostLabel.setEditable(false);
             buildCostLabel.setOpaque(true);
             buildCostLabel.setFont(new JLabel().getFont());
@@ -67,17 +68,17 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
 
             JButton buyButton = new JButton();
             buyButton.setText(stringsProvider.GetStringFor(StringId.Build));
-            buyButton.setEnabled(world.GetInventory().hasItems(recipe.GetBuildCost()));
+            buyButton.setEnabled(world.GetInventory().hasItems(generatorMaterials.GetWhatItsMadeOutOf()));
 
             for (ItemId itemId : ItemId.values())
             {
-                if (recipe.GetBuildCost().get(itemId) != null)
-                    observableItems.addListener((id, amount) -> buyButton.setEnabled(world.GetInventory().hasItems(recipe.GetBuildCost())));
+                if (generatorMaterials.GetWhatItsMadeOutOf().get(itemId) != null)
+                    observableItems.addListener((id, amount) -> buyButton.setEnabled(world.GetInventory().hasItems(generatorMaterials.GetWhatItsMadeOutOf())));
             }
             buyButton.addActionListener(e ->
                     {
-                        world.GetInventory().takeItems(recipe.GetBuildCost());
-                        world.AddNewGenerator(recipe.CreateGenerator());
+                        world.GetInventory().takeItems(generatorMaterials.GetWhatItsMadeOutOf());
+                        world.AddNewGenerator(factory.CreateGenerator());
                     });
 
 

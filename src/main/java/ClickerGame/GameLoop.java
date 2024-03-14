@@ -4,7 +4,6 @@ import ClickerGame.Generators.IGenerator;
 import ClickerGame.World.IWorld;
 import Core.IGameLoop;
 
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GameLoop implements IGameLoop {
@@ -19,6 +18,6 @@ public class GameLoop implements IGameLoop {
         ConcurrentLinkedQueue<IGenerator> activeGenerators = world.GetActiveGenerators();
 
         for (IGenerator gen : activeGenerators)
-            gen.Update(deltaTime, world.GetInventory());
+            gen.Update(deltaTime);
     }
 }

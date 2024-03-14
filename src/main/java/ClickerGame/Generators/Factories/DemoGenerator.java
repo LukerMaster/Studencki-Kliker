@@ -1,13 +1,9 @@
-package ClickerGame.Generators.BuildRecipes;
+package ClickerGame.Generators.Factories;
 
 import ClickerGame.Generators.IGenerator;
-import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
-import java.math.BigInteger;
-import java.util.Map;
-
-public class DemoGenerator implements IBuildRecipe {
+public class DemoGenerator implements IGeneratorFactory {
     final IInventory targetInventory;
 
     public DemoGenerator(IInventory targetInventory) {
@@ -18,8 +14,5 @@ public class DemoGenerator implements IBuildRecipe {
         return new ClickerGame.Generators.DemoGenerator(targetInventory);
     }
 
-    @Override
-    public Map<ItemId, BigInteger> GetBuildCost() {
-        return Map.of(ItemId.Wood, new BigInteger("1"));
-    }
+
 }

@@ -1,7 +1,6 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.World.IInventory;
 
 import java.io.Serializable;
 
@@ -10,9 +9,9 @@ import java.io.Serializable;
  */
 public interface IGenerator extends Serializable {
 
-    default void Update(float deltaTime, IInventory targetInventory)
+    default void Update(float deltaTime)
     {
-        GetGenerationStrategy().Update(deltaTime, targetInventory);
+        GetGenerationStrategy().Update(deltaTime);
     }
     IGeneration GetGenerationStrategy();
 

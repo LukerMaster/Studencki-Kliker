@@ -11,7 +11,7 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class HuntingHut implements IGenerator{
+public class HuntingHut implements IGenerator, IMadeOutOf {
     final IGeneration strategy;
 
     public HuntingHut(IInventory inventory) {
@@ -25,5 +25,14 @@ public class HuntingHut implements IGenerator{
     @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
+        return Map.of(
+                ItemId.Wood, new BigInteger("1100"),
+                ItemId.Stone, new BigInteger("220"),
+                ItemId.Student, new BigInteger("3")
+        );
     }
 }

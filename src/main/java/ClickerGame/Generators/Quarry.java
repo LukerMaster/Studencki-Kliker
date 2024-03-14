@@ -11,7 +11,7 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class Quarry implements IGenerator{
+public class Quarry implements IGenerator, IMadeOutOf {
     private final IGeneration strategy;
 
     public Quarry(IInventory inventory)
@@ -26,5 +26,14 @@ public class Quarry implements IGenerator{
     @Override
     public IGeneration GetGenerationStrategy() {
         return this.strategy;
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
+        return Map.of(
+                ItemId.Wood, new BigInteger("180"),
+                ItemId.Stone, new BigInteger("30"),
+                ItemId.Student, new BigInteger("1")
+        );
     }
 }

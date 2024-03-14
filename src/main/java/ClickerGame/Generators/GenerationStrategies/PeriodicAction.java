@@ -1,7 +1,5 @@
 package ClickerGame.Generators.GenerationStrategies;
 
-import ClickerGame.World.IInventory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -32,7 +30,7 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
         Requirement = requirement;
     }
     @Override
-    public void Update(float deltaTime, IInventory targetInventory) {
+    public void Update(float deltaTime) {
 
         if (Requirement.get() && !isProducing)
         {

@@ -2,18 +2,17 @@ package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.OnFinishActions.SimpleItemSpawning;
-import ClickerGame.Generators.GenerationStrategies.OnStartActions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.OnStartActions.SimpleItemTaking;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.InventoryHasItems;
-import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
+import ClickerGame.Generators.Scraping.IScrappable;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
 import java.math.BigInteger;
 import java.util.Map;
 
-public class Brewery implements IGenerator {
+public class Brewery implements IGenerator, IMadeOutOf, IScrappable {
     private final IGeneration strategy;
 
     public Brewery(IInventory inventory) {
@@ -28,5 +27,23 @@ public class Brewery implements IGenerator {
     @Override
     public IGeneration GetGenerationStrategy() {
         return this.strategy;
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
+        return Map.of(
+                ItemId.Wood, new BigInteger("750"),
+                ItemId.Stone, new BigInteger("450"),
+                ItemId.Student, new BigInteger("3")
+        );
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetScrapValue() {
+        return Map.of(
+                ItemId.Wood, new BigInteger("350"),
+                ItemId.Stone, new BigInteger("250"),
+                ItemId.Student, new BigInteger("3")
+        );
     }
 }

@@ -87,10 +87,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
 
     private static void EmulateTimeOffline(IWorld world) {
         float TotalTimeOffline = Instant.now().getEpochSecond() - world.GetLastGameTime().getEpochSecond();
-        world.GetActiveGenerators().forEach(g ->
-        {
-            g.Update(TotalTimeOffline, world.GetInventory());
-        });
+        world.GetActiveGenerators().forEach(g -> g.Update(TotalTimeOffline));
 
     }
 

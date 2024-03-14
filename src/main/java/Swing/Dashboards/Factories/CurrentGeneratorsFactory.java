@@ -2,6 +2,8 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.Scraping.IScrappable;
+import ClickerGame.Localization.StringId;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;
@@ -9,7 +11,8 @@ import ClickerGame.Localization.IStringsProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static ClickerGame.Localization.StringId.ActiveGenerators;
 
@@ -20,58 +23,95 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
     final IWorldEventHandler eventHandler;
     final IStringsProvider stringsProvider;
 
+    JPanel generatorsPanel;
+
+    Map<IGenerator, JPanel> generatorUIs = new HashMap<>();
+
     public CurrentGeneratorsFactory(IWorld generatorList, IWorldEventHandler eventHandler, IStringsProvider stringsProvider) {
         this.world = generatorList;
         this.eventHandler = eventHandler;
         this.stringsProvider = stringsProvider;
     }
 
-    private void PresentGeneratorOnPanel(IGenerator generator, JPanel panel)
+    private JPanel CreateGeneratorUI(IGenerator generator)
     {
 
-        JLabel generatorName = new JLabel(stringsProvider.GetNameForGenerator(generator));
-        generatorName.setFont(generatorName.getFont().deriveFont(14f));
-        generatorName.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel name = new JLabel(stringsProvider.GetNameForGenerator(generator));
+        name.setFont(name.getFont().deriveFont(14f));
+        name.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextArea generatorDescription = new JTextArea(stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()));
-        generatorDescription.setEditable(false);
-        generatorDescription.setOpaque(true);
-        generatorDescription.setFont(new JLabel().getFont());
+        JTextArea description = new JTextArea(stringsProvider.GetGenerationDescription(generator.GetGenerationStrategy()));
+        description.setEditable(false);
+        description.setOpaque(true);
+        description.setFont(new JLabel().getFont());
 
+        JPanel mainArea = new JPanel();
+        mainArea.setLayout(new BoxLayout(mainArea, BoxLayout.X_AXIS));
+
+        mainArea.add(description);
+
+        if (generator instanceof IScrappable)
+        {
+            JButton scrapButton = new JButton();
+            scrapButton.setText(stringsProvider.GetStringFor(StringId.Scrap));
+            scrapButton.addActionListener(b -> {
+                world.GetInventory().addItems(((IScrappable) generator).GetScrapValue());
+                world.RemoveGenerator(generator);
+            });
+
+            mainArea.add(scrapButton);
+        }
 
         JPanel generatorPanel = new JPanel();
         generatorPanel.setLayout(new BoxLayout(generatorPanel, BoxLayout.Y_AXIS));
 
-        generatorPanel.add(generatorName);
-        generatorPanel.add(generatorDescription);
+        generatorPanel.add(name);
+        generatorPanel.add(mainArea);
 
-        if (Arrays.asList(generator.GetGenerationStrategy().getClass().getInterfaces()).contains(IPeriodicProgressingAction.class))
+        if (generator.GetGenerationStrategy() instanceof IPeriodicProgressingAction strategy)
         {
             JProgressBar progressBar = new JProgressBar();
-            IPeriodicProgressingAction strategy = (IPeriodicProgressingAction) generator.GetGenerationStrategy();
             strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
 
             generatorPanel.add(progressBar);
         }
+        generatorPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        return generatorPanel;
+    }
 
-        panel.add(generatorPanel);
+    private void PresentOnGeneratorPanel(JPanel generatorUI)
+    {
+        generatorsPanel.add(generatorUI);
+        generatorsPanel.revalidate();
+        generatorsPanel.repaint();
+    }
 
-        // Spacer
-        panel.add(Box.createRigidArea(new Dimension(0, 15)));
-        panel.revalidate();
-        panel.repaint();
+    private void RefreshView()
+    {
+        generatorsPanel.revalidate();
+        generatorsPanel.repaint();
     }
 
     @Override
     public JComponent CreateDashboard() {
 
-
-        JPanel generatorsPanel = new JPanel();
+        generatorsPanel = new JPanel();
         generatorsPanel.setLayout(new BoxLayout(generatorsPanel, BoxLayout.Y_AXIS));
-        eventHandler.AddListener_OnBeforeAddGenerator(gen -> PresentGeneratorOnPanel(gen, generatorsPanel));
+        eventHandler.AddListener_OnBeforeAddGenerator(gen -> {
+            JPanel UI = CreateGeneratorUI(gen);
+            PresentOnGeneratorPanel(UI);
+            RefreshView();
+            generatorUIs.put(gen, UI);
+        });
+
+        eventHandler.AddListener_OnAfterRemoveGenerator(gen -> {
+            generatorsPanel.remove(generatorUIs.get(gen));
+            generatorUIs.remove(gen);
+            RefreshView();
+        });
 
         for (IGenerator generator : world.GetActiveGenerators()) {
-            PresentGeneratorOnPanel(generator, generatorsPanel);
+            CreateGeneratorUI(generator);
         }
 
         JScrollPane scrollPane = new JScrollPane(generatorsPanel);

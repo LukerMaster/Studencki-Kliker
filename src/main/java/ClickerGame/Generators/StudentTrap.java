@@ -12,7 +12,7 @@ import java.math.BigInteger;
 import java.util.Map;
 import java.util.Random;
 
-public class StudentTrap implements IGenerator {
+public class StudentTrap implements IGenerator, IMadeOutOf {
 
 
     final IGeneration strategy;
@@ -27,5 +27,13 @@ public class StudentTrap implements IGenerator {
     @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
+        return Map.of(
+                ItemId.Wood, new BigInteger("5"),
+                ItemId.Beer, new BigInteger("1")
+        );
     }
 }

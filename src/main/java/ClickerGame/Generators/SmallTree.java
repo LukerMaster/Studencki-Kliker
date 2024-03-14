@@ -11,7 +11,7 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class SmallTree implements IGenerator {
+public class SmallTree implements IGenerator, IMadeOutOf {
 
     private final IGeneration strategy;
 
@@ -28,5 +28,11 @@ public class SmallTree implements IGenerator {
     @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
+        return Map.of(ItemId.Wood, new BigInteger("40"),
+                ItemId.Stone, new BigInteger("8"));
     }
 }

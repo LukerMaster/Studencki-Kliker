@@ -1,14 +1,12 @@
 package Swing.Dashboards.Factories;
 
 import ClickerGame.Actions.ICustomUserAction;
-import ClickerGame.ItemId;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
 import Swing.Dashboards.IDashboardFactory;
 
 import javax.swing.*;
-import javax.swing.text.BoxView;
 import java.awt.*;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class AvailableActionsFactory implements IDashboardFactory {
             button.addActionListener(e -> action.execute());
             button.setEnabled(action.canExecute());
 
-            inventory.addListener((id, count) -> {button.setEnabled(action.canExecute());});
+            inventory.addListener((id, count) -> button.setEnabled(action.canExecute()));
             resourcePanel.add(button);
         }
         JScrollPane scrollPane = new JScrollPane(resourcePanel);
