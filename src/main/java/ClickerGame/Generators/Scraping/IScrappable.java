@@ -1,10 +1,18 @@
 package ClickerGame.Generators.Scraping;
 
 import ClickerGame.ItemId;
+import ClickerGame.Localization.ScrappingTypeId;
 
 import java.math.BigInteger;
 import java.util.Map;
 
 public interface IScrappable {
-    Map<ItemId, BigInteger> GetScrapValue();
+    default Map<ItemId, BigInteger> GetScrapValue()
+    {
+        return Map.of();
+    }
+    default ScrappingTypeId GetScrappingType()
+    {
+        return ScrappingTypeId.Demolish;
+    }
 }

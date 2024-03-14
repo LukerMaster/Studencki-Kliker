@@ -3,7 +3,6 @@ package Swing.Dashboards.Factories;
 import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.Generators.Scraping.IScrappable;
-import ClickerGame.Localization.StringId;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;
@@ -53,7 +52,7 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         if (generator instanceof IScrappable)
         {
             JButton scrapButton = new JButton();
-            scrapButton.setText(stringsProvider.GetStringFor(StringId.Scrap));
+            scrapButton.setText(stringsProvider.GetNameForScrappingType(((IScrappable) generator).GetScrappingType()));
             scrapButton.addActionListener(b -> {
                 world.GetInventory().addItems(((IScrappable) generator).GetScrapValue());
                 world.RemoveGenerator(generator);

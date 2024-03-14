@@ -1,8 +1,8 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.Generators.GenerationStrategies.OnFinishActions.ChanceBasedSpawning;
-import ClickerGame.Generators.GenerationStrategies.OnStartActions.SimpleItemTaking;
+import ClickerGame.Generators.GenerationStrategies.Actions.ChanceBasedSpawning;
+import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemTaking;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.InventoryHasItems;
 import ClickerGame.ItemId;

@@ -1,8 +1,8 @@
 package ClickerGame.Generators;
 
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
-import ClickerGame.Generators.GenerationStrategies.OnFinishActions.SimpleItemSpawning;
-import ClickerGame.Generators.GenerationStrategies.OnStartActions.NoAction;
+import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
+import ClickerGame.Generators.GenerationStrategies.Actions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
 import ClickerGame.Generators.Scraping.IScrappable;

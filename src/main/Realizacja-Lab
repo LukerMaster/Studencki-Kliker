@@ -7,15 +7,20 @@ L2 Stosowanie strukturalnych wzorców projektowych
 - Decorator - ObservableInventory.java
 
 L3 Stosowanie czynnościowych wzorców projektowych
-- Strategy - PeriodicSpawning.java
+- Strategy - PeriodicAction.java
 - Command - ICustomUserAction.java
 - Observer - ObservableInventory.java
 
 L4 Stosowanie zasad pojedynczej odpowiedzialności i otwarte-zamknięte
+- Jeśli nigdzie się nie pomyliłem, to każda klasa ma tylko jedno zadanie.
+- Jest dużo klas, które JEST kilkoma rzeczami naraz (Generatory), ale nadal wykonują tylko JEDNĄ rzecz (zgodne z SRP).
 
 L5 Stosowanie zasad podstawiania Liskov, odwracania zależności i segregacji interfejsów
+- Każda klasa tylko przyjmuje swoje zależności. Nic nie jest tworzone losowo w środku czegoś innego (poza fabrykami!), co jest zgodne z jej wzorcem projektowym.
+- Każda klasa używa tylko interfejsów do dostawania się do innych obiektów. Jeśli nigdzie nie ma pomyłki, to nie ma ani jednego pola "final" odwołującego się do klasy.
 
 L6 Zastosowanie zasad czystego kodu w programowaniu
+-
 
 L7 Zastosowanie programowania funkcyjnego
 

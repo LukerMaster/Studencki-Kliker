@@ -1,4 +1,4 @@
-package ClickerGame.Generators.GenerationStrategies.OnFinishActions;
+package ClickerGame.Generators.GenerationStrategies.Actions;
 
 import ClickerGame.ItemId;
 

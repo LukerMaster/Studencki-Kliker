@@ -5,7 +5,7 @@ import ClickerGame.World.IInventory;
 
 import java.util.Random;
 
-public class SearchForPlants implements ICustomUserAction{
+public class SearchForPlants implements ICustomUserAction {
 
     final IInventory userInventory;
 

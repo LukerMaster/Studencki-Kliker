@@ -22,6 +22,7 @@ public interface IStringsProvider {
     String GetNameForAction(ICustomUserAction Action);
     String GetNameForGenerator(IGenerator Generator);
     String GetGenerationDescription(IGeneration Id);
+    String GetNameForScrappingType(ScrappingTypeId Id);
     String FormatItemsAsString(Map<ItemId, BigInteger> cost);
     String GetStringFor(StringId Id);
 }

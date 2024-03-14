@@ -9,7 +9,6 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 {
     float currentTime = 0;
     final float secondsBetweenSpawns;
-
     boolean isProducing = false;
 
     final Runnable OnFinish;
@@ -34,6 +33,9 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 
         if (Requirement.get() && !isProducing)
         {
+            currentTime -= secondsBetweenSpawns;
+            if (currentTime < 0) currentTime = 0;
+
             OnStart.run();
             isProducing = true;
         }
@@ -45,7 +47,6 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
             if (currentTime >= secondsBetweenSpawns)
             {
                 OnFinish.run();
-                currentTime -= secondsBetweenSpawns;
                 isProducing = false;
             }
         }
