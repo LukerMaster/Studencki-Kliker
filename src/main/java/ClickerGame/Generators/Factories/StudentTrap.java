@@ -1,14 +1,11 @@
-package ClickerGame.Generators.BuildRecipes;
+package ClickerGame.Generators.Factories;
 
 import ClickerGame.Generators.IGenerator;
-import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
-import java.math.BigInteger;
-import java.util.Map;
 import java.util.Random;
 
-public class StudentTrap implements IBuildRecipe {
+public class StudentTrap implements IGeneratorFactory {
 
     final IInventory targetInventory;
     final Random rng;
@@ -23,11 +20,5 @@ public class StudentTrap implements IBuildRecipe {
         return new ClickerGame.Generators.StudentTrap(rng, targetInventory);
     }
 
-    @Override
-    public Map<ItemId, BigInteger> GetBuildCost() {
-        return Map.of(
-                ItemId.Wood, new BigInteger("5"),
-                ItemId.Beer, new BigInteger("1")
-        );
-    }
+
 }
