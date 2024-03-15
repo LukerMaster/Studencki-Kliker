@@ -20,12 +20,16 @@ L5 Stosowanie zasad podstawiania Liskov, odwracania zależności i segregacji in
 - Każda klasa używa tylko interfejsów do dostawania się do innych obiektów. Jeśli nigdzie nie ma pomyłki, to nie ma ani jednego pola "final" odwołującego się do klasy.
 
 L6 Zastosowanie zasad czystego kodu w programowaniu
--
+- Najbrzydszą (moim zdaniem) klasą tutaj jest swingowe "GeneratorBuyMenuFactory". Jeśli ona jest ładna, to chyba jest git.
 
 L7 Zastosowanie programowania funkcyjnego
+- Sporo lambd jest używanych, głównie do dodawania listenerów dla przycisków.
+- Generalnie raczej tam, gdzie Observer pattern, tam i lambda się znajdzie.
 
 L8 Zastosowanie programowania aspektowego
+-
 
 L9 Refactoring kodu programu
+- Wystarczy zajrzeć na githuba, ten projekt miał pare rewolucji konceptualnych.
 
 L10 Stosowanie testów w wytwarzaniu oprogramowania
