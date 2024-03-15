@@ -27,7 +27,8 @@ L7 Zastosowanie programowania funkcyjnego
 - Generalnie raczej tam, gdzie Observer pattern, tam i lambda się znajdzie.
 
 L8 Zastosowanie programowania aspektowego
--
+- Jest napisany jeden aspekt do logowania, aczkolwiek trochę załamałem ręce jak okazało się, że AspectJ nie za bardzo może zostać użyty sam, w zwykłej aplikacji. Jeśli da się bez tego dostać 5.0, to wolałbym używania AOP uniknąć.
+- Plus jest taki, że sporo się trzeba było oczytać, żeby doprowadzić aspekty do jakiegokolwiek działania - powiem tak - założenie jest bardzo fajne, ale moim zdaniem dekorator - pomimo, że bardziej kodochłonny i czasochłonny - jest o wiele bardziej elegancki i wygodny.
 
 L9 Refactoring kodu programu
 - Wystarczy zajrzeć na githuba, ten projekt miał pare rewolucji konceptualnych.
