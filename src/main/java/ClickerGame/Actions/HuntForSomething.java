@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class HuntForSomething implements ICustomUserAction {
 
-    private final IInventory inventory;
+    private final IInventory targetInventory;
     private final Random rng;
 
-    public HuntForSomething(IInventory inventory, Random rng) {
+    public HuntForSomething(IInventory targetInventory, Random rng) {
 
-        this.inventory = inventory;
+        this.targetInventory = targetInventory;
         this.rng = rng;
     }
     @Override
@@ -20,7 +20,7 @@ public class HuntForSomething implements ICustomUserAction {
         int rolled = rng.nextInt(0, 3);
         boolean success = rolled > 0;
         if (success)
-            inventory.addItems(ItemId.Meat, 1);
+            targetInventory.addItems(ItemId.Meat, 1);
     }
 
     @Override

@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class SearchForPlants implements ICustomUserAction {
 
-    final IInventory userInventory;
+    final IInventory targetInventory;
 
     final Random rng;
 
-    public SearchForPlants(IInventory userInventory, Random rng) {
-        this.userInventory = userInventory;
+    public SearchForPlants(IInventory targetInventory, Random rng) {
+        this.targetInventory = targetInventory;
         this.rng = rng;
     }
 
@@ -20,11 +20,11 @@ public class SearchForPlants implements ICustomUserAction {
     public void execute() {
         int rolled = rng.nextInt(0, 21);
         int potatoes = rolled / 10;
-        userInventory.addItems(ItemId.Potato, potatoes);
+        targetInventory.addItems(ItemId.Potato, potatoes);
 
         boolean foundHops = rng.nextInt(0, 41) == 40;
         if (foundHops)
-            userInventory.addItems(ItemId.Hops, 1);
+            targetInventory.addItems(ItemId.Hops, 1);
     }
 
     @Override

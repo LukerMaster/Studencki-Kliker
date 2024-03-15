@@ -11,14 +11,14 @@ import ClickerGame.ItemId;
  */
 public class CollectWood implements ICustomUserAction {
 
-    final IInventory userInventory;
+    final IInventory targetInventory;
 
-    public CollectWood(IInventory userInventory) {
-        this.userInventory = userInventory;
+    public CollectWood(IInventory targetInventory) {
+        this.targetInventory = targetInventory;
     }
     @Override
     public void execute() {
-        userInventory.addItems(ItemId.Wood, 1);
+        targetInventory.addItems(ItemId.Wood, 1);
     }
 
     @Override

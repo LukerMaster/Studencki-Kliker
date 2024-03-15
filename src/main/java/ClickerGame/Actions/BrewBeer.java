@@ -5,24 +5,24 @@ import ClickerGame.World.IInventory;
 
 public class BrewBeer implements ICustomUserAction {
 
-    final IInventory userInventory;
+    final IInventory targetInventory;
 
-    public BrewBeer(IInventory userInventory) {
-        this.userInventory = userInventory;
+    public BrewBeer(IInventory targetInventory) {
+        this.targetInventory = targetInventory;
     }
 
     @Override
     public void execute() {
         if (canExecute())
         {
-            userInventory.takeItems(ItemId.Hops, 4);
-            userInventory.addItems(ItemId.Beer, 1);
+            targetInventory.takeItems(ItemId.Hops, 4);
+            targetInventory.addItems(ItemId.Beer, 1);
         }
         else throw new RuntimeException("Action called despite it being unavailable at the moment.");
     }
 
     @Override
     public boolean canExecute() {
-        return userInventory.hasItems(ItemId.Hops, 4);
+        return targetInventory.hasItems(ItemId.Hops, 4);
     }
 }

@@ -5,16 +5,16 @@ import ClickerGame.World.IInventory;
 
 public class CollectStones implements ICustomUserAction {
 
-    final IInventory userInventory;
+    final IInventory targetInventory;
 
-    public CollectStones(IInventory userInventory)
+    public CollectStones(IInventory targetInventory)
     {
-        this.userInventory = userInventory;
+        this.targetInventory = targetInventory;
     }
 
     @Override
     public void execute() {
-        this.userInventory.addItems(ItemId.Stone, 1);
+        this.targetInventory.addItems(ItemId.Stone, 1);
     }
 
     @Override
