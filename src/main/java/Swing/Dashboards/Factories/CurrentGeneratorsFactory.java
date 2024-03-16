@@ -53,6 +53,7 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         {
             JButton scrapButton = new JButton();
             scrapButton.setText(stringsProvider.GetNameForScrappingType(((IScrappable) generator).GetScrappingType()));
+            scrapButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
             scrapButton.addActionListener(b -> {
                 world.GetInventory().addItems(((IScrappable) generator).GetScrapValue());
                 world.RemoveGenerator(generator);

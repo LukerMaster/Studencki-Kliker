@@ -103,7 +103,7 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
         dashboard.setLayout(new BoxLayout(dashboard, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel();
-        titleLabel.setText(stringsProvider.GetStringFor(StringId.Resource_generation));
+        titleLabel.setText(stringsProvider.GetStringFor(StringId.Build_menu));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         dashboard.add(titleLabel);

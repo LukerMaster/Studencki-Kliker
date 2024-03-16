@@ -34,3 +34,6 @@ L9 Refactoring kodu programu
 - Wystarczy zajrzeć na githuba, ten projekt miał pare rewolucji konceptualnych.
 
 L10 Stosowanie testów w wytwarzaniu oprogramowania
+- Dodanych jest kilka prostych testów do sprawdzania poprawności działania niektórych bardziej skomplikowanych klas
+- Dodanych jest kilka testów prostych, celem demonstracji działania testów ogólnie
+- Użyte zostało Mockowanie dla prostrzej separacji zależności
