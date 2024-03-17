@@ -16,7 +16,7 @@ import java.util.Map;
 public class Brewery implements IGenerator, IMadeOutOf, IScrappable {
     private final IGeneration strategy;
 
-    private IScrappable scrappingComponent;
+    private final IScrappable scrappingComponent;
 
     public Brewery(IInventory inventory) {
 

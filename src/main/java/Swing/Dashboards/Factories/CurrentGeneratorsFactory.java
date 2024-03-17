@@ -24,7 +24,7 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
 
     JPanel generatorsPanel;
 
-    Map<IGenerator, JPanel> generatorUIs = new HashMap<>();
+    final Map<IGenerator, JPanel> generatorUIs = new HashMap<>();
 
     public CurrentGeneratorsFactory(IWorld generatorList, IWorldEventHandler eventHandler, IStringsProvider stringsProvider) {
         this.world = generatorList;

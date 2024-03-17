@@ -2,7 +2,6 @@ package ClickerGame.Generators.Components.Scrapping;
 
 import ClickerGame.Generators.IMadeOutOf;
 import ClickerGame.ItemId;
-import ClickerGame.Localization.ScrappingTypeId;
 
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -29,10 +28,5 @@ public class ScrappingForFractionOfCost implements IScrappable {
             value.put(entry.getKey(), entry.getValue());
         }
         return value;
-    }
-
-    @Override
-    public ScrappingTypeId GetScrappingType() {
-        return IScrappable.super.GetScrappingType();
     }
 }
