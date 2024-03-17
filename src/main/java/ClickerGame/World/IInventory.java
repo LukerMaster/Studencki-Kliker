@@ -19,4 +19,6 @@ public interface IInventory extends Serializable {
     void addItems(ItemId id, BigInteger amount);
     void addItems(ItemId id, int amount);
     BigInteger getCount(ItemId id);
+
+    boolean isEmpty();
 }

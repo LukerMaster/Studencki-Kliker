@@ -1,30 +1,31 @@
 package ClickerGame.Generators;
 
-import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
-import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
+import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.Actions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
+import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
 import java.math.BigInteger;
 import java.util.Map;
 
-public class HopsBush implements IGenerator, IMadeOutOf, IScrappable {
+public class SmallTreeFarm implements IGenerator, IMadeOutOf, IScrappable {
+
     private final IGeneration strategy;
     private final IScrappable scrappingComponent;
 
-    public HopsBush(IInventory inventory) {
-        strategy = new PeriodicAction(35,
+    public SmallTreeFarm(IInventory inventory)
+    {
+        strategy = new PeriodicAction(15,
                 new NoRequirements(),
                 new NoAction(),
-                new SimpleItemSpawning(Map.of(ItemId.Hops, new BigInteger("2")), inventory));
+                new SimpleItemSpawning(Map.of(ItemId.Wood, new BigInteger("20")), inventory));
         scrappingComponent = new ScrappingForFractionOfCost(this, 3);
     }
-
     @Override
     public IGeneration GetGenerationStrategy() {
         return strategy;
@@ -32,8 +33,8 @@ public class HopsBush implements IGenerator, IMadeOutOf, IScrappable {
 
     @Override
     public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
-        return Map.of(ItemId.Hops, new BigInteger("2"),
-                ItemId.Wood, new BigInteger("125"));
+        return Map.of(ItemId.Wood, new BigInteger("40"),
+                ItemId.Stone, new BigInteger("10"));
     }
 
     @Override

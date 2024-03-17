@@ -2,7 +2,7 @@ package Swing.Dashboards.Factories;
 
 import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
-import ClickerGame.Generators.Scraping.IScrappable;
+import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;

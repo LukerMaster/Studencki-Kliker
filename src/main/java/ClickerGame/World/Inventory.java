@@ -86,4 +86,9 @@ public class Inventory implements IInventory, Serializable {
         return items.get(id);
     }
 
+    @Override
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
 }

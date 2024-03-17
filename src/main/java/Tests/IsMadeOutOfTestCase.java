@@ -2,8 +2,6 @@ package Tests;
 
 import ClickerGame.Generators.*;
 import ClickerGame.World.IInventory;
-import ClickerGame.World.Inventory;
-import Swing.ObservableInventory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
@@ -29,8 +27,8 @@ public class IsMadeOutOfTestCase {
                 new IMadeOutOf[]{ new HopsBush(inventory)},
                 new IMadeOutOf[]{ new HuntingHut(inventory)},
                 new IMadeOutOf[]{ new Quarry(inventory)},
-                new IMadeOutOf[]{ new SmallTree(inventory)},
-                new IMadeOutOf[]{new StudentTrap(rng, inventory)}
+                new IMadeOutOf[]{ new SmallTreeFarm(inventory)},
+                new IMadeOutOf[]{ new StudentTrap(rng, inventory)}
         );
     }
 

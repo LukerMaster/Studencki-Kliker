@@ -74,8 +74,8 @@ public class Main {
         List<ICustomUserAction> availableActions = world.GetAvailableActions();
 
         List<IGeneratorFactory> buildRecipes = new ArrayList<>();
-        buildRecipes.add(new DemoGenerator(world.GetInventory()));
-        buildRecipes.add(new SmallTree(world.GetInventory()));
+        //buildRecipes.add(new DemoGenerator(world.GetInventory()));
+        buildRecipes.add(new SmallTreeFarm(world.GetInventory()));
         buildRecipes.add(new HopsBush(world.GetInventory()));
         buildRecipes.add(new StudentTrap(world.GetInventory(), world.GetRng()));
         buildRecipes.add(new Quarry(world.GetInventory()));

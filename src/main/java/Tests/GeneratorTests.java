@@ -25,7 +25,7 @@ public class GeneratorTests {
                 new IGenerator[]{ new HopsBush(inventory)},
                 new IGenerator[]{ new HuntingHut(inventory)},
                 new IGenerator[]{ new Quarry(inventory)},
-                new IGenerator[]{ new SmallTree(inventory)},
+                new IGenerator[]{ new SmallTreeFarm(inventory)},
                 new IGenerator[]{new StudentTrap(rng, inventory)}
         );
     }

@@ -1,5 +1,7 @@
 package ClickerGame.Generators;
 
+import ClickerGame.Generators.Components.Scrapping.IScrappable;
+import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemTaking;
@@ -11,8 +13,9 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class Quarry implements IGenerator, IMadeOutOf {
+public class Quarry implements IGenerator, IMadeOutOf, IScrappable {
     private final IGeneration strategy;
+    private final IScrappable scrappingComponent;
 
     public Quarry(IInventory inventory)
     {
@@ -21,6 +24,7 @@ public class Quarry implements IGenerator, IMadeOutOf {
                 new SimpleItemTaking(Map.of(ItemId.Beer, new BigInteger("1"), ItemId.Meat, new BigInteger("8")), inventory),
                 new SimpleItemSpawning(Map.of(ItemId.Stone, new BigInteger("32")), inventory)
         );
+        scrappingComponent = new ScrappingForFractionOfCost(this, 3);
     }
 
     @Override
@@ -35,5 +39,10 @@ public class Quarry implements IGenerator, IMadeOutOf {
                 ItemId.Stone, new BigInteger("30"),
                 ItemId.Student, new BigInteger("1")
         );
+    }
+
+    @Override
+    public Map<ItemId, BigInteger> GetScrapValue() {
+        return scrappingComponent.GetScrapValue();
     }
 }

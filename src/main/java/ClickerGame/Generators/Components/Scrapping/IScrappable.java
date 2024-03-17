@@ -1,4 +1,4 @@
-package ClickerGame.Generators.Scraping;
+package ClickerGame.Generators.Components.Scrapping;
 
 import ClickerGame.ItemId;
 import ClickerGame.Localization.ScrappingTypeId;

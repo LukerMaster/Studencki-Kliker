@@ -39,6 +39,11 @@ public class StringsProvider implements IStringsProvider {
     }
 
     @Override
+    public String GetTooltipForAction(ICustomUserAction Action) {
+        return this.textsBundle.getString("Action_Tooltip." + Action.getClass().getSimpleName());
+    }
+
+    @Override
     public String GetNameForGenerator(IGenerator Generator) {
         return this.textsBundle.getString("Generator_Name." + Generator.getClass().getSimpleName());
     }

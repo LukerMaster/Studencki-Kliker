@@ -1,11 +1,12 @@
 package ClickerGame.Generators;
 
+import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
 import ClickerGame.Generators.GenerationStrategies.Actions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
-import ClickerGame.Generators.Scraping.IScrappable;
+import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class DemoGenerator implements IGenerator, IMadeOutOf, IScrappable
 {
     private final IGeneration strategy;
+    private final IScrappable scrappingComponent;
 
     public DemoGenerator(IInventory inventory)
     {
@@ -22,6 +24,7 @@ public class DemoGenerator implements IGenerator, IMadeOutOf, IScrappable
                 new NoRequirements(),
                 new NoAction(),
                 new SimpleItemSpawning(Map.of(ItemId.Wood, new BigInteger("50")), inventory));
+        scrappingComponent = new ScrappingForFractionOfCost(this, 3);
     }
     @Override
     public IGeneration GetGenerationStrategy() {
@@ -35,8 +38,6 @@ public class DemoGenerator implements IGenerator, IMadeOutOf, IScrappable
 
     @Override
     public Map<ItemId, BigInteger> GetScrapValue() {
-        return Map.of(
-                ItemId.Wood, new BigInteger("750")
-        );
+        return scrappingComponent.GetScrapValue();
     }
 }

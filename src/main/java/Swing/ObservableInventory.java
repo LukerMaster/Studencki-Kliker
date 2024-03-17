@@ -110,4 +110,9 @@ public class ObservableInventory implements IInventory, IObservableItemsProvider
     public BigInteger getCount(ItemId id) {
         return inventory.getCount(id);
     }
+
+    @Override
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
 }

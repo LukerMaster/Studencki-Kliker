@@ -22,7 +22,7 @@ public class SearchForPlants implements ICustomUserAction {
         int potatoes = rolled / 10;
         targetInventory.addItems(ItemId.Potato, potatoes);
 
-        boolean foundHops = rng.nextInt(0, 41) == 40;
+        boolean foundHops = rng.nextInt(0, 11) == 0;
         if (foundHops)
             targetInventory.addItems(ItemId.Hops, 1);
     }

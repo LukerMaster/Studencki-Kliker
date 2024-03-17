@@ -36,6 +36,7 @@ public class AvailableActionsFactory implements IDashboardFactory {
             button.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getPreferredSize().height));
             button.addActionListener(e -> action.execute());
             button.setEnabled(action.canExecute());
+            button.setToolTipText(stringsProvider.GetTooltipForAction(action));
 
             inventory.addListener((id, count) -> button.setEnabled(action.canExecute()));
             resourcePanel.add(button);

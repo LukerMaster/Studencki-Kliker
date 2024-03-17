@@ -20,6 +20,7 @@ import java.util.Map;
 public interface IStringsProvider {
     String GetNameForItem(ItemId Id);
     String GetNameForAction(ICustomUserAction Action);
+    String GetTooltipForAction(ICustomUserAction Action);
     String GetNameForGenerator(IGenerator Generator);
     String GetGenerationDescription(IGeneration Id);
     String GetNameForScrappingType(ScrappingTypeId Id);
