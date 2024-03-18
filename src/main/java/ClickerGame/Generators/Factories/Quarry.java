@@ -12,7 +12,7 @@ public class Quarry implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.Quarry(targetInventory);
+        return new ClickerGame.Generators.StandardGenerators.Quarry(targetInventory);
     }
 
 

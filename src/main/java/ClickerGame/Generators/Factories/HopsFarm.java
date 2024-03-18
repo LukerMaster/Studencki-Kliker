@@ -11,7 +11,7 @@ public class HopsFarm implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.HopsFarm(targetInventory);
+        return new ClickerGame.Generators.StandardGenerators.HopsFarm(targetInventory);
     }
 
 

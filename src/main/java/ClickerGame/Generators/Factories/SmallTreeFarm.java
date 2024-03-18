@@ -11,7 +11,7 @@ public class SmallTreeFarm implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.SmallTreeFarm(targetInventory);
+        return new ClickerGame.Generators.CustomGenerators.SmallTreeFarm(targetInventory);
     }
 
 }

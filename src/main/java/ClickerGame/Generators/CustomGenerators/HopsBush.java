@@ -1,28 +1,29 @@
-package ClickerGame.Generators;
+package ClickerGame.Generators.CustomGenerators;
 
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
-import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemTaking;
+import ClickerGame.Generators.GenerationStrategies.Actions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
-import ClickerGame.Generators.GenerationStrategies.StartConditions.InventoryHasItems;
+import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
+import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.IMadeOutOf;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
 import java.math.BigInteger;
 import java.util.Map;
 
-public class HuntingHut implements IGenerator, IMadeOutOf, IScrappable {
-    final IGeneration strategy;
+public class HopsBush implements IGenerator, IMadeOutOf, IScrappable {
+    private final IGeneration strategy;
     private final IScrappable scrappingComponent;
 
-    public HuntingHut(IInventory inventory) {
-        strategy = new PeriodicAction(10,
-                new InventoryHasItems(Map.of(ItemId.Beer, new BigInteger("1")), inventory),
-                new SimpleItemTaking(Map.of(ItemId.Beer, new BigInteger("1")), inventory),
-                new SimpleItemSpawning(Map.of(ItemId.Meat, new BigInteger("12")), inventory)
-        );
+    public HopsBush(IInventory inventory) {
+        strategy = new PeriodicAction(35,
+                new NoRequirements(),
+                new NoAction(),
+                new SimpleItemSpawning(Map.of(ItemId.Hops, new BigInteger("2")), inventory));
         scrappingComponent = new ScrappingForFractionOfCost(this, 3);
     }
 
@@ -33,11 +34,8 @@ public class HuntingHut implements IGenerator, IMadeOutOf, IScrappable {
 
     @Override
     public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
-        return Map.of(
-                ItemId.Wood, new BigInteger("1100"),
-                ItemId.Stone, new BigInteger("320"),
-                ItemId.Student, new BigInteger("3")
-        );
+        return Map.of(ItemId.Hops, new BigInteger("2"),
+                ItemId.Wood, new BigInteger("125"));
     }
 
     @Override

@@ -11,6 +11,6 @@ public class Butchery implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.Butchery(inventory);
+        return new ClickerGame.Generators.StandardGenerators.Butchery(inventory);
     }
 }

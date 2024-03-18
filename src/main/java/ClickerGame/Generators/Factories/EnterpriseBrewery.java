@@ -11,6 +11,6 @@ public class EnterpriseBrewery implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.EnterpriseBrewery(inventory);
+        return new ClickerGame.Generators.StandardGenerators.EnterpriseBrewery(inventory);
     }
 }

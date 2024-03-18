@@ -11,6 +11,6 @@ public class PotatoFarm implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.PotatoFarm(inventory);
+        return new ClickerGame.Generators.StandardGenerators.PotatoFarm(inventory);
     }
 }

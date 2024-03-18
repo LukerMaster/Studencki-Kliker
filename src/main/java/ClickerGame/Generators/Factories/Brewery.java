@@ -13,7 +13,7 @@ public class Brewery implements IGeneratorFactory {
 
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.Brewery(targetInventory);
+        return new ClickerGame.Generators.StandardGenerators.Brewery(targetInventory);
     }
 
 

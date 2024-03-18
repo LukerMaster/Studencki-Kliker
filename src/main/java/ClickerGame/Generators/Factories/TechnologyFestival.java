@@ -15,6 +15,6 @@ public class TechnologyFestival implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.TechnologyFestival(inventory, rng);
+        return new ClickerGame.Generators.CustomGenerators.TechnologyFestival(inventory, rng);
     }
 }

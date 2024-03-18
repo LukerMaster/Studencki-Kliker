@@ -11,6 +11,6 @@ public class Mine implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.Mine(inventory);
+        return new ClickerGame.Generators.StandardGenerators.Mine(inventory);
     }
 }

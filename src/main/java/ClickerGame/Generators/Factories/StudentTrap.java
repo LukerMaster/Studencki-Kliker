@@ -17,7 +17,7 @@ public class StudentTrap implements IGeneratorFactory {
 
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.StudentTrap(rng, targetInventory);
+        return new ClickerGame.Generators.CustomGenerators.StudentTrap(rng, targetInventory);
     }
 
 

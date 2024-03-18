@@ -11,7 +11,7 @@ public class HuntingHut implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.HuntingHut(targetInventory);
+        return new ClickerGame.Generators.StandardGenerators.HuntingHut(targetInventory);
     }
 
 

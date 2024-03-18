@@ -11,6 +11,6 @@ public class University implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.University(inventory);
+        return new ClickerGame.Generators.StandardGenerators.University(inventory);
     }
 }

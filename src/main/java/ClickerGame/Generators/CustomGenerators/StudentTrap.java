@@ -1,4 +1,4 @@
-package ClickerGame.Generators;
+package ClickerGame.Generators.CustomGenerators;
 
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
@@ -7,6 +7,8 @@ import ClickerGame.Generators.GenerationStrategies.Actions.ChanceBasedSpawning;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemTaking;
 import ClickerGame.Generators.GenerationStrategies.PeriodicAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.InventoryHasItems;
+import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.IMadeOutOf;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 

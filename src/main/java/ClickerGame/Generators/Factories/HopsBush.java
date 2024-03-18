@@ -12,7 +12,7 @@ public class HopsBush implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.HopsBush(targetInventory);
+        return new ClickerGame.Generators.CustomGenerators.HopsBush(targetInventory);
     }
 
 

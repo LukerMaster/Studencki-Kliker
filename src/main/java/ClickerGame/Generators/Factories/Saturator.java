@@ -11,6 +11,6 @@ public class Saturator implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.Saturator(inventory);
+        return new ClickerGame.Generators.StandardGenerators.Saturator(inventory);
     }
 }

@@ -1,4 +1,4 @@
-package ClickerGame.Generators;
+package ClickerGame.Generators.StandardGenerators;
 
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
@@ -13,27 +13,22 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class Mine implements IGenerator, IScrappable, IMadeOutOf {
-
-    final IInventory inventory;
-
-    final Map<ItemId, BigInteger> itemsNecessary = Map.of(
-            ItemId.Wood, new BigInteger("40"),
-            ItemId.Meat, new BigInteger("20"),
-            ItemId.Beer, new BigInteger("10"));
-
+public class StandardGenerator implements IStandardGenerator {
     final IScrappable scrappingComponent;
-
-    final Map<ItemId, BigInteger> itemsSpawned = Map.of(ItemId.Metal, new BigInteger("4"));
     private final IGeneration strategy;
-
-    public Mine(IInventory inventory) {
-        this.inventory = inventory;
-        this.strategy = new PeriodicAction(24,
+    private final Map<ItemId, BigInteger> madeOutOf;
+    public StandardGenerator(IInventory inventory,
+                             Map<ItemId, BigInteger> madeOutOf,
+                             float secondsBetweenSpawns,
+                             Map<ItemId, BigInteger> itemsNecessary,
+                             Map<ItemId, BigInteger> itemsSpawned,
+                             int scrappingDivisor) {
+        this.madeOutOf = madeOutOf;
+        this.strategy = new PeriodicAction(secondsBetweenSpawns,
                 new InventoryHasItems(itemsNecessary, inventory),
                 new SimpleItemTaking(itemsNecessary, inventory),
                 new SimpleItemSpawning(itemsSpawned, inventory));
-        scrappingComponent = new ScrappingForFractionOfCost(this, 3);
+        scrappingComponent = new ScrappingForFractionOfCost(this, scrappingDivisor);
     }
 
     @Override
@@ -48,8 +43,6 @@ public class Mine implements IGenerator, IScrappable, IMadeOutOf {
 
     @Override
     public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
-        return Map.of(ItemId.Stone, new BigInteger("550"),
-                ItemId.Wood, new BigInteger("2200"),
-                ItemId.Student, new BigInteger("10"));
+        return madeOutOf;
     }
 }

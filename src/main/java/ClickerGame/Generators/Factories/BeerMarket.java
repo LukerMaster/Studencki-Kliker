@@ -11,6 +11,6 @@ public class BeerMarket implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.BeerMarket(inventory);
+        return new ClickerGame.Generators.StandardGenerators.BeerMarket(inventory);
     }
 }

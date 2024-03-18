@@ -11,7 +11,7 @@ public class DemoGenerator implements IGeneratorFactory {
     }
     @Override
     public IGenerator CreateGenerator() {
-        return new ClickerGame.Generators.DemoGenerator(targetInventory);
+        return new ClickerGame.Generators.CustomGenerators.DemoGenerator(targetInventory);
     }
 
 

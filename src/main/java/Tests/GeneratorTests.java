@@ -1,6 +1,11 @@
 package Tests;
 
 import ClickerGame.Generators.*;
+import ClickerGame.Generators.CustomGenerators.DemoGenerator;
+import ClickerGame.Generators.CustomGenerators.HopsBush;
+import ClickerGame.Generators.CustomGenerators.SmallTreeFarm;
+import ClickerGame.Generators.CustomGenerators.StudentTrap;
+import ClickerGame.Generators.StandardGenerators.*;
 import ClickerGame.World.IInventory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
