@@ -10,6 +10,7 @@ import ClickerGame.Localization.IStringsProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,8 +112,10 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         });
 
         for (IGenerator generator : world.GetActiveGenerators()) {
-            CreateGeneratorUI(generator);
+            generatorUIs.put(generator, CreateGeneratorUI(generator));
+            PresentOnGeneratorPanel(generatorUIs.get(generator));
         }
+        RefreshView();
 
         JScrollPane scrollPane = new JScrollPane(generatorsPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(SCROLL_SPEED);

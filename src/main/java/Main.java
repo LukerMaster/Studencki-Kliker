@@ -82,6 +82,15 @@ public class Main {
         buildRecipes.add(new HopsFarm(world.GetInventory()));
         buildRecipes.add(new Brewery(world.GetInventory()));
         buildRecipes.add(new HuntingHut(world.GetInventory()));
+        buildRecipes.add(new Mine(world.GetInventory()));
+        buildRecipes.add(new Saturator(world.GetInventory()));
+        buildRecipes.add(new PotatoFarm(world.GetInventory()));
+        buildRecipes.add(new AlcoholMarket(world.GetInventory()));
+        buildRecipes.add(new BeerMarket(world.GetInventory()));
+        buildRecipes.add(new University(world.GetInventory()));
+        buildRecipes.add(new TechnologyFestival(world.GetInventory(), world.GetRng()));
+        buildRecipes.add(new Butchery(world.GetInventory()));
+        buildRecipes.add(new EnterpriseBrewery(world.GetInventory()));
 
         IGameLoop gameLoop = new GameLoop(world);
         //

@@ -9,6 +9,7 @@ public enum ItemId implements Serializable {
     Potato,
     Hops,
     Beer,
+    Metal,
     Vodka,
     Gold,
     Student

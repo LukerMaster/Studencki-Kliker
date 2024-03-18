@@ -35,7 +35,7 @@ public class HuntingHut implements IGenerator, IMadeOutOf, IScrappable {
     public Map<ItemId, BigInteger> GetWhatItsMadeOutOf() {
         return Map.of(
                 ItemId.Wood, new BigInteger("1100"),
-                ItemId.Stone, new BigInteger("220"),
+                ItemId.Stone, new BigInteger("320"),
                 ItemId.Student, new BigInteger("3")
         );
     }

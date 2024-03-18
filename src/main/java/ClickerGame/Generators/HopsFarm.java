@@ -37,7 +37,7 @@ public class HopsFarm implements IGenerator, IMadeOutOf, IScrappable {
         return Map.of(
                 ItemId.Hops, new BigInteger("2"),
                 ItemId.Wood, new BigInteger("155"),
-                ItemId.Stone, new BigInteger("10"),
+                ItemId.Stone, new BigInteger("60"),
                 ItemId.Student, new BigInteger("1")
         );
     }
