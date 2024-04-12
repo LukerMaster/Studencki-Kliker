@@ -40,3 +40,26 @@ L10 Stosowanie testów w wytwarzaniu oprogramowania
 - Dodanych jest kilka prostych testów do sprawdzania poprawności działania niektórych bardziej skomplikowanych klas
 - Dodanych jest kilka testów prostych, celem demonstracji działania testów ogólnie
 - Użyte zostało Mockowanie dla prostrzej separacji zależności
+
+Patterns:
+1.Factory - done
+2.Singleton - done
+3.Builder - done
+4.Prototype
+5.Adapter
+6.Composite
+7.Bridge
+8.Decorator - done
+9.Facade - done
+10.Proxy
+11.Flyweight
+12.Command
+13.Interpreter
+14.Iterator
+15.Mediator
+16.Memento
+17.Observer - done
+18.State
+19.Strategy - done
+20.Template
+21.Visitor
