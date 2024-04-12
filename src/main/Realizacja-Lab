@@ -45,21 +45,21 @@ Patterns:
 1.Factory - done
 2.Singleton - done
 3.Builder - done
-4.Prototype
-5.Adapter
+4.Prototype - done
+5.Adapter - done
 6.Composite
-7.Bridge
+7.Bridge - done
 8.Decorator - done
 9.Facade - done
-10.Proxy
-11.Flyweight
-12.Command
+10.Proxy - done
+11.Flyweight - done
+12.Command - done
 13.Interpreter
-14.Iterator
+14.Iterator - done
 15.Mediator
-16.Memento
+16.Memento - done
 17.Observer - done
 18.State
 19.Strategy - done
-20.Template
+20.Template - done
 21.Visitor
