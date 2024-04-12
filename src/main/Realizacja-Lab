@@ -1,15 +1,18 @@
 L1 Stosowanie konstrukcyjnych wzorców projektowych
 - Singleton - Main.java - inventory, world, stringsProvider
 - Abstract Factory - IDashboardFactory.java oraz implementacje
++2
 
 L2 Stosowanie strukturalnych wzorców projektowych
 - Facade - StringsProvider.java
 - Decorator - ObservableInventory.java
++5
 
 L3 Stosowanie czynnościowych wzorców projektowych
 - Strategy - PeriodicAction.java
 - Command - ICustomUserAction.java
 - Observer - ObservableInventory.java
++7
 
 L4 Stosowanie zasad pojedynczej odpowiedzialności i otwarte-zamknięte
 - Jeśli nigdzie się nie pomyliłem, to każda klasa ma tylko jedno zadanie.
@@ -29,7 +32,7 @@ L7 Zastosowanie programowania funkcyjnego
 L8 Zastosowanie programowania aspektowego
 - Jest napisany jeden aspekt do logowania, aczkolwiek trochę załamałem ręce jak okazało się, że AspectJ nie za bardzo może zostać użyty sam, w zwykłej aplikacji. Jeśli da się bez tego dostać 5.0, to wolałbym używania AOP uniknąć.
 - Plus jest taki, że sporo się trzeba było oczytać, żeby doprowadzić aspekty do jakiegokolwiek działania - powiem tak - założenie jest bardzo fajne, ale moim zdaniem dekorator - pomimo, że bardziej kodochłonny i czasochłonny - jest o wiele bardziej elegancki i wygodny.
-
++ jeszcze 2
 L9 Refactoring kodu programu
 - Wystarczy zajrzeć na githuba, ten projekt miał pare rewolucji konceptualnych.
 
