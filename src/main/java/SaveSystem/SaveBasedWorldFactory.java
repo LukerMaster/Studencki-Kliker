@@ -44,7 +44,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
     private void CreateNewGame() {
         Random rng = new Random();
 
-        ObservableInventory observableInventory = new ObservableInventory(new Inventory());
+        ObservableInventory observableInventory = new ObservableInventory(new InventoryWithHoles(new Inventory(), rng));
 
         List<ICustomUserAction> availableActions = GetUserActions(observableInventory, rng);
 

@@ -1,5 +1,6 @@
 package ClickerGame.Generators.CustomGenerators;
 
+import ClickerGame.Generators.Components.Copying.IPrototype;
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
@@ -15,11 +16,13 @@ import ClickerGame.World.IInventory;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class HopsBush implements IGenerator, IMadeOutOf, IScrappable {
+public class HopsBush implements IGenerator, IMadeOutOf, IScrappable, IPrototype<IGenerator> {
     private final IGeneration strategy;
     private final IScrappable scrappingComponent;
+    private final IInventory inventory;
 
     public HopsBush(IInventory inventory) {
+        this.inventory = inventory;
         strategy = new PeriodicAction(35,
                 new NoRequirements(),
                 new NoAction(),
@@ -41,5 +44,10 @@ public class HopsBush implements IGenerator, IMadeOutOf, IScrappable {
     @Override
     public Map<ItemId, BigInteger> GetScrapValue() {
         return scrappingComponent.GetScrapValue();
+    }
+
+    @Override
+    public IGenerator clone() {
+        return new HopsBush(inventory);
     }
 }
