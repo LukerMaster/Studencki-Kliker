@@ -10,6 +10,7 @@ import ClickerGame.Generators.GenerationStrategies.Actions.NoAction;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.IItemRequirement;
 import ClickerGame.Generators.GenerationStrategies.StartConditions.NoRequirements;
 import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.States.IState;
 import ClickerGame.ItemId;
 
 import java.math.BigInteger;
@@ -35,17 +36,23 @@ public class StringsProvider implements IStringsProvider {
 
     @Override
     public String GetNameForAction(ICustomUserAction Action) {
-        return this.textsBundle.getString("Action_Name." + Action.getClass().getSimpleName());
+        return this.textsBundle.getString("Action_Name." + Action.getName());
     }
 
     @Override
     public String GetTooltipForAction(ICustomUserAction Action) {
-        return this.textsBundle.getString("Action_Tooltip." + Action.getClass().getSimpleName());
+        return this.textsBundle.getString("Action_Tooltip." + Action.getName());
     }
 
     @Override
     public String GetNameForGenerator(IGenerator Generator) {
         return this.textsBundle.getString("Generator_Name." + Generator.getClass().getSimpleName());
+    }
+
+    @Override
+    public String GetNameForGeneratorState(IState State) {
+
+        return this.textsBundle.getString("Generator.State." + State.getName());
     }
 
     @Override

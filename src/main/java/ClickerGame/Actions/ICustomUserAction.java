@@ -6,4 +6,8 @@ package ClickerGame.Actions;
 public interface ICustomUserAction {
     void execute();
     boolean canExecute();
+    default String getName()
+    {
+        return this.getClass().getSimpleName();
+    }
 }

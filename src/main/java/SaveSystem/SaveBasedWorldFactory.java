@@ -1,6 +1,7 @@
 package SaveSystem;
 
 import ClickerGame.Actions.*;
+import ClickerGame.Actions.CookieSpawning.CookieSpawnActionWrapper;
 import ClickerGame.World.*;
 import Swing.ObservableInventory;
 
@@ -30,15 +31,22 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
 
     private List<ICustomUserAction> GetUserActions(IInventory inv, Random rng)
     {
-        List<ICustomUserAction> availableActions = new ArrayList<>();
+        List<ICustomUserAction> rawActions = new ArrayList<>();
 
-        availableActions.add(new CollectWood(inv));
-        availableActions.add(new CollectStones(inv));
-        availableActions.add(new HuntForSomething(inv, rng));
-        availableActions.add(new SearchForPlants(inv, rng));
-        availableActions.add(new BrewBeer(inv));
 
-        return availableActions;
+        rawActions.add(new CollectWood(inv));
+        rawActions.add(new CollectStones(inv));
+        rawActions.add(new HuntForSomething(inv, rng));
+        rawActions.add(new SearchForPlants(inv, rng));
+        rawActions.add(new BrewBeer(inv));
+
+        CookieSpawnActionWrapper wrapper = new CookieSpawnActionWrapper(rng);
+        List<ICustomUserAction> wrappedActions = new ArrayList<>();
+        for (ICustomUserAction action: rawActions) {
+            wrappedActions.add(wrapper.WrapActionWithCookieSpawn(action, inv));
+        }
+
+        return wrappedActions;
     }
 
     private void CreateNewGame() {

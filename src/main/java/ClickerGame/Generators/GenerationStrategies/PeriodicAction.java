@@ -1,5 +1,9 @@
 package ClickerGame.Generators.GenerationStrategies;
 
+import ClickerGame.Generators.States.IState;
+import ClickerGame.Generators.States.Running;
+import ClickerGame.Generators.States.Waiting;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -15,6 +19,8 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
     final Runnable OnStart;
     final Supplier<Boolean> Requirement;
 
+    IState currentState;
+
     transient List<Consumer<Float>> onProgressListeners = new ArrayList<>();
 
     public PeriodicAction(
@@ -23,6 +29,7 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
             Runnable onStart,
             Runnable onFinish)
     {
+        currentState = new Waiting();
         this.secondsBetweenSpawns = secondsBetweenSpawns;
         OnStart = onStart;
         OnFinish = onFinish;
@@ -38,6 +45,7 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 
             OnStart.run();
             isProducing = true;
+            currentState = new Running();
         }
 
         if (isProducing)
@@ -48,6 +56,8 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
             {
                 OnFinish.run();
                 isProducing = false;
+                currentState = new Waiting();
+                NotifyListeners();
             }
         }
     }
@@ -65,6 +75,11 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
     @Override
     public Supplier<Boolean> GetRequirement() {
         return Requirement;
+    }
+
+    @Override
+    public IState GetState() {
+        return currentState;
     }
 
     private void NotifyListeners()

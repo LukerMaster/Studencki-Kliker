@@ -3,6 +3,7 @@ package Swing.Dashboards.Factories;
 import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
+import ClickerGame.Generators.States.IState;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;
@@ -63,6 +64,8 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
             mainArea.add(scrapButton);
         }
 
+
+
         JPanel generatorPanel = new JPanel();
         generatorPanel.setLayout(new BoxLayout(generatorPanel, BoxLayout.Y_AXIS));
 
@@ -71,9 +74,19 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
 
         if (generator.GetGenerationStrategy() instanceof IPeriodicProgressingAction strategy)
         {
+            JLabel statusLabel = new JLabel();
             JProgressBar progressBar = new JProgressBar();
-            strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
 
+            statusLabel.setText(stringsProvider.GetNameForGeneratorState(generator.GetGenerationStrategy().GetState()));
+
+            strategy.AddOnProgressChangeListener(f -> {
+                IState state = generator.GetGenerationStrategy().GetState();
+                String stateName = stringsProvider.GetNameForGeneratorState(state);
+                statusLabel.setText(stateName);
+            });
+
+            strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
+            generatorPanel.add(statusLabel);
             generatorPanel.add(progressBar);
         }
         generatorPanel.add(Box.createRigidArea(new Dimension(0, 15)));

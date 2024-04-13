@@ -3,6 +3,7 @@ package ClickerGame.Localization;
 import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.Generators.GenerationStrategies.IGeneration;
 import ClickerGame.Generators.IGenerator;
+import ClickerGame.Generators.States.IState;
 import ClickerGame.ItemId;
 
 import java.math.BigInteger;
@@ -22,6 +23,7 @@ public interface IStringsProvider {
     String GetNameForAction(ICustomUserAction Action);
     String GetTooltipForAction(ICustomUserAction Action);
     String GetNameForGenerator(IGenerator Generator);
+    String GetNameForGeneratorState(IState State);
     String GetGenerationDescription(IGeneration Id);
     String GetNameForScrappingType(ScrappingTypeId Id);
     String FormatItemsAsString(Map<ItemId, BigInteger> cost);

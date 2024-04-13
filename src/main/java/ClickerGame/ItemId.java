@@ -12,5 +12,5 @@ public enum ItemId implements Serializable {
     Metal,
     Vodka,
     Gold,
-    Student
+    Cookie, Student
 }
