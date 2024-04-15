@@ -4,6 +4,7 @@ import ClickerGame.Generators.States.IState;
 import ClickerGame.Generators.States.Running;
 import ClickerGame.Generators.States.Waiting;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -11,14 +12,12 @@ import java.util.function.Supplier;
 
 public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 {
-    float currentTime = 0;
-    final float secondsBetweenSpawns;
-    boolean isProducing = false;
-
     final Runnable OnFinish;
     final Runnable OnStart;
     final Supplier<Boolean> Requirement;
 
+    float progress = 0;
+    final float secondsBetweenSpawns;
     IState currentState;
 
     transient List<Consumer<Float>> onProgressListeners = new ArrayList<>();
@@ -29,37 +28,30 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
             Runnable onStart,
             Runnable onFinish)
     {
-        currentState = new Waiting();
         this.secondsBetweenSpawns = secondsBetweenSpawns;
         OnStart = onStart;
         OnFinish = onFinish;
         Requirement = requirement;
+        var WaitingState = new Waiting(requirement);
+        var RunningState = new Running(secondsBetweenSpawns,
+                (Serializable & Consumer<Float>)(progress) -> this.progress = progress,
+                onFinish);
+
+        WaitingState.SetOnFinish((Serializable & Runnable)() -> {
+            onStart.run();
+            currentState = RunningState;
+        });
+
+        RunningState.SetOnFinish((Serializable & Runnable)() -> {
+            currentState = WaitingState;
+        });
+
+        currentState = WaitingState;
     }
     @Override
     public void Update(float deltaTime) {
-
-        if (Requirement.get() && !isProducing)
-        {
-            currentTime -= secondsBetweenSpawns;
-            if (currentTime < 0) currentTime = 0;
-
-            OnStart.run();
-            isProducing = true;
-            currentState = new Running();
-        }
-
-        if (isProducing)
-        {
-            currentTime += deltaTime;
-            NotifyListeners();
-            if (currentTime >= secondsBetweenSpawns)
-            {
-                OnFinish.run();
-                isProducing = false;
-                currentState = new Waiting();
-                NotifyListeners();
-            }
-        }
+        currentState.Progress(deltaTime);
+        NotifyListeners();
     }
 
     @Override
@@ -100,7 +92,7 @@ public class PeriodicAction implements IGeneration, IPeriodicProgressingAction
 
     @Override
     public float GetProgressToNextSpawn() {
-        return currentTime / secondsBetweenSpawns;
+        return progress;
     }
 
     @Override
