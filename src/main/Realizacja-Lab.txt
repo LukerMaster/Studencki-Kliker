@@ -14,7 +14,7 @@ L2 Stosowanie strukturalnych wzorców projektowych
 - Composite - CookieSpawning package
 
 L3 Stosowanie czynnościowych wzorców projektowych
-- Strategy - PeriodicAction.java
+- Strategy - IGeneration.java -> PeriodicAction.java
 - Command - ICustomUserAction.java
 - Observer - ObservableInventory.java
 - Iterator - AvailableActionsFactory.java
@@ -24,7 +24,7 @@ L3 Stosowanie czynnościowych wzorców projektowych
 - Interpreter - TODO
 - Mediator - TODO
 - State - Generators.States package, PeriodicAction.java
-- Visitor - TODO
+- Visitor - BuildingActions package, BuildingVisitor.java
 
 L4 Stosowanie zasad pojedynczej odpowiedzialności i otwarte-zamknięte
 - Jeśli nigdzie się nie pomyliłem, to każda klasa ma tylko jedno zadanie.

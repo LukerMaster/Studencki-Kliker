@@ -17,5 +17,5 @@ public enum StringId {
     Build_cost,
     Build_menu,
     Nothing,
-    ActiveGenerators
+    Visit, ActiveGenerators
 }

@@ -1,17 +1,19 @@
 package Swing.Dashboards.Factories;
 
+import ClickerGame.BuildingActions.BuildingVisitor;
+import ClickerGame.BuildingActions.IBuildingVisitor;
+import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.GenerationStrategies.IPeriodicProgressingAction;
 import ClickerGame.Generators.IGenerator;
-import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.States.IState;
+import ClickerGame.Localization.IStringsProvider;
+import ClickerGame.Localization.StringId;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
 import Swing.Dashboards.IDashboardFactory;
-import ClickerGame.Localization.IStringsProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,10 +48,20 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
         description.setOpaque(true);
         description.setFont(new JLabel().getFont());
 
+
+        JButton visitButton = new JButton();
+        visitButton.setText(stringsProvider.GetStringFor(StringId.Visit));
+        visitButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        visitButton.addActionListener(b ->
+        {
+            IBuildingVisitor visitor = new BuildingVisitor();
+            visitor.visit(generator);
+        });
+
         JPanel mainArea = new JPanel();
         mainArea.setLayout(new BoxLayout(mainArea, BoxLayout.X_AXIS));
-
         mainArea.add(description);
+        mainArea.add(visitButton);
 
         if (generator instanceof IScrappable)
         {
@@ -60,15 +72,11 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
                 world.GetInventory().addItems(((IScrappable) generator).GetScrapValue());
                 world.RemoveGenerator(generator);
             });
-
             mainArea.add(scrapButton);
         }
 
-
-
         JPanel generatorPanel = new JPanel();
         generatorPanel.setLayout(new BoxLayout(generatorPanel, BoxLayout.Y_AXIS));
-
         generatorPanel.add(name);
         generatorPanel.add(mainArea);
 
@@ -78,14 +86,13 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
             JProgressBar progressBar = new JProgressBar();
 
             statusLabel.setText(stringsProvider.GetNameForGeneratorState(generator.GetGenerationStrategy().GetState()));
-
             strategy.AddOnProgressChangeListener(f -> {
                 IState state = generator.GetGenerationStrategy().GetState();
                 String stateName = stringsProvider.GetNameForGeneratorState(state);
                 statusLabel.setText(stateName);
             });
-
             strategy.AddOnProgressChangeListener(f -> progressBar.setValue((int) (f * 100)));
+
             generatorPanel.add(statusLabel);
             generatorPanel.add(progressBar);
         }
