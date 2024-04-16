@@ -12,8 +12,9 @@ import Core.*;
 import Swing.ClickerWindow;
 import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
-import Swing.Dashboards.Factories.ResourcesDashboardFactory;
-import Swing.Dashboards.IDashboardFactory;
+import Swing.Dashboards.Factories.CurrentResourcesFactory;
+import Swing.IControlFactory;
+import Swing.TopBar.Factories.TopBarFactory;
 
 import java.util.*;
 
@@ -99,14 +100,14 @@ public class Main {
 
         IWorldEventHandler eventHandler = (IWorldEventHandler) world;
 
-
-        List<IDashboardFactory> dashboardFactories = new ArrayList<>();
-        dashboardFactories.add(new ResourcesDashboardFactory(stringsProvider, observableItemsProvider));
+        IControlFactory topBarFactory = new TopBarFactory(stringsProvider);
+        List<IControlFactory> dashboardFactories = new ArrayList<>();
+        dashboardFactories.add(new CurrentResourcesFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableItemsProvider));
         dashboardFactories.add(new GeneratorBuyMenuFactory(buildRecipes, world, observableItemsProvider, stringsProvider));
         dashboardFactories.add(new CurrentGeneratorsFactory(world, eventHandler, stringsProvider));
 
-        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, stringsProvider, gameLoop, gameSaver);
+        IProgramWindow programWindow = new ClickerWindow(dashboardFactories, topBarFactory, stringsProvider, gameLoop, gameSaver);
         programWindow.Start();
     }
 }

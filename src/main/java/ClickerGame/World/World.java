@@ -10,8 +10,9 @@ import java.util.function.Consumer;
 
 public class World implements IWorld, IWorldEventHandler {
 
+    private float _actionMultiplier;
+    private float _buildingMultiplier;
     private transient List<ICustomUserAction> userActions;
-
     private transient List<Consumer<IGenerator>> onGeneratorAddEvents = new ArrayList<>();
     private transient List<Consumer<IGenerator>> onGeneratorRemoveEvents = new ArrayList<>();
     final IInventory inventory;
@@ -73,6 +74,28 @@ public class World implements IWorld, IWorldEventHandler {
     @Override
     public Instant GetLastGameTime() {
         return LastGameTime;
+    }
+
+    @Override
+    public float GetActionMultiplier() {
+        return _actionMultiplier;
+    }
+
+    @Override
+    public void SetActionMultiplier(float value) {
+        _actionMultiplier = value;
+        if (_actionMultiplier < 0.1f) _actionMultiplier = 0.1f;
+    }
+
+    @Override
+    public float GetBuildingMultiplier() {
+        return _buildingMultiplier;
+    }
+
+    @Override
+    public void SetBuildingMultiplier(float value) {
+        _buildingMultiplier = value;
+        if (_buildingMultiplier < 0.1f) _buildingMultiplier = 0.1f;
     }
 
 

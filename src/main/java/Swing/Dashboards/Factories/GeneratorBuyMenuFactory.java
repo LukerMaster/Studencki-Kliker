@@ -8,13 +8,13 @@ import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.World.IWorld;
-import Swing.Dashboards.IDashboardFactory;
+import Swing.IControlFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class GeneratorBuyMenuFactory implements IDashboardFactory {
+public class GeneratorBuyMenuFactory implements IControlFactory {
 
     private static final int SCROLL_SPEED = 32;
     private final List<IGeneratorFactory> factories;
@@ -34,7 +34,7 @@ public class GeneratorBuyMenuFactory implements IDashboardFactory {
         this.stringsProvider = stringsProvider;
     }
     @Override
-    public JComponent CreateDashboard() {
+    public JComponent CreateControl() {
 
         JPanel allSchematicsPanel = new JPanel();
         allSchematicsPanel.setLayout(new BoxLayout(allSchematicsPanel, BoxLayout.Y_AXIS));

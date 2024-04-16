@@ -5,7 +5,6 @@ import ClickerGame.Localization.StringId;
 import Core.IGameLoop;
 import Core.IProgramWindow;
 import SaveSystem.IGameSaver;
-import Swing.Dashboards.IDashboardFactory;
 import org.apache.commons.lang3.time.StopWatch;
 
 import javax.swing.*;
@@ -17,15 +16,18 @@ import java.util.List;
 public class ClickerWindow implements IProgramWindow {
 
 
-    private final List<IDashboardFactory> dashboardFactories;
+    private final List<IControlFactory> dashboardFactories;
+    private final IControlFactory topBarFactory;
+
     private final IStringsProvider stringsProvider;
     private final StopWatch stopwatch = new StopWatch();
     private final IGameLoop gameLoop;
 
     private final IGameSaver saver;
 
-    public ClickerWindow(List<IDashboardFactory> dashboardFactories, IStringsProvider stringsProvider, IGameLoop gameLoop, IGameSaver saver) {
+    public ClickerWindow(List<IControlFactory> dashboardFactories, IControlFactory topBarFactory, IStringsProvider stringsProvider, IGameLoop gameLoop, IGameSaver saver) {
         this.dashboardFactories = dashboardFactories;
+        this.topBarFactory = topBarFactory;
         this.stringsProvider = stringsProvider;
         this.gameLoop = gameLoop;
         this.saver = saver;
@@ -36,9 +38,14 @@ public class ClickerWindow implements IProgramWindow {
     @Override
     public void Start() {
 
-        mainPanel.setLayout(new GridLayout());
-        for (IDashboardFactory factory : dashboardFactories)
-            mainPanel.add(factory.CreateDashboard());
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(topBarFactory.CreateControl());
+
+        JPanel dashboardPanel = new JPanel(new GridLayout());
+        for (IControlFactory factory : dashboardFactories)
+            dashboardPanel.add(factory.CreateControl());
+
+        mainPanel.add(dashboardPanel);
 
         JFrame frame = new JFrame(stringsProvider.GetStringFor(StringId.Title));
         frame.setLocationRelativeTo(null);

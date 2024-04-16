@@ -10,7 +10,7 @@ import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
 import ClickerGame.World.IWorld;
 import ClickerGame.World.IWorldEventHandler;
-import Swing.Dashboards.IDashboardFactory;
+import Swing.IControlFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 import static ClickerGame.Localization.StringId.ActiveGenerators;
 
-public class CurrentGeneratorsFactory implements IDashboardFactory {
+public class CurrentGeneratorsFactory implements IControlFactory {
 
     private static final int SCROLL_SPEED = 32;
     final IWorld world;
@@ -114,7 +114,7 @@ public class CurrentGeneratorsFactory implements IDashboardFactory {
     }
 
     @Override
-    public JComponent CreateDashboard() {
+    public JComponent CreateControl() {
 
         generatorsPanel = new JPanel();
         generatorsPanel.setLayout(new BoxLayout(generatorsPanel, BoxLayout.Y_AXIS));

@@ -1,4 +1,4 @@
-package Swing.Dashboards;
+package Swing;
 
 import javax.swing.*;
 
@@ -7,6 +7,6 @@ import javax.swing.*;
  * than described in GoF. All the factories are going to be used, instead of standard
  * switching between one of them based on some environmental variables.
  */
-public interface IDashboardFactory {
-    JComponent CreateDashboard();
+public interface IControlFactory {
+    JComponent CreateControl();
 }

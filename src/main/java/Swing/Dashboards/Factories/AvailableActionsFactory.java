@@ -4,14 +4,14 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
-import Swing.Dashboards.IDashboardFactory;
+import Swing.IControlFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
-public class AvailableActionsFactory implements IDashboardFactory {
+public class AvailableActionsFactory implements IControlFactory {
     private final IStringsProvider stringsProvider;
 
     public AvailableActionsFactory(IStringsProvider stringsProvider, List<ICustomUserAction> actionList, IObservableItemsProvider inventory) {
@@ -24,7 +24,7 @@ public class AvailableActionsFactory implements IDashboardFactory {
     final IObservableItemsProvider inventory;
 
     @Override
-    public JComponent CreateDashboard() {
+    public JComponent CreateControl() {
 
 
         JPanel resourcePanel = new JPanel();

@@ -22,5 +22,9 @@ public interface IWorld extends Serializable {
     void SetLastGameTime(Instant time);
     Instant GetLastGameTime();
 
+    float GetActionMultiplier();
+    void SetActionMultiplier(float value);
+    float GetBuildingMultiplier();
+    void SetBuildingMultiplier(float value);
     Random GetRng();
 }
