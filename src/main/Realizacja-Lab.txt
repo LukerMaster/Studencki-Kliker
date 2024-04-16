@@ -22,7 +22,7 @@ L3 Stosowanie czynnościowych wzorców projektowych
 - Memento - SaveBasedWorldFactory.java - Zapisywanie całej gry do pliku za pomocą interfejsu Serializable
 - Template - StandardGenerator.java - Wszystkie generatory korzystają z już skończonej implementacji tej klasy
 - Interpreter - TODO
-- Mediator - CustomControls package, mnożniki (unused)
+- Mediator - CustomControls package, mnożniki (actions only)
 - State - Generators.States package, PeriodicAction.java
 - Visitor - BuildingActions package, BuildingVisitor.java
 
