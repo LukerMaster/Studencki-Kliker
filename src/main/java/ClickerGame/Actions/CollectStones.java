@@ -6,6 +6,7 @@ import ClickerGame.World.IInventory;
 public class CollectStones implements ICustomUserAction {
 
     final IInventory targetInventory;
+    private float _multiplier;
 
     public CollectStones(IInventory targetInventory)
     {
@@ -14,11 +15,16 @@ public class CollectStones implements ICustomUserAction {
 
     @Override
     public void execute() {
-        this.targetInventory.addItems(ItemId.Stone, 1);
+        this.targetInventory.addItems(ItemId.Stone, (int)_multiplier);
     }
 
     @Override
     public boolean canExecute() {
         return true;
+    }
+
+    @Override
+    public void setPowerMultiplier(float value) {
+        _multiplier = value;
     }
 }

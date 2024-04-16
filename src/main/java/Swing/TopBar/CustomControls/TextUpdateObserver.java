@@ -1,4 +1,4 @@
-package Swing.TopBar.CustomControls.Mediator;
+package Swing.TopBar.CustomControls;
 
 import Swing.TopBar.CustomControls.ITunable;
 
@@ -23,7 +23,7 @@ public class TextUpdateObserver<T extends JButton & ITunable> {
 
 
     public void UpdateTexts() {
-        button1.setText(defaultText1 + ": " + String.format("%.2f", button1.GetValue()) );
-        button2.setText(defaultText2 + ": " + String.format("%.2f",button2.GetValue()) );
+        button1.setText(defaultText1 + ": " + String.format("%.1f", button1.GetValue()) + "x" );
+        button2.setText(defaultText2 + ": " + String.format("%.1f",button2.GetValue()) + "x" );
     }
 }

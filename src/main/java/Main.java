@@ -14,7 +14,7 @@ import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
 import Swing.Dashboards.Factories.CurrentResourcesFactory;
 import Swing.IControlFactory;
-import Swing.TopBar.Factories.TopBarFactory;
+import Swing.TopBar.Factories.MultiplierTunerFactory;
 
 import java.util.*;
 
@@ -100,7 +100,7 @@ public class Main {
 
         IWorldEventHandler eventHandler = (IWorldEventHandler) world;
 
-        IControlFactory topBarFactory = new TopBarFactory(stringsProvider);
+        IControlFactory topBarFactory = new MultiplierTunerFactory(stringsProvider, world);
         List<IControlFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new CurrentResourcesFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableItemsProvider));

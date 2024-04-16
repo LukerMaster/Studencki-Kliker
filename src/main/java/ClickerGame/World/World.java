@@ -10,8 +10,8 @@ import java.util.function.Consumer;
 
 public class World implements IWorld, IWorldEventHandler {
 
-    private float _actionMultiplier;
-    private float _buildingMultiplier;
+    private float _actionMultiplier = 1.0f;
+    private float _buildingMultiplier = 1.0f;
     private transient List<ICustomUserAction> userActions;
     private transient List<Consumer<IGenerator>> onGeneratorAddEvents = new ArrayList<>();
     private transient List<Consumer<IGenerator>> onGeneratorRemoveEvents = new ArrayList<>();
@@ -26,6 +26,8 @@ public class World implements IWorld, IWorldEventHandler {
         this.inventory = inventory;
         this.userActions = userActions;
         this.rng = rng;
+        SetActionMultiplier(GetActionMultiplier());
+        SetBuildingMultiplier(GetBuildingMultiplier());
     }
 
     @Override
@@ -39,9 +41,7 @@ public class World implements IWorld, IWorldEventHandler {
     }
 
     @Override
-    public void SetAvailableActions(List<ICustomUserAction> actions) {
-        userActions = actions;
-    }
+    public void SetAvailableActions(List<ICustomUserAction> actions) { userActions = actions; }
 
     @Override
     public ConcurrentLinkedQueue<IGenerator> GetActiveGenerators() {
@@ -85,6 +85,10 @@ public class World implements IWorld, IWorldEventHandler {
     public void SetActionMultiplier(float value) {
         _actionMultiplier = value;
         if (_actionMultiplier < 0.1f) _actionMultiplier = 0.1f;
+        for (var action : userActions)
+        {
+            action.setPowerMultiplier(_actionMultiplier);
+        }
     }
 
     @Override

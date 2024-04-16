@@ -6,6 +6,7 @@ import ClickerGame.World.IInventory;
 public class BrewBeer implements ICustomUserAction {
 
     final IInventory targetInventory;
+    private float _multiplier;
 
     public BrewBeer(IInventory targetInventory) {
         this.targetInventory = targetInventory;
@@ -15,8 +16,8 @@ public class BrewBeer implements ICustomUserAction {
     public void execute() {
         if (canExecute())
         {
-            targetInventory.takeItems(ItemId.Hops, 4);
-            targetInventory.addItems(ItemId.Beer, 1);
+            targetInventory.takeItems(ItemId.Hops, 4 * (int)_multiplier);
+            targetInventory.addItems(ItemId.Beer, (int) _multiplier);
         }
         else throw new RuntimeException("Action called despite it being unavailable at the moment.");
     }
@@ -24,5 +25,10 @@ public class BrewBeer implements ICustomUserAction {
     @Override
     public boolean canExecute() {
         return targetInventory.hasItems(ItemId.Hops, 4);
+    }
+
+    @Override
+    public void setPowerMultiplier(float value) {
+        _multiplier = value;
     }
 }

@@ -4,6 +4,7 @@ import ClickerGame.Actions.ICustomUserAction;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class CookieSpawnActionWrapper {
@@ -28,6 +29,11 @@ public class CookieSpawnActionWrapper {
             @Override
             public boolean canExecute() {
                 return action.canExecute();
+            }
+
+            @Override
+            public void setPowerMultiplier(float value) {
+                action.setPowerMultiplier(value);
             }
 
             @Override

@@ -2,19 +2,24 @@ package Swing.TopBar.Factories;
 
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
+import ClickerGame.World.IWorld;
 import Swing.IControlFactory;
 import Swing.TopBar.CustomControls.Mediator.FlipMediator;
-import Swing.TopBar.CustomControls.Mediator.TextUpdateObserver;
+import Swing.TopBar.CustomControls.TextUpdateObserver;
 import Swing.TopBar.CustomControls.MultiplierButton;
 
 import javax.swing.*;
 
-public class TopBarFactory implements IControlFactory {
+public class MultiplierTunerFactory implements IControlFactory {
 
     private final IStringsProvider stringsProvider;
+    private final IWorld world;
 
-    public TopBarFactory(IStringsProvider stringsProvider) {
+    private final static float MultiplierStepPerClick = 0.1f;
+
+    public MultiplierTunerFactory(IStringsProvider stringsProvider, IWorld world) {
         this.stringsProvider = stringsProvider;
+        this.world = world;
     }
 
     @Override
@@ -22,8 +27,15 @@ public class TopBarFactory implements IControlFactory {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-        MultiplierButton actionMultiplierButton = new MultiplierButton();
-        MultiplierButton buildingMultiplierButton = new MultiplierButton();
+        MultiplierButton actionMultiplierButton = new MultiplierButton(
+                world::GetActionMultiplier,
+                world::SetActionMultiplier,
+                MultiplierStepPerClick);
+        MultiplierButton buildingMultiplierButton = new MultiplierButton(
+                world::GetBuildingMultiplier,
+                world::SetBuildingMultiplier,
+                MultiplierStepPerClick
+        );
 
         var textUpdateObserver = new TextUpdateObserver(
                 actionMultiplierButton,

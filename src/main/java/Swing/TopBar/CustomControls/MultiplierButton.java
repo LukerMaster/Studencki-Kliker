@@ -4,10 +4,22 @@ import Swing.TopBar.CustomControls.Mediator.IMediator;
 
 import javax.accessibility.AccessibleContext;
 import javax.swing.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class MultiplierButton extends JButton implements ITunable, INotifiesViaMediator {
     private IMediator _mediator;
-    private float _value = 1;
+    private final Supplier<Float> getter;
+    private final Consumer<Float> setter;
+    private final float step;
+
+    public MultiplierButton(Supplier<Float> getter, Consumer<Float> setter, float step) {
+        this.getter = getter;
+        this.setter = setter;
+        this.step = step;
+    }
+
+
     @Override
     public void SetMediator(IMediator mediator)
     {
@@ -17,20 +29,18 @@ public class MultiplierButton extends JButton implements ITunable, INotifiesViaM
     @Override
     public void Increase()
     {
-        _value+=0.1f;
+        setter.accept(getter.get()+step);
         _mediator.Notify(this, "increase");
     }
     @Override
     public void Decrease()
     {
-        _value-=0.1f;
-        if (_value < 0.1f)
-            _value = 0.1f;
+        setter.accept(getter.get()-step);
         _mediator.Notify(this, "decrease");
     }
 
     @Override
     public float GetValue() {
-        return _value;
+        return getter.get();
     }
 }

@@ -29,7 +29,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
         }
     }
 
-    private List<ICustomUserAction> GetUserActions(IInventory inv, Random rng)
+    private List<ICustomUserAction> GetUserActions(IInventory inv, Random rng, float multiplier)
     {
         List<ICustomUserAction> rawActions = new ArrayList<>();
 
@@ -44,6 +44,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
         List<ICustomUserAction> wrappedActions = new ArrayList<>();
         for (ICustomUserAction action: rawActions) {
             wrappedActions.add(wrapper.WrapActionWithCookieSpawn(action, inv));
+            action.setPowerMultiplier(multiplier);
         }
 
         return wrappedActions;
@@ -54,7 +55,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
 
         ObservableInventory observableInventory = new ObservableInventory(new InventoryWithHoles(new Inventory(), rng));
 
-        List<ICustomUserAction> availableActions = GetUserActions(observableInventory, rng);
+        List<ICustomUserAction> availableActions = GetUserActions(observableInventory, rng, 1);
 
         this.world = new World(observableInventory, availableActions, rng);
     }
@@ -84,7 +85,7 @@ public class SaveBasedWorldFactory implements IWorldFactory, IGameSaver {
             FileInputStream fileIn = new FileInputStream("save.kekw");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             IWorld world = (IWorld) in.readObject();
-            world.SetAvailableActions(GetUserActions(world.GetInventory(), world.GetRng()));
+            world.SetAvailableActions(GetUserActions(world.GetInventory(), world.GetRng(), world.GetActionMultiplier()));
             EmulateTimeOffline(world);
             return world;
         }

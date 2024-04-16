@@ -10,7 +10,7 @@ public class InventoryWithHoles implements  IInventory
 {
     private IInventory innerInventory;
     private Random rng;
-    private float fallingOffChance = 0.2f;
+    private float fallingOffChance = 0.02f;
 
     public InventoryWithHoles(IInventory inventory, Random rng)
     {

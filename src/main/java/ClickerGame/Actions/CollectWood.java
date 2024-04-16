@@ -12,17 +12,23 @@ import ClickerGame.ItemId;
 public class CollectWood implements ICustomUserAction {
 
     final IInventory targetInventory;
+    private float _multiplier;
 
     public CollectWood(IInventory targetInventory) {
         this.targetInventory = targetInventory;
     }
     @Override
     public void execute() {
-        targetInventory.addItems(ItemId.Wood, 1);
+        targetInventory.addItems(ItemId.Wood, (int)_multiplier);
     }
 
     @Override
     public boolean canExecute() {
         return true;
+    }
+
+    @Override
+    public void setPowerMultiplier(float value) {
+        _multiplier = value;
     }
 }
