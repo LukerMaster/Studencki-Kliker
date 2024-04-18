@@ -2,6 +2,6 @@ package ClickerGame.Cheats;
 
 import ClickerGame.World.IWorld;
 
-public interface Expression {
+public interface IExpression {
     void interpret(IWorld world);
 }
