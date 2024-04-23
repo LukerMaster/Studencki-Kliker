@@ -16,7 +16,6 @@ public enum StringId {
     Build,
     Build_cost,
     Build_menu,
-    Nothing,
     Visit,
     ActionMultiplier,
     BuildingMultiplier,
