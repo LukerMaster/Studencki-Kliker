@@ -1,5 +1,7 @@
 import ClickerGame.*;
 import ClickerGame.Actions.*;
+import ClickerGame.Cheats.CheatParser;
+import ClickerGame.Cheats.ICheatParser;
 import ClickerGame.Generators.Factories.*;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringsProvider;
@@ -14,7 +16,9 @@ import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
 import Swing.Dashboards.Factories.CurrentResourcesFactory;
 import Swing.IControlFactory;
+import Swing.TopBar.Factories.CheatConsole;
 import Swing.TopBar.Factories.MultiplierTunerFactory;
+import Swing.TopBar.Factories.TopBar;
 
 import java.util.*;
 
@@ -100,7 +104,13 @@ public class Main {
 
         IWorldEventHandler eventHandler = (IWorldEventHandler) world;
 
-        IControlFactory topBarFactory = new MultiplierTunerFactory(stringsProvider, world);
+        ICheatParser cheatParser = new CheatParser();
+
+        List<IControlFactory> topBarFactories = new ArrayList<>();
+        topBarFactories.add(new MultiplierTunerFactory(stringsProvider, world));
+        topBarFactories.add(new CheatConsole(stringsProvider, world, cheatParser));
+
+        IControlFactory topBarFactory = new TopBar(topBarFactories);
         List<IControlFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new CurrentResourcesFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableItemsProvider));
