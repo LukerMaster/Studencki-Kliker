@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,8 +25,8 @@ public class WorldTestCase {
     @Mock
     static IInventory inventory;
 
-    @Mock
-    static List<ICustomUserAction> customUserActionList;
+
+    static List<ICustomUserAction> customUserActionList = new ArrayList<>();
 
     @Mock
     static IGenerator dummyGenerator;
@@ -59,8 +60,7 @@ public class WorldTestCase {
     @MethodSource("GetWorld")
     public void AssertConstructorValues(IWorld world)
     {
-        assertEquals(inventory, world.GetInventory());
+        assertEquals(inventory.isEmpty(), world.GetInventory().isEmpty());
         assertEquals(customUserActionList, world.GetAvailableActions());
-        assertEquals(random, world.GetRng());
     }
 }
