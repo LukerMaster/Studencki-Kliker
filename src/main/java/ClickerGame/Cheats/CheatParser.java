@@ -12,7 +12,7 @@ public class CheatParser implements ICheatParser {
     {
         String[] statements = text.split(";");
         List<IExpression> expressions = new ArrayList<>();
-        for (var statement:statements) {
+        for (var statement : statements) {
             statement = statement.trim();
             var parts = statement.split(" ");
             if (isValid_AddOrRemoveItem_String(parts))
@@ -23,7 +23,7 @@ public class CheatParser implements ICheatParser {
         return expressions;
     }
 
-    private static boolean isValid_AddOrRemoveItem_String(String[] parts) {
+    private boolean isValid_AddOrRemoveItem_String(String[] parts) {
         return parts.length == 3 &&
                 (parts[0].equals("add") || parts[0].equals("remove")) &&
                 Arrays.stream(ItemId.values()).anyMatch(p -> p.name().equals(parts[1])) &&

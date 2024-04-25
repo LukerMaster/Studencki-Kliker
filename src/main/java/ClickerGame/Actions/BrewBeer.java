@@ -1,5 +1,6 @@
 package ClickerGame.Actions;
 
+import ClickerGame.Actions.Exceptions.UnavailableActionException;
 import ClickerGame.ItemId;
 import ClickerGame.World.IInventory;
 
@@ -19,7 +20,7 @@ public class BrewBeer implements ICustomUserAction {
             targetInventory.takeItems(ItemId.Hops, 4 * (int)_multiplier);
             targetInventory.addItems(ItemId.Beer, (int) _multiplier);
         }
-        else throw new RuntimeException("Action called despite it being unavailable at the moment.");
+        else throw new UnavailableActionException("Action called despite it being unavailable at the moment.");
     }
 
     @Override

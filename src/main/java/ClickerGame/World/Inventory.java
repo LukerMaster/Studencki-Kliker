@@ -1,6 +1,7 @@
 package ClickerGame.World;
 
 import ClickerGame.ItemId;
+import ClickerGame.World.Exception.NotEnoughItemsException;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -30,7 +31,7 @@ public class Inventory implements IInventory, Serializable {
             }
         }
 
-        throw new RuntimeException("Not enough items.");
+        throw new NotEnoughItemsException("Not enough items.");
     }
 
     @Override

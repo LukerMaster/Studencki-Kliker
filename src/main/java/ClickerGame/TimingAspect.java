@@ -10,7 +10,7 @@ import java.util.Timer;
 @Aspect
 public class TimingAspect {
 
-	@Pointcut(value="execution(* ClickerGame.Actions..*(..) )")
+	@Pointcut(value="execution(* ClickerGame.Actions.*(..) )")
 	public void myPointcut() {
 
 	}
@@ -25,7 +25,7 @@ public class TimingAspect {
 		long endTime = System.nanoTime();
 		long time = endTime - startTime;
 
-		System.out.println(className + "." + methodName + " took " + time + "ns.");
+		System.out.println(className + "." + methodName + " took " + time + "ms.");
 
 		return object;
 	}
