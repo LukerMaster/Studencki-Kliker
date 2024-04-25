@@ -20,6 +20,7 @@ public class CheatParser implements ICheatParser {
                 expressions.add(new AddItemExpression(parts[0], parts[1], Integer.parseInt(parts[2])));
             }
         }
+
         return expressions;
     }
 

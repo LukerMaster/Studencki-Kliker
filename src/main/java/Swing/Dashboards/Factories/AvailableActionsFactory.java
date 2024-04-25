@@ -1,6 +1,8 @@
 package Swing.Dashboards.Factories;
 
+import ClickerGame.Actions.CustomActionIterator;
 import ClickerGame.Actions.ICustomUserAction;
+import ClickerGame.Actions.Iterator;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;
@@ -8,7 +10,6 @@ import Swing.IControlFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 
 public class AvailableActionsFactory implements IControlFactory {
@@ -30,24 +31,20 @@ public class AvailableActionsFactory implements IControlFactory {
         JPanel resourcePanel = new JPanel();
 
         resourcePanel.setLayout(new BoxLayout(resourcePanel, BoxLayout.Y_AXIS));
-        Iterator<ICustomUserAction> iterator = actionList.iterator();
-        ICustomUserAction action = iterator.next();
-        while (true)
+        Iterator<ICustomUserAction> iterator = new CustomActionIterator(actionList);
+
+        while (iterator.hasNext())
         {
+            ICustomUserAction action = iterator.next();
             JButton button = new JButton(stringsProvider.GetNameForAction(action));
             button.setAlignmentX(Component.CENTER_ALIGNMENT);
             button.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getPreferredSize().height));
-            ICustomUserAction finalAction = action;
-            button.addActionListener(e -> finalAction.execute());
+            button.addActionListener(e -> action.execute());
             button.setEnabled(action.canExecute());
             button.setToolTipText(stringsProvider.GetTooltipForAction(action));
-            inventory.addListener((id, count) -> button.setEnabled(finalAction.canExecute()));
+            inventory.addListener((id, count) -> button.setEnabled(action.canExecute()));
             resourcePanel.add(button);
 
-            if (iterator.hasNext())
-                action = iterator.next();
-            else
-                break;
         }
         JScrollPane scrollPane = new JScrollPane(resourcePanel);
 

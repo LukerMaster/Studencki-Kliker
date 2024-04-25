@@ -17,7 +17,6 @@ public class GameLoop implements IGameLoop {
     {
         ConcurrentLinkedQueue<IGenerator> activeGenerators = world.GetActiveGenerators();
 
-        for (IGenerator gen : activeGenerators)
-            gen.Update(deltaTime);
+        activeGenerators.stream().forEach(gen -> gen.Update(deltaTime));
     }
 }

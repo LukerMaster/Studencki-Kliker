@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.Map;
 import java.util.Random;
 
-public class InventoryWithHoles implements  IInventory
+public class InventoryWithHoles implements IInventory
 {
     private IInventory innerInventory;
     private Random rng;

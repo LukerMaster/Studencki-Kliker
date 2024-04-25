@@ -32,4 +32,16 @@ public class AddItemExpression implements IExpression {
                 world.GetInventory().takeItems(itemId, world.GetInventory().getCount(itemId));
         }
     }
+
+    public String getAction() {
+        return action;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
 }

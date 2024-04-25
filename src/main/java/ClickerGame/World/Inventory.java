@@ -13,19 +13,15 @@ public class Inventory implements IInventory, Serializable {
 
     @Override
     public void takeItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : items.keySet())
-        {
-            if (items.get(key) != null)
-                takeItems(key, items.get(key));
+        for (ItemId key : items.keySet()) {
+            if (items.get(key) != null) takeItems(key, items.get(key));
         }
     }
 
     @Override
     public void takeItems(ItemId id, BigInteger amount) {
-        if (items.get(id) != null)
-        {
-            if (hasItems(id, amount))
-            {
+        if (items.get(id) != null) {
+            if (hasItems(id, amount)) {
                 items.put(id, items.get(id).subtract(amount));
                 return;
             }
@@ -41,18 +37,15 @@ public class Inventory implements IInventory, Serializable {
 
     @Override
     public boolean hasItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : items.keySet())
-        {
-            if (items.get(key) != null && !hasItems(key, items.get(key)))
-                return false;
+        for (ItemId key : items.keySet()) {
+            if (items.get(key) != null && !hasItems(key, items.get(key))) return false;
         }
         return true;
     }
 
     @Override
     public boolean hasItems(ItemId id, BigInteger minAmount) {
-        if (items.get(id) == null)
-            return false;
+        if (items.get(id) == null) return false;
         return items.get(id).compareTo(minAmount) >= 0;
     }
 
@@ -63,11 +56,7 @@ public class Inventory implements IInventory, Serializable {
 
     @Override
     public void addItems(Map<ItemId, BigInteger> items) {
-        for (ItemId key : items.keySet())
-        {
-            if (items.get(key) != null)
-                addItems(key, items.get(key));
-        }
+        items.entrySet().stream().filter(x -> x.getKey() != null && x.getValue() != null).forEach(x -> addItems(x.getKey(), x.getValue()));
     }
 
     @Override
@@ -82,8 +71,7 @@ public class Inventory implements IInventory, Serializable {
 
     @Override
     public BigInteger getCount(ItemId id) {
-        if (items.get(id) == null)
-            return new BigInteger("0");
+        if (items.get(id) == null) return new BigInteger("0");
         return items.get(id);
     }
 

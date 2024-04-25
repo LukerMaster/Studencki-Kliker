@@ -23,6 +23,8 @@ public class TopBar implements IControlFactory {
             mainPanel.add(control.CreateControl());
         }
 
+        controlsInTopBar.stream().forEach(control -> mainPanel.add(control.CreateControl()));
+
         return mainPanel;
     }
 }

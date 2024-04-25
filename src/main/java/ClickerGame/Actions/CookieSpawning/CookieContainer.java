@@ -15,12 +15,9 @@ public class CookieContainer implements IHasCookies {
 
     @Override
     public int GetCookies() {
-        int cookies = 0;
-        for (IHasCookies container : containers)
-        {
-            cookies += container.GetCookies();
-        }
-        return cookies;
+        return containers.stream()
+                .mapToInt(IHasCookies::GetCookies)
+                .sum();
     }
 
     static CookieContainer CreateRandomContainer(Random rng)

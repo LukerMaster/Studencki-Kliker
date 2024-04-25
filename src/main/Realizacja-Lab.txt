@@ -17,7 +17,7 @@ L3 Stosowanie czynnościowych wzorców projektowych
 - Strategy - IGeneration.java -> PeriodicAction.java
 - Command - ICustomUserAction.java
 - Observer - ObservableInventory.java
-- Iterator - AvailableActionsFactory.java (tylko użycie, bez implementacji ręcznej)
+- Iterator - AvailableActionsFactory.java - uzycie, implementacja - CustomActionIterator.java
 - Proxy - InventoryWithHoles.java
 - Memento - SaveBasedWorldFactory.java - Zapisywanie całej gry do pliku za pomocą interfejsu Serializable
 - Template - StandardGenerator.java - Wszystkie generatory korzystają z już skończonej implementacji tej klasy
@@ -40,10 +40,13 @@ L6 Zastosowanie zasad czystego kodu w programowaniu
 L7 Zastosowanie programowania funkcyjnego
 - Sporo lambd jest używanych, głównie do dodawania listenerów dla przycisków.
 - Generalnie raczej tam, gdzie Observer pattern, tam i lambda się znajdzie.
+- ( pokaż na przykładzie wykorzystanie programowania funkcyjnego w strumieniowym przetwarzaniu 3 kolekcji - 3 pkt.) -> CTRL+ SHIFT + F -> enter 'stream' and search
 
 L8 Zastosowanie programowania aspektowego
 - Jest napisany jeden aspekt do logowania, aczkolwiek trochę załamałem ręce jak okazało się, że AspectJ nie za bardzo może zostać użyty sam, w zwykłej aplikacji. Jeśli da się bez tego dostać 5.0, to wolałbym używania AOP uniknąć.
 - Plus jest taki, że sporo się trzeba było oczytać, żeby doprowadzić aspekty do jakiegokolwiek działania - powiem tak - założenie jest bardzo fajne, ale moim zdaniem dekorator - pomimo, że bardziej kodochłonny i czasochłonny - jest o wiele bardziej elegancki i wygodny.
+!!! - Są zaimplementowane trzy rozne, ale nie podpięte
+
 
 L9 Refactoring kodu programu
 - Wystarczy zajrzeć na githuba, ten projekt miał pare rewolucji konceptualnych.
