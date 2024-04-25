@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CookieBox implements IHasCookies {
 
-    private List<Cookie> cookieList;
+    private final List<Cookie> cookieList;
 
     public CookieBox(List<Cookie> list)
     {

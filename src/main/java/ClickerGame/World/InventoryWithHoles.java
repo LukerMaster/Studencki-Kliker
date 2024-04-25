@@ -8,9 +8,9 @@ import java.util.Random;
 
 public class InventoryWithHoles implements IInventory
 {
-    private IInventory innerInventory;
-    private Random rng;
-    private float fallingOffChance = 0.02f;
+    private final IInventory innerInventory;
+    private final Random rng;
+    private final float fallingOffChance = 0.02f;
 
     public InventoryWithHoles(IInventory inventory, Random rng)
     {

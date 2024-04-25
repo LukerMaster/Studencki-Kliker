@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class CookieContainer implements IHasCookies {
 
-    private List<IHasCookies> containers = new ArrayList<>();
+    private final List<IHasCookies> containers = new ArrayList<>();
 
     private static final float containerSpawnChance = 0.7F;
     private static final float cookieSpawnChance = 0.4F;
