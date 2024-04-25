@@ -21,20 +21,27 @@
             <version>3.12.0</version>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
+            <groupId>aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.9.22</version>
+            <version>1.5.4</version>
         </dependency>
+
         <dependency>
-            <groupId>org.aspectj</groupId>
+            <groupId>aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.22</version>
+            <version>1.5.4</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -48,18 +55,14 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.15.0</version>
+                <version>1.14.0</version>
                 <configuration>
                     <complianceLevel>21</complianceLevel>
                     <source>21</source>
                     <target>21</target>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjrt</artifactId>
-                            <version>1.9.22</version>
-                        </aspectLibrary>
-                    </aspectLibraries>
+                    <weaveDirectories>
+                        <weaveDirectory>${project.build.directory}/classes</weaveDirectory>
+                    </weaveDirectories>
                 </configuration>
                 <executions>
                     <execution>

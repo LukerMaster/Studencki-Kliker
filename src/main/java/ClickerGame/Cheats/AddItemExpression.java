@@ -21,10 +21,10 @@ public class AddItemExpression implements IExpression {
     public void interpret(IWorld world) {
         ItemId itemId = ItemId.valueOf(item);
 
-        if (action.toLowerCase().equals("add")) {
+        if (action.equalsIgnoreCase("add")) {
             world.GetInventory().addItems(itemId, amount);
         }
-        if (action.toLowerCase().equals("remove"))
+        if (action.equalsIgnoreCase("remove"))
         {
             if (world.GetInventory().hasItems(itemId, amount))
                 world.GetInventory().takeItems(itemId, amount);
