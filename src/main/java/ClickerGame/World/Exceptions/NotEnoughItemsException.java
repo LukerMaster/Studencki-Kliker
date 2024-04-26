@@ -1,4 +1,4 @@
-package ClickerGame.World.Exception;
+package ClickerGame.World.Exceptions;
 
 public class NotEnoughItemsException extends RuntimeException {
 

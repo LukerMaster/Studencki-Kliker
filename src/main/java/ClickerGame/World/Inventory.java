@@ -1,7 +1,7 @@
 package ClickerGame.World;
 
 import ClickerGame.ItemId;
-import ClickerGame.World.Exception.NotEnoughItemsException;
+import ClickerGame.World.Exceptions.NotEnoughItemsException;
 
 import java.io.Serializable;
 import java.math.BigInteger;

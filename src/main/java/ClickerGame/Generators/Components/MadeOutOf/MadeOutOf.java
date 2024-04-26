@@ -6,11 +6,11 @@ import ClickerGame.ItemId;
 import java.math.BigInteger;
 import java.util.Map;
 
-public class MadeOutOfComponent implements IMadeOutOf {
+public class MadeOutOf implements IMadeOutOf {
 
     private final Map<ItemId, BigInteger> _cost;
 
-    public MadeOutOfComponent(Map<ItemId, BigInteger> cost)
+    public MadeOutOf(Map<ItemId, BigInteger> cost)
     {
         _cost = cost;
     }

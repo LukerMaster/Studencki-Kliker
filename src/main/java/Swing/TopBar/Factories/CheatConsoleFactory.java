@@ -8,14 +8,14 @@ import Swing.IControlFactory;
 
 import javax.swing.*;
 
-public class CheatConsole implements IControlFactory {
+public class CheatConsoleFactory implements IControlFactory {
 
     final IStringsProvider stringsProvider;
     final IWorld world;
 
     final ICheatParser parser;
 
-    public CheatConsole(IStringsProvider stringsProvider, IWorld world, ICheatParser parser) {
+    public CheatConsoleFactory(IStringsProvider stringsProvider, IWorld world, ICheatParser parser) {
         this.stringsProvider = stringsProvider;
         this.world = world;
         this.parser = parser;

@@ -16,9 +16,9 @@ import Swing.Dashboards.Factories.AvailableActionsFactory;
 import Swing.Dashboards.Factories.GeneratorBuyMenuFactory;
 import Swing.Dashboards.Factories.CurrentResourcesFactory;
 import Swing.IControlFactory;
-import Swing.TopBar.Factories.CheatConsole;
+import Swing.TopBar.Factories.CheatConsoleFactory;
 import Swing.TopBar.Factories.MultiplierTunerFactory;
-import Swing.TopBar.Factories.TopBar;
+import Swing.TopBar.Factories.TopBarFactory;
 
 import java.util.*;
 
@@ -108,9 +108,9 @@ public class Main {
 
         List<IControlFactory> topBarFactories = new ArrayList<>();
         topBarFactories.add(new MultiplierTunerFactory(stringsProvider, world));
-        topBarFactories.add(new CheatConsole(stringsProvider, world, cheatParser));
+        topBarFactories.add(new CheatConsoleFactory(stringsProvider, world, cheatParser));
 
-        IControlFactory topBarFactory = new TopBar(topBarFactories);
+        IControlFactory topBarFactory = new TopBarFactory(topBarFactories);
         List<IControlFactory> dashboardFactories = new ArrayList<>();
         dashboardFactories.add(new CurrentResourcesFactory(stringsProvider, observableItemsProvider));
         dashboardFactories.add(new AvailableActionsFactory(stringsProvider, availableActions, observableItemsProvider));

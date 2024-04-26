@@ -1,8 +1,8 @@
 package Swing.Dashboards.Factories;
 
-import ClickerGame.Actions.CustomActionIterator;
+import ClickerGame.Actions.Iterators.CustomActionIterator;
 import ClickerGame.Actions.ICustomUserAction;
-import ClickerGame.Actions.Iterator;
+import ClickerGame.Actions.Iterators.Iterator;
 import ClickerGame.World.IObservableItemsProvider;
 import ClickerGame.Localization.IStringsProvider;
 import ClickerGame.Localization.StringId;

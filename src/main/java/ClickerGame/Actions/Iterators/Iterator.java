@@ -1,4 +1,4 @@
-package ClickerGame.Actions;
+package ClickerGame.Actions.Iterators;
 
 
 public interface Iterator<E> {

@@ -15,6 +15,4 @@ public class Brewery implements IGeneratorFactory {
     public IGenerator CreateGenerator() {
         return new ClickerGame.Generators.StandardGenerators.Brewery(targetInventory);
     }
-
-
 }

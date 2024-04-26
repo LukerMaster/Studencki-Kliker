@@ -1,6 +1,6 @@
 package ClickerGame.Generators.StandardGenerators;
 
-import ClickerGame.Generators.Components.MadeOutOf.MadeOutOfComponent;
+import ClickerGame.Generators.Components.MadeOutOf.MadeOutOf;
 import ClickerGame.Generators.Components.Scrapping.IScrappable;
 import ClickerGame.Generators.Components.Scrapping.ScrappingForFractionOfCost;
 import ClickerGame.Generators.GenerationStrategies.Actions.SimpleItemSpawning;
@@ -25,7 +25,7 @@ public class StandardGenerator implements IStandardGenerator {
                              Map<ItemId, BigInteger> itemsNecessary,
                              Map<ItemId, BigInteger> itemsSpawned,
                              int scrappingDivisor) {
-        this.madeOutOf = new MadeOutOfComponent(madeOutOf);
+        this.madeOutOf = new MadeOutOf(madeOutOf);
         this.strategy = new PeriodicAction(secondsBetweenSpawns,
                 new InventoryHasItems(itemsNecessary, inventory),
                 new SimpleItemTaking(itemsNecessary, inventory),

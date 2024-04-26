@@ -14,6 +14,4 @@ public class HopsBush implements IGeneratorFactory {
     public IGenerator CreateGenerator() {
         return new ClickerGame.Generators.CustomGenerators.HopsBush(targetInventory);
     }
-
-
 }

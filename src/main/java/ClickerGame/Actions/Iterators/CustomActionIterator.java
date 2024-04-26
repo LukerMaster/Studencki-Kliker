@@ -1,4 +1,6 @@
-package ClickerGame.Actions;
+package ClickerGame.Actions.Iterators;
+
+import ClickerGame.Actions.ICustomUserAction;
 
 import java.util.List;
 import java.util.NoSuchElementException;

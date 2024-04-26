@@ -5,11 +5,11 @@ import Swing.IControlFactory;
 import javax.swing.*;
 import java.util.List;
 
-public class TopBar implements IControlFactory {
+public class TopBarFactory implements IControlFactory {
 
     private final List<IControlFactory> controlsInTopBar;
 
-    public TopBar(List<IControlFactory> controlsInTopBar) {
+    public TopBarFactory(List<IControlFactory> controlsInTopBar) {
         this.controlsInTopBar = controlsInTopBar;
     }
 
@@ -17,11 +17,6 @@ public class TopBar implements IControlFactory {
     public JComponent CreateControl() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-
-        for (var control : controlsInTopBar)
-        {
-            mainPanel.add(control.CreateControl());
-        }
 
         controlsInTopBar.stream().forEach(control -> mainPanel.add(control.CreateControl()));
 

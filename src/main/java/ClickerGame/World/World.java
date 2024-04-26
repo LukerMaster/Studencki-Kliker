@@ -12,6 +12,8 @@ public class World implements IWorld, IWorldEventHandler {
 
     private float _actionMultiplier = 1.0f;
     private float _buildingMultiplier = 1.0f;
+    private final float _minMultiplier = 0.1f;
+
     private transient List<ICustomUserAction> userActions;
     private transient List<Consumer<IGenerator>> onGeneratorAddEvents = new ArrayList<>();
     private transient List<Consumer<IGenerator>> onGeneratorRemoveEvents = new ArrayList<>();
@@ -84,7 +86,7 @@ public class World implements IWorld, IWorldEventHandler {
     @Override
     public void SetActionMultiplier(float value) {
         _actionMultiplier = value;
-        if (_actionMultiplier < 0.1f) _actionMultiplier = 0.1f;
+        if (_actionMultiplier < _minMultiplier) _actionMultiplier = _minMultiplier;
         for (var action : userActions)
         {
             action.setPowerMultiplier(_actionMultiplier);
@@ -99,7 +101,7 @@ public class World implements IWorld, IWorldEventHandler {
     @Override
     public void SetBuildingMultiplier(float value) {
         _buildingMultiplier = value;
-        if (_buildingMultiplier < 0.1f) _buildingMultiplier = 0.1f;
+        if (_buildingMultiplier < _minMultiplier) _buildingMultiplier = _minMultiplier;
     }
 
 

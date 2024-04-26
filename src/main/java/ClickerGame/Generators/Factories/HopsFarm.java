@@ -13,6 +13,4 @@ public class HopsFarm implements IGeneratorFactory {
     public IGenerator CreateGenerator() {
         return new ClickerGame.Generators.StandardGenerators.HopsFarm(targetInventory);
     }
-
-
 }

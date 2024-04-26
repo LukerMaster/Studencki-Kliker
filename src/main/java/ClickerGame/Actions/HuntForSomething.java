@@ -18,6 +18,7 @@ public class HuntForSomething implements ICustomUserAction {
     }
     @Override
     public void execute() {
+        // Tunable formula
         int bound = 3 - _multiplier > 1 ? (int) (3 - _multiplier) : 1;
 
         int rolled = rng.nextInt(0, bound);

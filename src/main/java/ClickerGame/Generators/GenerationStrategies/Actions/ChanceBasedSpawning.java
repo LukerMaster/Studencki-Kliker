@@ -8,13 +8,14 @@ import java.math.BigInteger;
 import java.util.Map;
 import java.util.Random;
 
-public class ChanceBasedSpawning implements Runnable, IChanceBased, IItemSpawning, Serializable {
+public class ChanceBasedSpawning implements IChanceBasedSpawning {
 
     final float chance;
 
     final Map<ItemId, BigInteger> itemsSpawned;
 
     final Random rng;
+
     final IInventory inventory;
 
     public ChanceBasedSpawning(Map<ItemId, BigInteger> itemsSpawned, IInventory inventory, float chance, Random rng) {

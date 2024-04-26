@@ -13,6 +13,4 @@ public class DemoGenerator implements IGeneratorFactory {
     public IGenerator CreateGenerator() {
         return new ClickerGame.Generators.CustomGenerators.DemoGenerator(targetInventory);
     }
-
-
 }
